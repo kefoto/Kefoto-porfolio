@@ -183,6 +183,8 @@ function origin__reset__promise(x) {
   }
 }
 
+let button__menu__size = playground__container.clientHeight/2 - 15;
+
 function buttons__collision() {
   //   debugger;
   button__menu.forEach((b) => {
@@ -201,21 +203,39 @@ function buttons__collision() {
       document.getElementById(classes[elementId]).style.top = "50%";
       document.getElementById(classes[elementId]).style.opacity = "1";
       b.style.backgroundColor = "#242424";
+      console.log(b.id);
+      
+      // b.style.transformOrigin = "50% 50%";
+      let temptranslate;
 
-      // otherButtons.forEach((b2) => {
-      //   b2.style.top = "-1000px";
-      //   b2.style.opacity = "0";
-      // });
+      if(b.id == "abt"){
+        temptranslate = "translate(-50%, -50%)"
+      } else if(b.id == "dta") {
+        temptranslate = "translate(50%, -50%)"
+      } else if(b.id == "fto") {
+        temptranslate = "translate(-50%, 50%)"
+      } else {
+        temptranslate = "translate(50%, 50%)"
+      }
+
+
+      b.style.transform = "scale(0.4) " + temptranslate;
+   
+
+
     } else {
       b.style.backgroundColor = "transparent";
+      b.style.transformOrigin = "initial";
+      // b.style.transform = "none";
+      b.style.width = button__menu__size + "px";
+      b.style.height = button__menu__size + "px";
+      b.style.transform = "scale(1.0) translate(0%, 0%)";
+      
+      // console.log(b.clientWidth);
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
       collision__circle[elementId] = false;
 
-      // otherButtons.forEach((b2) => {
-      //   b2.style.top = "0";
-      //   b2.style.opacity = "1";
-      // });
     }
   });
 }
@@ -453,9 +473,11 @@ const repeatedString = (str, times) => {
 function updateBottomDateCircle(){
   if (getKeysByValue(collision__circle, true).length == 0){
     var temp = new Date();
-    presentDateCircle(`WELCOME, TODAY'S DATE: ${
+    presentDateCircle(`TODAY'S DATE: ${
       temp.getMonth() + 1
-    }/${temp.getDate()}/${temp.getFullYear()} WELCOME, TODAY'S DATE: ${
+    }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
+      temp.getMonth() + 1
+    }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
       temp.getMonth() + 1
     }/${temp.getDate()}/${temp.getFullYear()} `);
   } else {

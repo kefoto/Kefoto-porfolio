@@ -136,7 +136,10 @@ body {
 .button:hover {
   /* color: var(--bkg__black); */
   border: var(--bkg__black) solid 1px;
+  
   transition: all 0.3s ease-in-out;
+  /* max-width: 60vw; */
+  /* max-height: ; */
 }
 
 .navbar__links:hover {
@@ -476,6 +479,15 @@ body {
   position: absolute;
 }
 
+
+.enter {
+  text-decoration: none;
+}
+
+.enter a {
+  text-decoration: none;
+  color: black;
+}
 
 
 /* TODO: the nav extension in phone is gone */
