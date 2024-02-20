@@ -70,6 +70,18 @@ container__collision();
 const paragraphs = document.querySelectorAll(".hoverable-paragraph");
 changeHoverletter();
 
+const enter = document.getElementById("enter");
+const arrow = document.getElementById("arrow");
+
+enter.addEventListener("mousemove", (e) => {
+  const angle = Math.atan2(
+    e.clientY - (enter.offsetTop + arrow.offsetTop + arrow.offsetHeight / 2),
+    e.clientX - (enter.offsetLeft + arrow.offsetLeft + arrow.offsetWidth / 2)
+  );
+  const rotation = angle * (180 / Math.PI);
+  arrow.style.transform = `rotate(${rotation}deg)`;
+});
+
 // presentDateCircle();
 
 //random color hover on button
@@ -183,7 +195,7 @@ function origin__reset__promise(x) {
   }
 }
 
-let button__menu__size = playground__container.clientHeight/2 - 15;
+let button__menu__size = playground__container.clientHeight / 2 - 15;
 
 function buttons__collision() {
   //   debugger;
@@ -204,38 +216,33 @@ function buttons__collision() {
       document.getElementById(classes[elementId]).style.opacity = "1";
       b.style.backgroundColor = "#242424";
       console.log(b.id);
-      
+
       // b.style.transformOrigin = "50% 50%";
       let temptranslate;
 
-      if(b.id == "abt"){
-        temptranslate = "translate(-50%, -50%)"
-      } else if(b.id == "dta") {
-        temptranslate = "translate(50%, -50%)"
-      } else if(b.id == "fto") {
-        temptranslate = "translate(-50%, 50%)"
+      if (b.id == "abt") {
+        temptranslate = "translate(-50%, -50%)";
+      } else if (b.id == "dta") {
+        temptranslate = "translate(50%, -50%)";
+      } else if (b.id == "fto") {
+        temptranslate = "translate(-50%, 50%)";
       } else {
-        temptranslate = "translate(50%, 50%)"
+        temptranslate = "translate(50%, 50%)";
       }
 
-
       b.style.transform = "scale(0.4) " + temptranslate;
-   
-
-
+      // drag__e.style.transform = "scale(0.8)";
     } else {
       b.style.backgroundColor = "transparent";
       b.style.transformOrigin = "initial";
-      // b.style.transform = "none";
       b.style.width = button__menu__size + "px";
       b.style.height = button__menu__size + "px";
       b.style.transform = "scale(1.0) translate(0%, 0%)";
-      
-      // console.log(b.clientWidth);
+      // drag__e.style.transform = "scale(1.0)";
+
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
       collision__circle[elementId] = false;
-
     }
   });
 }
@@ -470,16 +477,18 @@ const repeatedString = (str, times) => {
   return `${str.repeat(times)}`;
 };
 
-function updateBottomDateCircle(){
-  if (getKeysByValue(collision__circle, true).length == 0){
+function updateBottomDateCircle() {
+  if (getKeysByValue(collision__circle, true).length == 0) {
     var temp = new Date();
-    presentDateCircle(`TODAY'S DATE: ${
-      temp.getMonth() + 1
-    }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
-      temp.getMonth() + 1
-    }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
-      temp.getMonth() + 1
-    }/${temp.getDate()}/${temp.getFullYear()} `);
+    presentDateCircle(
+      `TODAY'S DATE: ${
+        temp.getMonth() + 1
+      }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
+        temp.getMonth() + 1
+      }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
+        temp.getMonth() + 1
+      }/${temp.getDate()}/${temp.getFullYear()} `
+    );
   } else {
     const temp = getKeysByValue(collision__circle, true);
     const stringtemp = classes[temp] + " ";
@@ -490,11 +499,11 @@ function updateBottomDateCircle(){
 
 function presentDateCircle(input) {
   const text = document.querySelector(".text");
-  const formattedInput = input.replace(/ /g, '\u00A0');
+  const formattedInput = input.replace(/ /g, "\u00A0");
 
   text.innerText = formattedInput;
 
-  var letters = text.innerText.split('');
+  var letters = text.innerText.split("");
 
   const angle = 360 / letters.length;
 
@@ -503,9 +512,7 @@ function presentDateCircle(input) {
       (letter, i) =>
         `<span style="transform: rotate(${i * angle}deg)">${letter}</span>`
     )
-    .join('');
-
-  
+    .join("");
 }
 
 //setting border limit, setting timer to reset the position, increase the hitbox position;

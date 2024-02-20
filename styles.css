@@ -293,7 +293,7 @@ body {
 
 .description__pg {
   text-align: left;
-  width: 40vw;
+  width: 60vw;
   margin: 0 auto;
   align-items: center;
   /* margin: 0 auto;
@@ -319,9 +319,10 @@ body {
 }
 
 #data p, #foto p, #poster p{
-  width: 22vw;
+  width: 24vw;
   /* height: inherit; */
 }
+
 #about {
   opacity: 0;
   /* transform: translate(-50%,-50%); */
@@ -363,24 +364,34 @@ body {
   position: relative;
 }
 
-#foto .text-on-right {
+.text-on-right {
   position: absolute;
   top: 0;
-  left: 85%;
+  left: 60%;
   text-align: left;
   /* margin: -50px; */
   /* transform: translate(0, -50%); */
   overflow: auto;
 }
 
-#poster .text-on-right {
+.text-on-left {
   position: absolute;
   top: 0;
-  right: 85%;
+  right: 60%;
   text-align: right;
   /* margin: -50px; */
   /* transform: translate(0, -50%); */
   overflow: auto;
+}
+
+.image-on-right {
+  transform: translate(10vw, 0%);
+  /* padding-left:100px; */
+}
+
+.image-on-left {
+  transform: translate(-10vw, 0%);
+  /* padding-left:100px; */
 }
 
 .description__pg > div > img {
@@ -391,6 +402,8 @@ body {
   min-width: auto;
   z-index: 0;
 }
+
+
 
 .hoverable-letter {
   font-size: 1.1em;
@@ -480,27 +493,86 @@ body {
 }
 
 
-.enter {
-  text-decoration: none;
+/* .enter {
+  position: absolute;
+  display: flex;
+  align-items: center;
+
+  margin: 0 auto;
+  opacity: 0.3;
+  transform: ;
+  user-select: none;
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%,0%) scale(1.5); 
+  transition: all 0.15s ease-in-out;
 }
 
 .enter a {
   text-decoration: none;
   color: black;
+  text-align: center;
 }
+
+.arrow {
+  max-width: 1em;
+  max-height: 1em;
+  margin-left: 8px;
+  transition: all 0.15s ease-in-out;
+
+}
+
+.enter:hover .arrow {
+  transform: rotate(-90deg);
+}
+
+.enter:hover {
+  opacity: 1;
+} */
+
+
+.enter {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center; /* Optional: Center the content horizontally within .enter */
+}
+
+.arrow {
+  width: 5vw; /* Adjust the width as needed */
+  height: 5vh; /* Adjust the height as needed */
+  transition: transform 0.3s ease; /* Optional: Smooth transition for the rotation */
+}
+
+.enter:hover .arrow {
+  transform: rotate(90deg); /* Optional: Rotate the arrow on hover */
+}
+
 
 
 /* TODO: the nav extension in phone is gone */
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1080px) {
   .description__pg > div > img {
-    width: 60%;
-    height: 60%;
+    /* width: 60%;
+    height: 60%; */
+    width: 60% !important;
+    height: auto !important;
     margin: 0 auto;
-    min-height: auto;
-    min-width: auto;
     z-index: 0;
   }
+
+  .image-on-right {
+    transform: translate(22vw, 0%);
+    /* padding-left:100px; */
+  }
+  
+  .image-on-left {
+    transform: translate(-22vw, 0%);
+    /* padding-left:100px; */
+  }
+
   #container img {
     width: 30%;
     height: 30%;
@@ -516,6 +588,11 @@ body {
     /* padding: 20%; */
     /* max-height: ; */
   }
+
+  #data p, #foto p, #poster p{
+    width: 35vw;
+    /* height: inherit; */
+  }
 }
 
 
@@ -524,11 +601,9 @@ body {
 
 @media screen and (max-width: 480px) {
   .description__pg > div > img {
-    width: 60%;
-    height: 60%;
+    max-width: 60%;
+    max-height: 60%;
     margin: 0 auto;
-    min-height: auto;
-    min-width: auto;
     z-index: 0;
   }
 }
