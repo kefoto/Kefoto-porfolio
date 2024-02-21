@@ -187,7 +187,7 @@ function origin__reset__promise(x) {
           const rect = circle_container.getBoundingClientRect();
 
           const centerX = rect.left + + rect.width / 2;
-          const centerY = rect.top + rect.height / 2 -  nav__bar.offsetHeight;
+          const centerY = rect.top + rect.height / 2 - nav__bar.offsetHeight;
           drag__e.style.transition = "all 0.5s ease-in-out";
           drag__e.style.left = centerX + "px";
           drag__e.style.top = centerY + "px";
@@ -259,7 +259,8 @@ function buttons__collision() {
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
       // drag__e.style.transform = "scale(1.0)";
-      document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 100s ease";
+      // document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 60s ease";
+      document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
       collision__circle[elementId] = false;
@@ -307,7 +308,8 @@ function other_buttons_opacity() {
     // document.getElementById("Layer_2").style.opacity = "1";
   }
 }
-
+//TODO: bug whem the window goes full screen / vertical window change
+//TODO: nav expansion color change is buggy
 function arrow_interaction() {
   document.addEventListener("mousemove", (e) => {
 
@@ -320,12 +322,13 @@ function arrow_interaction() {
   
     const rotation = 45 + angle * (180 / Math.PI);
 
-    const norm_distance_opacity = distance_to_opacity(X_distance,Y_distance);
-    arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
-
+    
     if (getKeysByValue(collision__circle, true).length == 1) {
+      const norm_distance_opacity = distance_to_opacity(X_distance,Y_distance);
+      arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
+      console.log(norm_distance_opacity);
       enter.style.opacity = norm_distance_opacity.toString();
-      enter.style.bottom = "15px";
+      enter.style.bottom = "8px";
     } else if (getKeysByValue(collision__circle, true).length == 0) {
       enter.style.bottom = "-1000px";
       enter.style.opacity = "0";
@@ -337,6 +340,7 @@ function arrow_interaction() {
     if (getKeysByValue(collision__circle, true).length == 1) {
       isArrowHovered = true;    
       presentDateCircle(repeatedString("More ", 9));
+      // enter.style.opacity = "";
       arrow.classList.add("active");
       
     }
@@ -354,7 +358,12 @@ function arrow_interaction() {
 }
 
 function distance_to_opacity(x, y) {
-  const norm_distance_opacity = 1 - Math.sqrt((x/window.innerWidth)**2 + (y/window.innerHeight)**2)
+  const bias = 0.4;
+  let norm_distance_opacity = 1 - Math.sqrt((x/window.innerWidth)**2 + (y/window.innerHeight)**2);
+
+  norm_distance_opacity -= bias;
+
+  // norm_distance_opacity = norm_distance_opacity - 0.2;
 
   if (norm_distance_opacity <= 0){
     return 0;
@@ -530,12 +539,16 @@ function changeHoverletter() {
 
         if (randomStyleNumber == 1) {
           letter.style.fontFamily = "'Xanh Mono', monospace";
+          letter.style.fontSize = "1.1em";
         } else if (randomStyleNumber == 2) {
           letter.style.fontFamily = "'Syne Mono', monospace";
+          letter.style.fontSize = "1.1em";
         } else if (randomStyleNumber == 3) {
           letter.style.fontFamily = "'Silkscreen', sans-serif";
+          letter.style.fontSize = "0.9em";
         } else {
           letter.style.fontFamily = "'Space Mono', sans-serif";
+          letter.style.fontSize = "1.1em";
         }
         // console.log("Mouse entered the letter: " + letter.innerText);
       });

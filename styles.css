@@ -323,8 +323,16 @@ body {
 }
 
 #data p, #foto p, #poster p{
-  width: 24vw;
+  width: 34vw;
   /* height: inherit; */
+}
+
+#poster a:hover {
+  color: navy !important;
+}
+
+#poster a {
+  transition: all 0.3s ease;
 }
 
 #about {
@@ -410,8 +418,7 @@ body {
 
 .hoverable-letter {
   font-size: 1.1em;
-  cursor: pointer;
-  transition: font-family 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 
@@ -495,45 +502,6 @@ body {
   position: absolute;
 }
 
-
-/* .enter {
-  position: absolute;
-  display: flex;
-  align-items: center;
-
-  margin: 0 auto;
-  opacity: 0.3;
-  transform: ;
-  user-select: none;
-  bottom: 15px;
-  left: 50%;
-  transform: translate(-50%,0%) scale(1.5); 
-  transition: all 0.15s ease-in-out;
-}
-
-.enter a {
-  text-decoration: none;
-  color: black;
-  text-align: center;
-}
-
-.arrow {
-  max-width: 1em;
-  max-height: 1em;
-  margin-left: 8px;
-  transition: all 0.15s ease-in-out;
-
-}
-
-.enter:hover .arrow {
-  transform: rotate(-90deg);
-}
-
-.enter:hover {
-  opacity: 1;
-} */
-
-
 #enter {
   position: fixed;
   bottom: -1000px;
@@ -543,6 +511,10 @@ body {
   user-select: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+#enter:hover {
+  opacity: 0.85 !important;
 }
 
 #arrow {
