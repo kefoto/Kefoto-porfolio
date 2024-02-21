@@ -207,9 +207,14 @@ body {
   /* transition: all 1s ease-in; */
 }
 
-#Layer_2 {
+#drag__e:hover #Layer_1 {
   opacity: 1;
 }
+#Layer_1 {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
 
 .spin {
   position: absolute;

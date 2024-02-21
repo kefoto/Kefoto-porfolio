@@ -246,9 +246,6 @@ function buttons__collision() {
 
 
       //TODO: CHANGE arrowLink
-      //TODO: make circle reset to the center of container circle 
-   
-
 
       // drag__e.style.transform = "scale(0.8)";
     } else {
