@@ -280,6 +280,7 @@ body {
   transition: opacity 0.4s ease, background-color 0.3s ease-in-out, all 0.35s ease;
 
 }
+
 #container #fto {
   bottom: 0;
   left: 0;
@@ -292,12 +293,6 @@ body {
   right: 0;
   opacity: 1;
   transition: opacity 0.4s ease, background-color 0.3s ease-in-out, all 0.35s ease;
-
-}
-
-#container .button__menu p {
-  margin: 0 auto;
-  /* border: */
 }
 
 .description__pg {
@@ -309,12 +304,10 @@ body {
    */
 }
 
-/* Additional styles for better readability */
 .description__pg #about,
 .description__pg #data,
 .description__pg #foto,
 .description__pg #poster {
-  /* margin-bottom: 20px; */
   /* user-select: none; */
   position: absolute;
   /* overflow: hidden; */
@@ -324,19 +317,32 @@ body {
 #data *,
 #foto *,
 #poster * {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-#data p, #foto p, #poster p{
+
+#foto p, #poster p{
   width: 34vw;
   /* height: inherit; */
 }
 
-#poster a:hover {
+#data p {
+  /* display: block; */
+  position: relative;
+  top: -220px;
+  width: 70vw;
+  /* top:100px; */
+}
+
+/* #data p {
+  text-align: left;
+} */
+
+.description__pg a:hover {
   color: navy !important;
 }
 
-#poster a {
+.description__pg a {
   transition: all 0.3s ease;
 }
 

@@ -536,16 +536,12 @@ function changeHoverletter() {
 
         if (randomStyleNumber == 1) {
           letter.style.fontFamily = "'Xanh Mono', monospace";
-          letter.style.fontSize = "1.1em";
         } else if (randomStyleNumber == 2) {
           letter.style.fontFamily = "'Syne Mono', monospace";
-          letter.style.fontSize = "1.1em";
         } else if (randomStyleNumber == 3) {
-          letter.style.fontFamily = "'Silkscreen', sans-serif";
-          letter.style.fontSize = "0.9em";
+          letter.style.fontFamily = "'Syne Mono', monospace";
         } else {
           letter.style.fontFamily = "'Space Mono', sans-serif";
-          letter.style.fontSize = "1.1em";
         }
         // console.log("Mouse entered the letter: " + letter.innerText);
       });
