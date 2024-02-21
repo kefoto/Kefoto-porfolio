@@ -2,6 +2,12 @@ const menu = document.querySelector(".navbar__menu");
 const menuLinks = document.querySelector(".navbar__toggle");
 const buttons = document.querySelectorAll(".button");
 const spinning = document.querySelector(".spin");
+
+const enter = document.getElementById("enter");
+const arrow = document.getElementById("arrow");
+const arrowLink = document.getElementById('arrowLink');
+let isArrowHovered = false;
+
 const bkg__color = "#242424";
 
 //variable initiation for collision
@@ -68,19 +74,8 @@ updateBottomDateCircle();
 container__collision();
 
 const paragraphs = document.querySelectorAll(".hoverable-paragraph");
+arrow_interaction();
 changeHoverletter();
-
-const enter = document.getElementById("enter");
-const arrow = document.getElementById("arrow");
-
-enter.addEventListener("mousemove", (e) => {
-  const angle = Math.atan2(
-    e.clientY - (enter.offsetTop + arrow.offsetTop + arrow.offsetHeight / 2),
-    e.clientX - (enter.offsetLeft + arrow.offsetLeft + arrow.offsetWidth / 2)
-  );
-  const rotation = angle * (180 / Math.PI);
-  arrow.style.transform = `rotate(${rotation}deg)`;
-});
 
 // presentDateCircle();
 
@@ -212,25 +207,37 @@ function buttons__collision() {
         return;
       }
       //to change the disciptions
+      document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.top = "50%";
       document.getElementById(classes[elementId]).style.opacity = "1";
+      
       b.style.backgroundColor = "#242424";
-      console.log(b.id);
-
+      enter.style.opacity = "0.5";
       // b.style.transformOrigin = "50% 50%";
       let temptranslate;
 
       if (b.id == "abt") {
         temptranslate = "translate(-50%, -50%)";
+        arrowLink.href = 'https://example.com/collision1';
       } else if (b.id == "dta") {
         temptranslate = "translate(50%, -50%)";
+        arrowLink.href = 'https://example.com/collision2';
       } else if (b.id == "fto") {
         temptranslate = "translate(-50%, 50%)";
+        arrowLink.href = 'https://example.com/collision3';
       } else {
         temptranslate = "translate(50%, 50%)";
+        arrowLink.href = 'https://example.com/collision4';
       }
 
       b.style.transform = "scale(0.4) " + temptranslate;
+
+
+
+      //TODO: CHANGE arrowLink
+      //TODO: don't let the arrow hover when no circle is colliding 
+
+
       // drag__e.style.transform = "scale(0.8)";
     } else {
       b.style.backgroundColor = "transparent";
@@ -238,8 +245,9 @@ function buttons__collision() {
       b.style.width = button__menu__size + "px";
       b.style.height = button__menu__size + "px";
       b.style.transform = "scale(1.0) translate(0%, 0%)";
-      // drag__e.style.transform = "scale(1.0)";
 
+      // drag__e.style.transform = "scale(1.0)";
+      document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 100s ease";
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
       collision__circle[elementId] = false;
@@ -283,6 +291,64 @@ function other_buttons_opacity() {
       // }, 200);
       // }
     });
+
+    // document.getElementById("Layer_2").style.opacity = "1";
+  }
+}
+
+function arrow_interaction() {
+  document.addEventListener("mousemove", (e) => {
+
+    const X_distance = e.clientX - (enter.offsetLeft + arrow.offsetLeft + arrow.offsetWidth / 2);
+    const Y_distance = e.clientY - (enter.offsetTop + arrow.offsetTop + arrow.offsetHeight / 2);
+    const angle = Math.atan2(
+      Y_distance,
+      X_distance
+    );
+  
+    const rotation = 45 + angle * (180 / Math.PI);
+
+    const norm_distance_opacity = distance_to_opacity(X_distance,Y_distance);
+    console.log(norm_distance_opacity);
+    arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
+
+    if (getKeysByValue(collision__circle, true).length == 1) {
+      enter.style.opacity = norm_distance_opacity.toString();
+      enter.style.bottom = "15px";
+    } else if (getKeysByValue(collision__circle, true).length == 0) {
+      enter.style.bottom = "-1000px";
+      enter.style.opacity = "0";
+      
+    }
+  });
+
+  arrow.addEventListener("mouseenter", function () {
+    if (getKeysByValue(collision__circle, true).length == 1) {
+      isArrowHovered = true;    
+      presentDateCircle(repeatedString("More ", 9));
+      arrow.classList.add("active");
+      
+    }
+    
+    // Set other variables or perform actions as needed
+  });
+
+  arrow.addEventListener("mouseleave", function () {
+    isArrowHovered = false;
+    updateBottomDateCircle();
+    arrow.classList.remove("active");
+    
+    // Reset other variables or perform actions as needed
+  });
+}
+
+function distance_to_opacity(x, y) {
+  const norm_distance_opacity = 1 - Math.sqrt((x/window.innerWidth)**2 + (y/window.innerHeight)**2)
+
+  if (norm_distance_opacity <= 0){
+    return 0;
+  } else {
+    return norm_distance_opacity;
   }
 }
 
@@ -490,8 +556,10 @@ function updateBottomDateCircle() {
       }/${temp.getDate()}/${temp.getFullYear()} `
     );
   } else {
+    
     const temp = getKeysByValue(collision__circle, true);
     const stringtemp = classes[temp] + " ";
+    
     presentDateCircle(repeatedString(stringtemp, 9));
     // text.classList.add('loaded');
   }
