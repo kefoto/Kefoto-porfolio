@@ -181,6 +181,17 @@ function origin__reset__promise(x) {
           drag__e.style.left = origin[0] + "px";
           drag__e.style.top = origin[1] + "px";
           resolve();
+        } else if (getKeysByValue(collision__circle, true).length == 1 && !moving){
+          const temp = getKeysByValue(collision__circle, true);
+          const circle_container = document.getElementById(temp);
+          const rect = circle_container.getBoundingClientRect();
+
+          const centerX = rect.left + + rect.width / 2;
+          const centerY = rect.top + rect.height / 2 -  nav__bar.offsetHeight;
+          drag__e.style.transition = "all 0.5s ease-in-out";
+          drag__e.style.left = centerX + "px";
+          drag__e.style.top = centerY + "px";
+          resolve();
         }
         p = null;
       }, x);
@@ -235,7 +246,8 @@ function buttons__collision() {
 
 
       //TODO: CHANGE arrowLink
-      //TODO: don't let the arrow hover when no circle is colliding 
+      //TODO: make circle reset to the center of container circle 
+   
 
 
       // drag__e.style.transform = "scale(0.8)";
@@ -309,7 +321,6 @@ function arrow_interaction() {
     const rotation = 45 + angle * (180 / Math.PI);
 
     const norm_distance_opacity = distance_to_opacity(X_distance,Y_distance);
-    console.log(norm_distance_opacity);
     arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
 
     if (getKeysByValue(collision__circle, true).length == 1) {
@@ -384,7 +395,6 @@ function container__collision() {
       moving = false;
       // buttons__collision();
       if (
-        getKeysByValue(collision__circle, true).length == 0 &&
         drag__e.offsetLeft != origin[0] &&
         drag__e.offsetTop != origin[1]
       ) {
@@ -398,7 +408,6 @@ function container__collision() {
     moving = false;
 
     if (
-      getKeysByValue(collision__circle, true).length == 0 &&
       drag__e.offsetLeft != origin[0] &&
       drag__e.offsetTop != origin[1]
     ) {
@@ -454,6 +463,7 @@ function container__collision() {
           }
         }
         // debugger;
+        console.log(mousePosition);
         other_buttons_opacity();
         updateBottomDateCircle();
         buttons__collision();
@@ -482,7 +492,6 @@ function container__collision() {
       ];
 
       if (
-        getKeysByValue(collision__circle, true).length == 0 &&
         drag__e.offsetLeft != origin[0] &&
         drag__e.offsetTop != origin[1]
       ) {

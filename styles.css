@@ -214,8 +214,8 @@ body {
 .spin {
   position: absolute;
   font-size: 2.4em;
-  width: 6em;
-  height: 6em;
+  width: 4em;
+  height: 4em;
   opacity: 1;
   top: 50%;
   left: 50%;
@@ -389,12 +389,11 @@ body {
 }
 
 .image-on-right {
-  transform: translate(10vw, 0%);
-  /* padding-left:100px; */
+  transform: translate(15vw, -3vh);
 }
 
 .image-on-left {
-  transform: translate(-10vw, 0%);
+  transform: translate(-15vw, -3vh);
   /* padding-left:100px; */
 }
 
@@ -568,19 +567,19 @@ body {
   .description__pg > div > img {
     /* width: 60%;
     height: 60%; */
-    width: 60% !important;
+    width: 65% !important;
     height: auto !important;
     margin: 0 auto;
     z-index: 0;
   }
 
   .image-on-right {
-    transform: translate(22vw, 0%);
+    transform: translate(22vw, -3vh);
     /* padding-left:100px; */
   }
   
   .image-on-left {
-    transform: translate(-22vw, 0%);
+    transform: translate(-22vw, -3vh);
     /* padding-left:100px; */
   }
 
@@ -601,7 +600,7 @@ body {
   }
 
   #data p, #foto p, #poster p{
-    width: 35vw;
+    width: 38vw;
     /* height: inherit; */
   }
 }
