@@ -529,8 +529,8 @@ body {
 }
 
 #arrow {
-  width: 5vw; /* Adjust the width as needed */
-  height: 5vh; /* Adjust the height as needed */
+  width: 30px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
   transition: transform 0.2s ease-out;
   
   transform: translate(-50%,0%) scale(0.8); /* Optional: Smooth transition for the rotation */

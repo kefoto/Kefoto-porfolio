@@ -229,10 +229,10 @@ function buttons__collision() {
 
       if (b.id == "abt") {
         temptranslate = "translate(-50%, -50%)";
-        arrowLink.href = 'https://example.com/collision1';
+        arrowLink.href = 'https://www.linkedin.com/in/kefoto/';
       } else if (b.id == "dta") {
         temptranslate = "translate(50%, -50%)";
-        arrowLink.href = 'https://example.com/collision2';
+        arrowLink.href = 'https://github.com/kefoto/';
       } else if (b.id == "fto") {
         temptranslate = "translate(-50%, 50%)";
         arrowLink.href = 'https://example.com/collision3';
