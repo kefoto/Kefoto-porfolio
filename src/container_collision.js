@@ -199,6 +199,9 @@ export const container__collision = () => {
     },
     true
   );
+
+
+  //TODO: window change when goes full screen
 };
 
 function other_buttons_opacity() {
@@ -289,7 +292,6 @@ function buttons__collision() {
 
       //TODO: CHANGE arrowLink
 
-      // drag__e.style.transform = "scale(0.8)";
     } else {
       b.style.backgroundColor = "transparent";
       b.style.transformOrigin = "initial";
@@ -297,14 +299,12 @@ function buttons__collision() {
       b.style.height = button__menu__size + "px";
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
-      // drag__e.style.transform = "scale(1.0)";
       // document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 60s ease";
       document.getElementById(classes[elementId]).style.transition =
         "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
 
-      // console.log(b.id);
 
       //make sure it only execute once
       if (b.id == "dta") {
@@ -375,20 +375,4 @@ export const getKeysByValue = (object, value) => {
   return Object.keys(object).filter((key) => object[key] === value);
 }
 
-function hasExactlyOneTrue(hashTable) {
-  let trueCount = 0;
-
-  for (const key in hashTable) {
-    if (hashTable[key] === true) {
-      trueCount++;
-
-      // If trueCount exceeds 1, no need to continue checking
-      if (trueCount > 1) {
-        return false;
-      }
-    }
-  }
-
-  return trueCount === 1;
-}
 

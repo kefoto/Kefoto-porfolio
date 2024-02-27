@@ -16,5 +16,5 @@ arrow_interaction();
 changeHoverletter();
 
 
-
+//TODO: put document and window even listeners in the main method
 // console.log(deviceType);
