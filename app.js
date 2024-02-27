@@ -35,6 +35,11 @@ var p = null;
 const button__menu = document.querySelectorAll(".button__menu");
 // let button__1 = document.getElementById("about");
 
+var isRendering = false;
+const canvas__ele = document.getElementById("physicsCanvas");
+const physicCircleContainer__ele = document.getElementById("physicCircleContainer");
+
+
 //dragging event for collision
 let events = {
   mouse: {
@@ -217,6 +222,7 @@ function buttons__collision() {
         collision__circle[elementId] = false;
         return;
       }
+      
       //to change the disciptions
       document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.top = "50%";
@@ -233,6 +239,12 @@ function buttons__collision() {
       } else if (b.id == "dta") {
         temptranslate = "translate(50%, -50%)";
         arrowLink.href = 'https://github.com/kefoto/';
+
+        isRendering = true;
+        canvas__ele.style.left = "0";
+        physicCircleContainer__ele.style.left = "0";
+        physicCircleContainer__ele.style.opacity = "1";
+        
       } else if (b.id == "fto") {
         temptranslate = "translate(-50%, 50%)";
         arrowLink.href = 'https://example.com/collision3';
@@ -260,8 +272,20 @@ function buttons__collision() {
       document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.opacity = "0";
       document.getElementById(classes[elementId]).style.top = "-1000px";
+
+      // console.log(b.id);
+
+      //make sure it only execute once
+      if(b.id == "dta"){
+        isRendering = false;
+        canvas__ele.style.left = "-1000px";
+        physicCircleContainer__ele.style.left = "-1000px";
+        physicCircleContainer__ele.style.opacity = "0";
+      }
+      
+
       collision__circle[elementId] = false;
-    }
+    } 
   });
 }
 
@@ -469,7 +493,7 @@ function container__collision() {
           }
         }
         // debugger;
-        console.log(mousePosition);
+        // console.log(mousePosition);
         other_buttons_opacity();
         updateBottomDateCircle();
         buttons__collision();

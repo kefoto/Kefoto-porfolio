@@ -1,22 +1,22 @@
 //reference: https://www.youtube.com/watch?v=GcPT4kd9JSo&ab_channel=danielstuts
 // requires npm install regression
 
-//the centripetal acceleration applies, but we have to find the radius of motion
+
+import {isRendering} from "./container_collision.js";
 const canvas = document.getElementById("physicsCanvas");
 const ctx = canvas.getContext("2d");
-var playground__container = document.getElementById("container");
+const playground__container = document.getElementById("container");
 
 canvas.width = playground__container.offsetWidth * 0.45;
 canvas.height = playground__container.offsetHeight;
-// var timer;
 
 const icons = document.querySelectorAll(".physicCircle");
 
 const balls = [];
-var anglepre = 0;
 
-let friction;
-let mouseForce;
+let friction = 0.04;
+let mouseForce = 0.3;
+
 const epsilon = 1e-4;
 
 let startTime;
@@ -27,8 +27,9 @@ let isRecording = false;
 
 const targetFrameRate = 90; // Set your target frame rate
 const frameInterval = 1000 / targetFrameRate; // Calculate the interval between frames
-
 let lastFrameTime = 0;
+
+// import {isRendering} from './app.js';
 
 class Ball {
   constructor(x, y, r, id) {
@@ -47,27 +48,7 @@ class Ball {
     balls.push(this);
   }
 
-  // constructor(x, y, r, source) {
-  //   this.pos = new Vector(x, y);
-  //   this.r = r;
-  //   this.velo = new Vector(0, 0);
-  //   this.acce = new Vector(0, 0);
-  //   this.acceleration = 0.15;
-  //   this.isDragging = false;
-  //   this.isMoving = false;
-  //   this._latest_points = [];
-  //   this._angle_samples = [];
-  //   this.centripetal_acce = new Vector(0, 0);
-  //   this.prev_acce_vector = new Vector(0, 0);
-  //   balls.push(this);
-    
-  //   this.image = new Image();
-  //   this.image.src = source;
-  // }
-
-
   drawBall() {
-    // this.image.onload = function() {
       ctx.beginPath();
       ctx.arc(this.pos.x, this.pos.y, this.r, 0, 2 * Math.PI);
       ctx.strokeStyle = "black";
@@ -75,10 +56,6 @@ class Ball {
       ctx.fillStyle = "blue";
       ctx.fill();
       ctx.closePath();
-
-      // ctx.drawImage(image, this.pos.x - this.r, this.pos.y - this.r, 2 * this.r, 2 * this.r);
-    // };
-    
   }
 
   drawPoints() {
@@ -147,10 +124,6 @@ class Ball {
         // this.centripetal_acce = this.centripetal_acce.mult(1-friction);
         // console.log(this.centripetal_acce);
         // this.velo = this.velo.add(centripetal_acce.mult(1 - friction));
-
-        if (this.velo.mag() !== 0) {
-          this.isMoving = true;
-        }
       }
 
       // console.log(this.acce, this.velo, temp);
@@ -165,7 +138,6 @@ class Ball {
 
       if (this.velo.mag() <= epsilon) {
         this.velo = new Vector(0, 0);
-        this.isMoving = false;
       } else {
         this.pos = this.pos.add(this.velo);
       }
@@ -217,15 +189,6 @@ class Ball {
         this.collision_resolution(otherBall);
         otherBall.handleWallCollision();
 
-        if (otherBall.velo.mag() !== 0) {
-          otherBall.isMoving = true;
-        } else if (otherBall.velo.mag() <= epsilon) {
-          otherBall.velo = new Vector(0, 0);
-          otherBall.isMoving = false;
-        } else {
-          otherBall.isMoving = false;
-        }
-
         // otherBall.updateHtmlPosition();
     }
   }
@@ -251,9 +214,20 @@ class Ball {
 
   updateHtmlPosition(){
     const htmlEle = document.getElementById(this.id);
-    // console.log(this.id);
-    htmlEle.style.left = this.pos.x + "px";
-    htmlEle.style.top = this.pos.y + "px";
+
+    if(this.isMoving){
+      htmlEle.style.left = this.pos.x + "px";
+      htmlEle.style.top = this.pos.y + "px";
+    }  
+  }
+
+  isBallMoving(){
+    if (this.velo.mag() <= epsilon * 10) {
+      this.isMoving = false;
+      this.velo = new Vector(0,0);
+    } else {
+      this.isMoving = true;
+    }
   }
 
 
@@ -502,10 +476,13 @@ function calculateMeanAngle(angles){
 }
 
 
-
-function mainloop(currentTime) {
+export const mainloop = (currentTime) => {
+  console.log(isRendering);
+  // Stop rendering if the flag is set to false
+  if(!isRendering){
+    return;
+  }
   const elapsedTime = currentTime - lastFrameTime;
-
   mousectrl();
   // console.log( canvas.width, canvas.height);
   // Check if enough time has passed to proceed to the next frame
@@ -513,8 +490,6 @@ function mainloop(currentTime) {
   if (elapsedTime > frameInterval) {
     // Your animation/update logic goes here
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    
     for (const ball of balls) {
       ball.updatePhysics();
       // ball.drawBall();
@@ -526,21 +501,21 @@ function mainloop(currentTime) {
         timeLapse = Date.now() - startTime;
         // console.log("yea");
       }
+      ball.isBallMoving();
       ball.updateHtmlPosition();
     }
     // Update the last frame time
     lastFrameTime = currentTime;
     requestAnimationFrame(mainloop);
   }
-
-  
 }
-//TODO: cancel animation when button is not hovered and vice versa
+
 //TODO: make it less laggy
 //TODO: left and opacity animation
+//TODO: resize
 
-//resize
-console.log(icons);
+// console.log(icons);
+
 //initiate the physical icons 
 icons.forEach((icon) => {
   const left = icon.offsetLeft;
@@ -550,16 +525,14 @@ icons.forEach((icon) => {
   const id = icon.id;
 
   new Ball(left, top, width/2, id);
-  console.log(`Icon ID: ${id}, Left: ${left}px, Top: ${top}px, Width: ${width}px`);
+  // console.log(`Icon ID: ${id}, Left: ${left}px, Top: ${top}px, Width: ${width}px`);
 });
 
 
-mouseForce = 0.3;
-friction = 0.04;
 
 
 
-requestAnimationFrame(mainloop);
+// requestAnimationFrame(mainloop);
 
 
 

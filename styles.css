@@ -552,9 +552,12 @@ body {
   height: 100%;
   width: 50%;
   position: absolute;
-  /* left:1000px; */
+  left: -1000px;
+  top:0;
+  opacity: 0;
   /* background-color: green; */
   /* overflow: hidden; */
+  transition: opacity 0.3s ease-in;
 }
 
 #physicsCanvas {
@@ -564,7 +567,9 @@ body {
   height: 100vh; */
   z-index: 1;
   position: absolute;
-  /* left:1000px; */
+  left: -1000px;
+  top:0;
+  opacity: 0;
   
 }
 
