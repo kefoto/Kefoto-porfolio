@@ -1,6 +1,4 @@
 //reference: https://www.youtube.com/watch?v=GcPT4kd9JSo&ab_channel=danielstuts
-// requires npm install regression
-
 
 import {isRendering} from "./container_collision.js";
 const canvas = document.getElementById("physicsCanvas");
@@ -22,7 +20,6 @@ const epsilon = 1e-4;
 let startTime;
 let timeLapse = 0;
 
-let recordInterval;
 let isRecording = false;
 
 const targetFrameRate = 90; // Set your target frame rate
@@ -362,7 +359,6 @@ function mousectrl() {
     for (const ball of balls) {
       ball.isDragging = false;
     }
-    // clearInterval(recordInterval);
     isRecording = false;
   });
 
@@ -516,7 +512,10 @@ export const mainloop = (currentTime) => {
 
 // console.log(icons);
 
+
 //initiate the physical icons 
+
+//TODO: make an initiation method on converting and randomizing the position;
 icons.forEach((icon) => {
   const left = icon.offsetLeft;
   const top = icon.offsetTop;
