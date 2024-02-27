@@ -6,7 +6,7 @@ const canvas = document.getElementById("physicsCanvas");
 const ctx = canvas.getContext("2d");
 var playground__container = document.getElementById("container");
 
-canvas.width = playground__container.offsetWidth * 0.5;
+canvas.width = playground__container.offsetWidth * 0.45;
 canvas.height = playground__container.offsetHeight;
 // var timer;
 

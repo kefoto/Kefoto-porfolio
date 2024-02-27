@@ -329,14 +329,13 @@ body {
 #data p {
   /* display: block; */
   position: relative;
-  top: -220px;
-  width: 70vw;
+  /* transform: translate(0, -50%); */
+  /* top: -220px; */
+  top: -150px;
+  width: 34vw;
   /* top:100px; */
 }
 
-/* #data p {
-  text-align: left;
-} */
 
 .description__pg a:hover {
   color: navy !important;
@@ -360,8 +359,8 @@ body {
   text-align: center;
   opacity: 0;
   font-size: 1.2em;
-  padding: 10px;
-  /* transform: translate(-50%,-50%); */
+  /* padding: 10px; */
+  /* transform: translate(0, -50%); */
   transition: opacity 0.3s ease-out;
   top: -1000px;
   left: 50%;
@@ -389,12 +388,12 @@ body {
 
 .text-on-right {
   position: absolute;
-  top: 0;
+  top: 0 !important;
   left: 60%;
   text-align: left;
   /* margin: -50px; */
   /* transform: translate(0, -50%); */
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .text-on-left {
