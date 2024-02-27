@@ -21,6 +21,7 @@
       src="https://kit.fontawesome.com/30d1f7aba2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   </head>
 
   <body>
@@ -167,29 +168,33 @@
           <img class="spin" src="image/icons/draggme.svg" />
 
           <!-- for  -->
-          <div id="physicCircle">
-            <!-- <div id="python">
-              <img src="image/icons/python.png" />
+          <div>
+            <div id="physicCircleContainer">
+              <div id="python" class="physicCircle">
+                <img src="image/icons/python.png" />
+              </div>
+              <div id="java" class="physicCircle">
+                <img src="image/icons/java.png" />
+              </div>
+              <div id="js" class="physicCircle">
+                <img src="image/icons/js.png" />
+              </div>
+              <div id="stata" class="physicCircle">
+                <img src="image/icons/stata.png" />
+              </div>
+              <div id="html" class="physicCircle">
+                <img src="image/icons/html.png" />
+              </div>
+              <div id="css" class="physicCircle">
+                <img src="image/icons/css.png" />
+              </div>
+              <!-- <div id="tableau">
+                <img src="image/icons/css.png" />
+              </div> -->
             </div>
-            <div id="java">
-              <img src="image/icons/java.png" />
-            </div>
-            <div id="js">
-              <img src="image/icons/js.png" />
-            </div>
-            <div id="stata">
-              <img src="image/icons/stata.png" />
-            </div>
-            <div id="html">
-              <img src="image/icons/html.png" />
-            </div>
-            <div id="css">
-              <img src="image/icons/css.png" />
-            </div> -->
-            <!-- <div id="tableau">
-              <img src="image/icons/css.png" />
-            </div> -->
+            <canvas id="physicsCanvas"></canvas>
           </div>
+          
           <!-- <img id="welcome" src="/" /> -->
           <div id="abt" class="button__menu">
             <p>ABOUT</p>
@@ -315,6 +320,7 @@
       <div id="photo"></div>
     </section> -->
     <script src="app.js"></script>
+    <script src="ball.js"></script>
   </body>
 </html>
 <!-- after the lead I should include my statement and my inspiration  -->

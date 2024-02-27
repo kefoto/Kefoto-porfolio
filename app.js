@@ -323,7 +323,7 @@ function arrow_interaction() {
     if (getKeysByValue(collision__circle, true).length == 1) {
       const norm_distance_opacity = distance_to_opacity(X_distance,Y_distance);
       arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
-      console.log(norm_distance_opacity);
+      // console.log(norm_distance_opacity);
       enter.style.opacity = norm_distance_opacity.toString();
       enter.style.bottom = "8px";
     } else if (getKeysByValue(collision__circle, true).length == 0) {
