@@ -506,7 +506,7 @@ export const mainloop = (currentTime) => {
   }
 }
 
-//TODO: make it less laggy
+//TODO: still laggy, make requestion animation only there exist moving
 //TODO: left and opacity animation
 //TODO: resize
 

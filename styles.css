@@ -497,8 +497,8 @@ body {
   background-color: white;
   border-radius: 50%;
   border: 1px solid black;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   overflow: hidden;
   display: flex;
   position: absolute;
@@ -569,7 +569,7 @@ body {
   position: absolute;
   left: -1000px;
   top:0;
-  opacity: 0;
+  opacity: 1;
   
 }
 
