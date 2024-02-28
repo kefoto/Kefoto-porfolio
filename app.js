@@ -331,6 +331,7 @@ function other_buttons_opacity() {
 }
 //TODO: bug whem the window goes full screen / vertical window change
 //TODO: nav expansion color change is buggy
+
 function arrow_interaction() {
   document.addEventListener("mousemove", (e) => {
 

@@ -369,17 +369,6 @@ function mousectrl() {
 
 }
 
-// Add event listeners
-function calculateAngle(x, y) {
-  // Use Math.atan2 to calculate the angle in radians
-  const angleRadians = Math.atan2(y, x);
-
-  // Convert radians to degrees if needed
-  const angleDegrees = (angleRadians * 180) / Math.PI;
-
-  return angleDegrees;
-}
-
 function rotateVector(v, angleDegrees) {
   // Convert Cartesian coordinates to polar coordinates
   const magnitude = Math.sqrt(v.x ** 2 + v.y ** 2);

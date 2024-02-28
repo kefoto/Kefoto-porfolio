@@ -1,21 +1,23 @@
-import { deviceType, isTouchDevice } from "./device.js";
-import {updateBottomDateCircle} from './bottomCircle.js';
-import {arrow_move} from "./arrow.js"
-import {mainloop} from "./ball.js"
-isTouchDevice();
-
+import { deviceType, events } from "./device.js";
+import { isTouchDevice } from "./device.js";
+import { mainloop } from "./ball.js";
+import { updateBottomDateCircle } from "./bottomCircle.js";
 
 const spinning = document.querySelector(".spin");
-const arrowLink = document.getElementById('arrowLink');
+const arrowLink = document.getElementById("arrowLink");
 
 const canvas__ele = document.getElementById("physicsCanvas");
-const physicCircleContainer__ele = document.getElementById("physicCircleContainer");
+const physicCircleContainer__ele = document.getElementById(
+  "physicCircleContainer"
+);
+
+const drag__e = document.getElementById("drag__e");
+const nav__bar = document.querySelector(".navbar");
+export const button__menu = document.querySelectorAll(".button__menu");
 
 var offset = [0, 0];
-const drag__e = document.getElementById("drag__e");
 var mousePosition;
 
-const nav__bar = document.querySelector(".navbar");
 export const playground__container = document.getElementById("container");
 export var outDim = {
   left: playground__container.offsetLeft,
@@ -26,27 +28,13 @@ export var outDim = {
     playground__container.offsetHeight -
     nav__bar.offsetHeight,
 };
+
 export var moving = false;
 export var isRendering = false;
-export const button__menu = document.querySelectorAll(".button__menu");
 
 var p = null;
 
 let button__menu__size = playground__container.clientHeight / 2 - 15;
-
-let events = {
-  mouse: {
-    down: "mousedown",
-    move: "mousemove",
-    up: "mouseup",
-  },
-
-  touch: {
-    down: "touchstart",
-    move: "touchmove",
-    up: "touchend",
-  },
-};
 
 export const classes = {
   abt: "about",
@@ -76,132 +64,110 @@ export const container__collision = () => {
       drag__e.style.transition = "none";
       //making the spinning drag me disappear
       spinning.style.opacity = "0";
-      setTimeout(() => {
-        spinning.style.top = "-1000px";
-      }, 1020);
+      spinning.style.visibility = "hidden";
     },
     true
   );
 
-  document.addEventListener(
-    events[deviceType].up,
-    function () {
-      moving = false;
-      // buttons__collision();
-      if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
-        origin__reset__promise(4000);
-      }
-    },
-    true
-  );
-
-  drag__e.addEventListener(events[deviceType].up, (e) => {
-    moving = false;
-
-    if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
-      origin__reset__promise(4000);
-    }
+  drag__e.addEventListener(events[deviceType].up, () => {
+    drag__e_up();
   });
 
-  document.addEventListener(
-    events[deviceType].move,
-    function (event) {
-      // event.preventDefault();
-      if (moving) {
-        //change position and check on boundary collision
-        mousePosition = {
-          x: !isTouchDevice() ? event.clientX : event.touches[0].clientX,
-          y: !isTouchDevice() ? event.clientY : event.touches[0].clientY,
-        };
+  //TODO: window change when goes full screen
+};
 
-        var x_allowed =
-          mousePosition.x > outDim.left + drag__e.offsetWidth / 2 &&
-          mousePosition.x <= outDim.right - drag__e.offsetWidth / 2;
-        var y_allowed =
-          mousePosition.y >
-            outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight &&
-          mousePosition.y <=
-            outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
-        //   debugger;
-        if (x_allowed) {
-          drag__e.style.left = mousePosition.x + offset[0] + "px";
-        } else {
-          if (mousePosition.x >= outDim.left + drag__e.offsetWidth / 2) {
-            drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
-          }
-          if (mousePosition.x <= outDim.right - drag__e.offsetWidth / 2) {
-            drag__e.style.left = outDim.left + drag__e.offsetWidth / 2 + "px";
-          }
-        }
-        //   debugger;
-        if (y_allowed) {
-          drag__e.style.top = mousePosition.y + offset[1] + "px";
-        } else {
-          if (
-            mousePosition.y >=
-            outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight
-          ) {
-            drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
-          }
-          if (
-            mousePosition.y <=
-            outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
-          ) {
-            drag__e.style.top = outDim.top + drag__e.offsetHeight / 2 + "px";
-          }
-        }
-        // debugger;
-        // console.log(mousePosition);
-        other_buttons_opacity();
-        updateBottomDateCircle();
-        buttons__collision();
+//for document event listener
+export const drag__e_up = () => {
+  moving = false;
+
+  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
+    origin__reset__promise(4000);
+  }
+};
+
+export const drag__e_move = (event) => {
+  if (moving) {
+    //change position and check on boundary collision
+    mousePosition = {
+      x: !isTouchDevice() ? event.clientX : event.touches[0].clientX,
+      y: !isTouchDevice() ? event.clientY : event.touches[0].clientY,
+    };
+
+    var x_allowed =
+      mousePosition.x > outDim.left + drag__e.offsetWidth / 2 &&
+      mousePosition.x <= outDim.right - drag__e.offsetWidth / 2;
+    var y_allowed =
+      mousePosition.y >
+        outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight &&
+      mousePosition.y <=
+        outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
+    //   debugger;
+    if (x_allowed) {
+      drag__e.style.left = mousePosition.x + offset[0] + "px";
+    } else {
+      if (mousePosition.x >= outDim.left + drag__e.offsetWidth / 2) {
+        drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
       }
-
-      arrow_move(event);
-    },
-    true
-  );
-
-  //when the window change in size
-  window.addEventListener(
-    "resize",
-    (e) => {
-      //   debugger;
-      outDim.left = playground__container.offsetLeft;
-      outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
-      outDim.right =
-        playground__container.offsetLeft + playground__container.offsetWidth;
-      outDim.bottom =
-        playground__container.offsetTop +
-        playground__container.offsetHeight -
-        nav__bar.offsetHeight;
-
-      origin = [
-        playground__container.offsetWidth / 2,
-        playground__container.offsetHeight / 2,
-      ];
-
-      if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
-        origin__reset__promise(500);
+      if (mousePosition.x <= outDim.right - drag__e.offsetWidth / 2) {
+        drag__e.style.left = outDim.left + drag__e.offsetWidth / 2 + "px";
       }
-      //since the cursor would onnly go outofbound in right or bottom, we put restrictions
-      if (drag__e.offsetTop >= outDim.bottom - drag__e.offsetHeight / 2) {
+    }
+    //   debugger;
+    if (y_allowed) {
+      drag__e.style.top = mousePosition.y + offset[1] + "px";
+    } else {
+      if (
+        mousePosition.y >=
+        outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight
+      ) {
         drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
       }
-
-      if (drag__e.offsetLeft >= outDim.right - drag__e.offsetWidth / 2) {
-        drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
-        //   console.log("colide left", drag__e.offsetLeft, (outDim.left + drag__e.offsetWidth / 2));
+      if (
+        mousePosition.y <=
+        outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
+      ) {
+        drag__e.style.top = outDim.top + drag__e.offsetHeight / 2 + "px";
       }
-      other_buttons_opacity();
-      updateBottomDateCircle();
-      buttons__collision();
-    },
-    true
-  );
+    }
+    // debugger;
+    // console.log(mousePosition);
+    other_buttons_opacity();
+    updateBottomDateCircle();
+    buttons__collision();
+  }
+};
+//window resize event listener
+export const container_resize = () => {
+  //   debugger;
+  outDim.left = playground__container.offsetLeft;
+  outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
+  outDim.right =
+    playground__container.offsetLeft + playground__container.offsetWidth;
+  outDim.bottom =
+    playground__container.offsetTop +
+    playground__container.offsetHeight -
+    nav__bar.offsetHeight;
 
+  origin = [
+    playground__container.offsetWidth / 2,
+    playground__container.offsetHeight / 2,
+  ];
 
-  //TODO: window change when goes full screen
+  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
+    origin__reset__promise(500);
+  }
+  //since the cursor would onnly go outofbound in right or bottom, we put restrictions
+  if (drag__e.offsetTop >= outDim.bottom - drag__e.offsetHeight / 2) {
+    drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
+  }
+
+  if (drag__e.offsetLeft >= outDim.right - drag__e.offsetWidth / 2) {
+    drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
+    //   console.log("colide left", drag__e.offsetLeft, (outDim.left + drag__e.offsetWidth / 2));
+  }
+  other_buttons_opacity();
+  updateBottomDateCircle();
+  buttons__collision();
 };
 
 function other_buttons_opacity() {
@@ -234,13 +200,14 @@ function other_buttons_opacity() {
       const temp = position__map[b];
       document.getElementById(b).style[temp] = "0";
       document.getElementById(b).style.opacity = "1";
-
     });
 
     // document.getElementById("Layer_2").style.opacity = "1";
   }
 }
 
+//TODO: bug whem the window goes full screen / vertical window change
+//TODO: nav expansion color change is buggy
 //TODO: change visibility only when visibility is not the same
 
 function buttons__collision() {
@@ -262,7 +229,6 @@ function buttons__collision() {
       // document.getElementById(classes[elementId]).style.transition =
       //   "opacity 0.3s ease-out";
       // document.getElementById(classes[elementId]).style.top = "50%";
-      
 
       document.getElementById(classes[elementId]).style.opacity = "1";
       document.getElementById(classes[elementId]).style.visibility = "visible";
@@ -295,7 +261,6 @@ function buttons__collision() {
       b.style.transform = "scale(0.4) " + temptranslate;
 
       //TODO: CHANGE arrowLink
-
     } else {
       b.style.backgroundColor = "transparent";
       b.style.transformOrigin = "initial";
@@ -309,7 +274,6 @@ function buttons__collision() {
       document.getElementById(classes[elementId]).style.opacity = "0";
       // document.getElementById(classes[elementId]).style.top = "-1000px";
       document.getElementById(classes[elementId]).style.visibility = "hidden";
-
 
       //make sure it only execute once
       if (b.id == "dta") {
@@ -378,6 +342,4 @@ function getDistance(x1, y1, x2, y2) {
 
 export const getKeysByValue = (object, value) => {
   return Object.keys(object).filter((key) => object[key] === value);
-}
-
-
+};
