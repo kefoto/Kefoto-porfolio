@@ -241,6 +241,8 @@ function other_buttons_opacity() {
   }
 }
 
+//TODO: change visibility only when visibility is not the same
+
 function buttons__collision() {
   //   debugger;
   button__menu.forEach((b) => {
@@ -257,13 +259,15 @@ function buttons__collision() {
       }
 
       //to change the disciptions
-      document.getElementById(classes[elementId]).style.transition =
-        "opacity 0.3s ease-out";
-      document.getElementById(classes[elementId]).style.top = "50%";
+      // document.getElementById(classes[elementId]).style.transition =
+      //   "opacity 0.3s ease-out";
+      // document.getElementById(classes[elementId]).style.top = "50%";
+      
+
       document.getElementById(classes[elementId]).style.opacity = "1";
+      document.getElementById(classes[elementId]).style.visibility = "visible";
 
       b.style.backgroundColor = "#242424";
-      enter.style.opacity = "0.5";
       // b.style.transformOrigin = "50% 50%";
       let temptranslate;
 
@@ -275,8 +279,8 @@ function buttons__collision() {
         arrowLink.href = "https://github.com/kefoto/";
 
         isRendering = true;
-        canvas__ele.style.left = "0";
-        physicCircleContainer__ele.style.left = "0";
+        canvas__ele.style.visibility = "visible";
+        physicCircleContainer__ele.style.visibility = "visible";
         physicCircleContainer__ele.style.opacity = "1";
 
         requestAnimationFrame(mainloop);
@@ -300,17 +304,18 @@ function buttons__collision() {
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
       // document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 60s ease";
-      document.getElementById(classes[elementId]).style.transition =
-        "opacity 0.3s ease-out";
+      // document.getElementById(classes[elementId]).style.transition =
+      //   "opacity 0.3s ease-out";
       document.getElementById(classes[elementId]).style.opacity = "0";
-      document.getElementById(classes[elementId]).style.top = "-1000px";
+      // document.getElementById(classes[elementId]).style.top = "-1000px";
+      document.getElementById(classes[elementId]).style.visibility = "hidden";
 
 
       //make sure it only execute once
       if (b.id == "dta") {
         isRendering = false;
-        canvas__ele.style.left = "-1000px";
-        physicCircleContainer__ele.style.left = "-1000px";
+        canvas__ele.style.visibility = "hidden";
+        physicCircleContainer__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.opacity = "0";
       }
 

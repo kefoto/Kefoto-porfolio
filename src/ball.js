@@ -331,7 +331,6 @@ function mousectrl() {
           ball.pos.x += force.x;
           ball.pos.y += force.y;
           
-
           //check the boarders
           if (ball.pos.x < ball.r) {
             ball.pos.x = ball.r;

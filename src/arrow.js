@@ -23,9 +23,9 @@ export const arrow_move = (e) => {
     arrow.style.transform = ` translate(-50%,0%) scale(0.8) rotate(${rotation}deg)`;
     // console.log(norm_distance_opacity);
     enter.style.opacity = norm_distance_opacity.toString();
-    enter.style.bottom = "8px";
+    enter.style.visibility = "visible";
   } else if (getKeysByValue(collision__circle, true).length == 0) {
-    enter.style.bottom = "-1000px";
+    enter.style.visibility = "hidden";
     enter.style.opacity = "0";
   }
 };

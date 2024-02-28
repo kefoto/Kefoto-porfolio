@@ -302,7 +302,11 @@ body {
   align-items: center;
   /* margin: 0 auto;
    */
+   /* visibility: initial; */
+   /* visibility: hidden !important; */
 }
+
+
 
 .description__pg #about,
 .description__pg #data,
@@ -318,19 +322,18 @@ body {
 #foto *,
 #poster * {
   margin-bottom: 15px;
+  user-select: none;
+  visibility: inherit !important;
 }
 
 
 #foto p, #poster p{
   width: 34vw;
-  /* height: inherit; */
+
 }
 
 #data p {
-  /* display: block; */
   position: relative;
-  /* transform: translate(0, -50%); */
-  /* top: -220px; */
   top: -150px;
   width: 34vw;
   /* top:100px; */
@@ -342,17 +345,18 @@ body {
 }
 
 .description__pg a {
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 #about {
   opacity: 0;
   /* transform: translate(-50%,-50%); */
   font-size: 1.2em;
-  transition: opacity 0.3s ease-out;
-  top: -1000px;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  top: 50%;
   left: 50%;
   position: relative;
+  visibility: inherit;
 }
 
 #data {
@@ -361,29 +365,32 @@ body {
   font-size: 1.2em;
   /* padding: 10px; */
   /* transform: translate(0, -50%); */
-  transition: opacity 0.3s ease-out;
-  top: -1000px;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  top: 50%;
   left: 50%;
   position: relative;
+  visibility: inherit;
 }
 #foto {
   opacity: 0;
   text-align: center;
   font-size: 1.2em;
-  transition: opacity 0.3s ease-out;
-  top: -1000px;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  top: 50%;
   left: 50%;
   position: relative;
+  visibility: inherit;
 }
 #poster {
   opacity: 0;
   text-align: center;
   font-size: 1.2em;
   /* transform: translate(-50%,-50%); */
-  transition: opacity 0.3s ease-out;
-  top: -1000px;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  top: 50%;
   left: 50%;
   position: relative;
+  visibility: inherit;
 }
 
 .text-on-right {
@@ -412,7 +419,6 @@ body {
 
 .image-on-left {
   transform: translate(-15vw, -3vh);
-  /* padding-left:100px; */
 }
 
 .description__pg > div > img {
@@ -429,6 +435,7 @@ body {
 .hoverable-letter {
   font-size: 1.1em;
   transition: all 0.3s ease;
+  /* visibility: inherit !important; */
 }
 
 
@@ -505,6 +512,7 @@ body {
   align-items: center;
   justify-content: center;
   user-select: none;
+  visibility: inherit;
   /* overflow: hidden; */
   transform: translate(-50%, -50%);
 }
@@ -552,12 +560,15 @@ body {
   height: 100%;
   width: 50%;
   position: absolute;
-  left: -1000px;
+  left:0;
   top:0;
   opacity: 0;
+  
   /* background-color: green; */
   /* overflow: hidden; */
-  transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  visibility: inherit;
 }
 
 #physicsCanvas {
@@ -567,21 +578,23 @@ body {
   height: 100vh; */
   z-index: 1;
   position: absolute;
-  left: -1000px;
+  left:0;
   top:0;
-  opacity: 1;
-  
+  opacity: 0;
+  visibility: inherit;
 }
 
 #enter {
   position: fixed;
-  bottom: -1000px;
+  bottom: 8px;
   left: 50%;
+
   /* transform: translateX(-50%); */
   text-align: center; /* Optional: Center the content horizontally within .enter */
   user-select: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: inherit;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #enter:hover {
