@@ -72,6 +72,7 @@ body {
   position: relative;
   right: -1000px;
   opacity: 0;
+  
   transition: all 0.5s ease;
   /* overflow-y: auto; */
   /* overflow: hidden; */
@@ -150,7 +151,7 @@ body {
 }
 
 .navbar__toggle {
-  display: block;
+  display: flex;
   border: var(--bkg__black) solid 1px;
   border-radius: 50%;
   padding: 10px;

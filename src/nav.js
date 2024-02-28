@@ -3,14 +3,8 @@ export const menuLinks = document.querySelector(".navbar__toggle");
 export const buttons = document.querySelectorAll(".button");
 
 const bkg__color = "#242424";
-
 //random color hover on button
-export const setBg = (button) => {
-  setTimeout(function () {
-    button.style.backgroundColor = bkg__color;
-    button.style.color = "#fff";
-  }, 3000);
-
+const setBg = (button) => {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   button.style.backgroundColor = "#" + randomColor;
 
@@ -38,5 +32,11 @@ export const nav__expansion = () => {
 
   buttons.forEach((button) => {
     button.addEventListener("mouseenter", () => setBg(button));
+    button.addEventListener("mouseleave", () => {
+      setTimeout(function () {
+        button.style.backgroundColor = bkg__color;
+        button.style.color = "#fff";
+      }, 3000);
+    });
   });
 }

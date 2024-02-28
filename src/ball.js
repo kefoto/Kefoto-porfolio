@@ -344,12 +344,6 @@ function mousectrl() {
           } else if (ball.pos.y > canvas.height - ball.r) {
             ball.pos.y = canvas.height - ball.r;
           }
-
-          // if(force.mag() > epsilon * 10){
-          //   requestAnimationFrame(mainloop);
-          // }
-
-          // ball.updateHtmlPosition();
         }
       }
       // if (balls.some((ball) => ball.isMoving || ball.isDragging)) {
@@ -360,13 +354,36 @@ function mousectrl() {
   
   canvas.addEventListener("mouseup", function (event) {
     // Release all dragged balls when the mouse is up
-    // console.log("Mouse up event");
-    for (const ball of balls) {
-      ball.isDragging = false;
-    }
-    isRecording = false;
+
+    ball_up();
   });
 
+}
+
+export const ball_up = () => {
+  for (const ball of balls) {
+    ball.isDragging = false;
+  }
+  isRecording = false;
+}
+
+//TODO: buggy
+export const canvas_resize = () => {
+  canvas.width = playground__container.offsetWidth * 0.45;
+  canvas.height = playground__container.offsetHeight;
+
+  for (const ball of balls) {
+    ball.handleWallCollision();
+
+    for(const other of balls){
+      if(ball !== other){
+        ball.handleBallCollision(other);
+      }
+    }
+
+    ball.updateHtmlPosition();
+  }
+  
 }
 
 function rotateVector(v, angleDegrees) {

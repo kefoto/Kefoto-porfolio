@@ -1,70 +1,84 @@
 //make app.js into different files and the constructors
-import {nav__expansion} from './src/nav.js';
-import {deviceType,isTouchDevice, events} from './src/device.js';
-import {container__collision, container_resize, drag__e_move, drag__e_up} from './src/container_collision.js';
-import {updateBottomDateCircle} from './src/bottomCircle.js';
-import {changeHoverletter} from './src/letter.js'
-import {arrow_interaction, arrow_move} from './src/arrow.js';
-import {mainloop} from "./src/ball.js";
+import { nav__expansion } from "./src/nav.js";
+import { deviceType, isTouchDevice, events } from "./src/device.js";
+import {
+  container__collision,
+  container_resize,
+  drag__e_move,
+  drag__e_up
+} from "./src/container_collision.js";
+import { updateBottomDateCircle } from "./src/bottomCircle.js";
+import { changeHoverletter } from "./src/letter.js";
+import { arrow_interaction, arrow_move } from "./src/arrow.js";
+import { mainloop, ball_up, canvas_resize } from "./src/ball.js";
+
+let resizeTimeout;
+export var isResizing = false;
 
 //TODO: check this method if changes the deviceType in device.js
 isTouchDevice();
 nav__expansion();
 updateBottomDateCircle();
-container__collision();
 document_listener();
 window_listener();
+
+container__collision();
 
 requestAnimationFrame(mainloop);
 
 arrow_interaction();
 changeHoverletter();
 
-
-
 // ensure only one listener exist
 function window_listener() {
-    window.addEventListener(
-        "resize",
-        () => {
-            container_resize();
-        },
-        true
-      );
+  window.addEventListener(
+    "resize",
+    () => {
+        isResizing = true;
+      container_resize();
+      canvas_resize();
+    
+      
+      clearTimeout(resizeTimeout);
+
+      // Set a new timeout to detect the end of resizing
+      resizeTimeout = setTimeout(() => {
+        isResizing = false;
+      }, 1000);
+    },
+    true
+  );
 }
 
 function document_listener() {
+  // document.addEventListener{
+  //     events[deviceType].down,
+  //     () => {
 
-    // document.addEventListener{
-    //     events[deviceType].down,
-    //     () => {
-        
-    //     },
-    // true
-    // };
+  //     },
+  // true
+  // };
 
-    //to stop the ball moving when the mouse leaves the browser
-    document.addEventListener(
-        events[deviceType].up,
-        () => {
-            drag__e_up();
-            //TODO: same applies to the physics balls
-        },
+  //to stop the ball moving when the mouse leaves the browser
+  document.addEventListener(
+    events[deviceType].up,
+    () => {
+      drag__e_up();
+      ball_up();
+      //TODO: same applies to the physics balls
+    },
     true
-    );
+  );
 
-    document.addEventListener(
-        events[deviceType].move,
-        (e) => {
-            drag__e_move(e);
-            arrow_move(e);
-        },
+  document.addEventListener(
+    events[deviceType].move,
+    (e) => {
+      drag__e_move(e);
+      arrow_move(e);
+    },
     true
-    );
-
-    
+  );
 }
-
 
 //TODO: put document and window even listeners in the main method
 // console.log(deviceType);

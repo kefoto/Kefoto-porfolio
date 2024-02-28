@@ -2,6 +2,7 @@ import { deviceType, events } from "./device.js";
 import { isTouchDevice } from "./device.js";
 import { mainloop } from "./ball.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
+import {isResizing} from "../main.js";
 
 const spinning = document.querySelector(".spin");
 const arrowLink = document.getElementById("arrowLink");
@@ -137,8 +138,26 @@ export const drag__e_move = (event) => {
   }
 };
 //window resize event listener
+//TODO: fix this method
 export const container_resize = () => {
   //   debugger;
+  // const position_percentage = {
+  //   x: (drag__e.offsetLeft - drag__e.offsetWidth/2) / (outDim.right),
+  //   y:
+  //     (drag__e.offsetTop - drag__e.offsetWidth/2) /
+  //     (outDim.bottom + nav__bar.offsetHeight),
+  // };
+  //TODO: do only once in the begining of the method
+    const position_percentage = {
+      x: (drag__e.offsetLeft) / (outDim.right),
+      y:
+        (drag__e.offsetTop) /
+        (outDim.bottom),
+    };
+  
+
+
+  console.log(position_percentage);
   outDim.left = playground__container.offsetLeft;
   outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
   outDim.right =
@@ -148,26 +167,62 @@ export const container_resize = () => {
     playground__container.offsetHeight -
     nav__bar.offsetHeight;
 
+  // console.log(outDim.right, outDim.bottom);
   origin = [
     playground__container.offsetWidth / 2,
     playground__container.offsetHeight / 2,
   ];
 
-  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1]) {
-    origin__reset__promise(500);
-  }
+  // drag__e.style.top =
+  //   position_percentage.y *
+  //     (outDim.bottom + nav__bar.offsetHeight) + drag__e.offsetWidth/2 + 
+  //   "px";
+  // drag__e.style.left =
+  //   position_percentage.x * (outDim.right) + drag__e.offsetWidth/2 + "px";
+
+    drag__e.style.top =
+    position_percentage.y *
+      (outDim.bottom)  + 
+    "px";
+    drag__e.style.left =
+    position_percentage.x * (outDim.right) + "px";
+
   //since the cursor would onnly go outofbound in right or bottom, we put restrictions
-  if (drag__e.offsetTop >= outDim.bottom - drag__e.offsetHeight / 2) {
-    drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
+
+  // var x_allowed =
+  //   drag__e.offsetLeft > outDim.left + drag__e.offsetWidth / 2 &&
+  //   drag__e.offsetLeft <= outDim.right - drag__e.offsetWidth / 2;
+  // var y_allowed =
+  //   drag__e.offsetTop >
+  //     outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight &&
+  //   drag__e.offsetTop <=
+  //     outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
+
+  //TODO: issue here
+  if (
+    drag__e.offsetTop >=
+    outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
+  ) {
+    drag__e.style.top =
+      outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2 + "px";
   }
 
   if (drag__e.offsetLeft >= outDim.right - drag__e.offsetWidth / 2) {
+    console.log("yep");
     drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
     //   console.log("colide left", drag__e.offsetLeft, (outDim.left + drag__e.offsetWidth / 2));
   }
+
   other_buttons_opacity();
   updateBottomDateCircle();
+
+  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1] && !moving) {
+    origin__reset__promise(500);
+  }
+
   buttons__collision();
+
+  
 };
 
 function other_buttons_opacity() {
@@ -209,6 +264,7 @@ function other_buttons_opacity() {
 //TODO: bug whem the window goes full screen / vertical window change
 //TODO: nav expansion color change is buggy
 //TODO: change visibility only when visibility is not the same
+//TODO:  change style only when the style is not the same
 
 function buttons__collision() {
   //   debugger;
