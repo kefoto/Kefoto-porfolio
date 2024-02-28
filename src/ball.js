@@ -317,7 +317,7 @@ function mousectrl() {
 
   canvas.addEventListener(
     "mousemove",
-    _.throttle(function (event) {
+    function (event) {
       // console.log()
       const mouseX = event.clientX - canvas.getBoundingClientRect().left;
       const mouseY = event.clientY - canvas.getBoundingClientRect().top;
@@ -345,13 +345,17 @@ function mousectrl() {
             ball.pos.y = canvas.height - ball.r;
           }
 
+          // if(force.mag() > epsilon * 10){
+          //   requestAnimationFrame(mainloop);
+          // }
+
           // ball.updateHtmlPosition();
         }
       }
       // if (balls.some((ball) => ball.isMoving || ball.isDragging)) {
       //   timer = requestAnimationFrame(mainloop);
       // }
-    }, 10)
+    }
   );
   
   canvas.addEventListener("mouseup", function (event) {
@@ -424,9 +428,9 @@ function cal_Angle_V(vx, vy) {
   return sign * (theta * 180) / Math.PI;
 }
 
-function distance(x, y) {
-  return Math.sqrt(x ** 2 + y ** 2);
-}
+// function distance(x, y) {
+//   return Math.sqrt(x ** 2 + y ** 2);
+// }
 
 function calculateDifferencesAndMean(points) {
   const differences = [];
@@ -472,6 +476,22 @@ function calculateMeanAngle(angles){
   return sum/angles.length;
 }
 
+function isAnyBallMoving(){
+  var result = false;
+  for (const ball of balls) {
+    result = result || ball.isMoving;
+  }
+  return result;
+}
+
+function isAnyBallDragging(){
+  var result = false;
+  for (const ball of balls) {
+    result = result || ball.isDragging;
+  }
+  return result;
+}
+
 
 export const mainloop = (currentTime) => {
   console.log(isRendering);
@@ -480,11 +500,12 @@ export const mainloop = (currentTime) => {
     return;
   }
   const elapsedTime = currentTime - lastFrameTime;
-  mousectrl();
+  
   // console.log( canvas.width, canvas.height);
   // Check if enough time has passed to proceed to the next frame
   //throttling
   if (elapsedTime > frameInterval) {
+    mousectrl();
     // Your animation/update logic goes here
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const ball of balls) {
@@ -501,6 +522,12 @@ export const mainloop = (currentTime) => {
       ball.isBallMoving();
       ball.updateHtmlPosition();
     }
+
+    if(!isAnyBallMoving() && !isAnyBallDragging()){
+      return;
+    }
+  
+
     // Update the last frame time
     lastFrameTime = currentTime;
     requestAnimationFrame(mainloop);
@@ -508,7 +535,6 @@ export const mainloop = (currentTime) => {
 }
 
 //TODO: still laggy, make requestion animation only there exist moving
-//TODO: left and opacity animation
 //TODO: resize
 
 // console.log(icons);
