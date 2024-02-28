@@ -5,8 +5,10 @@ const canvas = document.getElementById("physicsCanvas");
 const ctx = canvas.getContext("2d");
 const playground__container = document.getElementById("container");
 
-canvas.width = playground__container.offsetWidth * 0.45;
-canvas.height = playground__container.offsetHeight;
+const _c_width = playground__container.offsetWidth * 0.45;
+const _c_height = playground__container.offsetHeight;
+canvas.width = _c_width;
+canvas.height = _c_height;
 
 const icons = document.querySelectorAll(".physicCircle");
 
@@ -514,8 +516,46 @@ export const mainloop = (currentTime) => {
 
 //initiate the physical icons 
 
-//TODO: make an initiation method on converting and randomizing the position;
+function getRandomPosition(icon) {
+  const containerWidth = _c_width;
+  const containerHeight = _c_height;
+
+  const iconRadius = icon.offsetWidth / 2; // Replace with the radius of your circle
+
+  // Calculate random left and top positions within the container
+  const randomLeft = Math.random() * (containerWidth - 2 * iconRadius) + iconRadius;
+  const randomTop = Math.random() * (containerHeight - 2 * iconRadius) + iconRadius;
+
+  return new Vector(randomLeft, randomTop);
+}
+
+function checkOverLap(icon, position) {
+
+  for (const otherIcon of icons) {
+    if (otherIcon !== icon) {
+      const otherRect_position = new Vector(otherIcon.offsetLeft, otherIcon.offsetTop);
+      const distance = position.subtr(otherRect_position).mag();
+      if (
+        distance <= ( icon.offsetWidth / 2 + otherIcon.offsetWidth / 2 )
+      ) {
+        // Overlap detected, adjust the position and check again
+        position = checkOverLap(icon, getRandomPosition(icon));
+      }
+    }
+  }
+  
+  return position;
+}
+
+//initiate the icons
 icons.forEach((icon) => {
+
+  const position = getRandomPosition(icon);
+  const adjustedPosition = checkOverLap(icon, position);
+
+  icon.style.left = `${adjustedPosition.x}px`;
+  icon.style.top = `${adjustedPosition.y}px`;
+
   const left = icon.offsetLeft;
   const top = icon.offsetTop;
   const width = icon.offsetWidth;
