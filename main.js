@@ -48,6 +48,7 @@ function document_listener() {
         events[deviceType].up,
         () => {
             drag__e_up();
+            //TODO: same applies to the physics balls
         },
     true
     );
