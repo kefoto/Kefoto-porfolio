@@ -284,10 +284,7 @@ class Vector {
   }
 }
 
-function round(number, precision){
-  let factor = 10 ** precision;
-  return Math.round(number * factor)/ factor;
-}
+
 function mousectrl() {
 
   // cancelAnimationFrame()

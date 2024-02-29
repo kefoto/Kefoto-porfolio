@@ -5,7 +5,9 @@ import {
   container__collision,
   container_resize,
   drag__e_move,
-  drag__e_up
+  drag__e_up,
+  outDim,
+  drag__e
 } from "./src/container_collision.js";
 import { updateBottomDateCircle } from "./src/bottomCircle.js";
 import { changeHoverletter } from "./src/letter.js";
@@ -34,17 +36,28 @@ function window_listener() {
   window.addEventListener(
     "resize",
     () => {
-        isResizing = true;
+        
+        if (!isResizing){
+            isResizing = true;
+        //     const position_percentage = {
+        //         x: (drag__e.offsetLeft) / (outDim.right),
+        //         y:
+        //           (drag__e.offsetTop) /
+        //           (outDim.bottom),
+        //       };
+
+        //     console.log(position_percentage);
+        }
+      
       container_resize();
       canvas_resize();
-    
-      
+        
       clearTimeout(resizeTimeout);
 
       // Set a new timeout to detect the end of resizing
       resizeTimeout = setTimeout(() => {
         isResizing = false;
-      }, 1000);
+      }, 100);
     },
     true
   );

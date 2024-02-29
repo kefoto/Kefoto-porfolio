@@ -12,7 +12,7 @@ const physicCircleContainer__ele = document.getElementById(
   "physicCircleContainer"
 );
 
-const drag__e = document.getElementById("drag__e");
+export const drag__e = document.getElementById("drag__e");
 const nav__bar = document.querySelector(".navbar");
 export const button__menu = document.querySelectorAll(".button__menu");
 
@@ -32,6 +32,12 @@ export var outDim = {
 
 export var moving = false;
 export var isRendering = false;
+
+var position_percentage = { x: (drag__e.offsetLeft) / (outDim.right),
+  y:
+    (drag__e.offsetTop) /
+    (outDim.bottom),
+};
 
 var p = null;
 
@@ -62,7 +68,6 @@ export const container__collision = () => {
     function (e) {
       moving = true;
       offset = [drag__e.offsetLeft - e.clientX, drag__e.offsetTop - e.clientY];
-      drag__e.style.transition = "none";
       //making the spinning drag me disappear
       spinning.style.opacity = "0";
       spinning.style.visibility = "hidden";
@@ -94,6 +99,7 @@ export const drag__e_move = (event) => {
       y: !isTouchDevice() ? event.clientY : event.touches[0].clientY,
     };
 
+    //mouse allowed area but not the border collision
     var x_allowed =
       mousePosition.x > outDim.left + drag__e.offsetWidth / 2 &&
       mousePosition.x <= outDim.right - drag__e.offsetWidth / 2;
@@ -135,29 +141,17 @@ export const drag__e_move = (event) => {
     other_buttons_opacity();
     updateBottomDateCircle();
     buttons__collision();
+
+    update_pos_percent();
+    // console.log(position_percentage);
   }
 };
 //window resize event listener
 //TODO: fix this method
 export const container_resize = () => {
   //   debugger;
-  // const position_percentage = {
-  //   x: (drag__e.offsetLeft - drag__e.offsetWidth/2) / (outDim.right),
-  //   y:
-  //     (drag__e.offsetTop - drag__e.offsetWidth/2) /
-  //     (outDim.bottom + nav__bar.offsetHeight),
-  // };
-  //TODO: do only once in the begining of the method
-    const position_percentage = {
-      x: (drag__e.offsetLeft) / (outDim.right),
-      y:
-        (drag__e.offsetTop) /
-        (outDim.bottom),
-    };
-  
-
-
-  console.log(position_percentage);
+  console.log(isResizing);
+  // console.log(position_percentage);
   outDim.left = playground__container.offsetLeft;
   outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
   outDim.right =
@@ -166,19 +160,10 @@ export const container_resize = () => {
     playground__container.offsetTop +
     playground__container.offsetHeight -
     nav__bar.offsetHeight;
-
-  // console.log(outDim.right, outDim.bottom);
   origin = [
     playground__container.offsetWidth / 2,
     playground__container.offsetHeight / 2,
   ];
-
-  // drag__e.style.top =
-  //   position_percentage.y *
-  //     (outDim.bottom + nav__bar.offsetHeight) + drag__e.offsetWidth/2 + 
-  //   "px";
-  // drag__e.style.left =
-  //   position_percentage.x * (outDim.right) + drag__e.offsetWidth/2 + "px";
 
     drag__e.style.top =
     position_percentage.y *
@@ -186,44 +171,30 @@ export const container_resize = () => {
     "px";
     drag__e.style.left =
     position_percentage.x * (outDim.right) + "px";
+    
 
-  //since the cursor would onnly go outofbound in right or bottom, we put restrictions
-
-  // var x_allowed =
-  //   drag__e.offsetLeft > outDim.left + drag__e.offsetWidth / 2 &&
-  //   drag__e.offsetLeft <= outDim.right - drag__e.offsetWidth / 2;
-  // var y_allowed =
-  //   drag__e.offsetTop >
-  //     outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight &&
-  //   drag__e.offsetTop <=
-  //     outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
-
-  //TODO: issue here
-  if (
-    drag__e.offsetTop >=
-    outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
-  ) {
-    drag__e.style.top =
-      outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2 + "px";
-  }
-
-  if (drag__e.offsetLeft >= outDim.right - drag__e.offsetWidth / 2) {
-    console.log("yep");
-    drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
-    //   console.log("colide left", drag__e.offsetLeft, (outDim.left + drag__e.offsetWidth / 2));
-  }
+  //since the cursor would onnly go outofbound in right or bottom
+  //and we posiiton based on the percentage of the board, 
+  //it's impossible to go off bound with no transitions
 
   other_buttons_opacity();
   updateBottomDateCircle();
+  buttons__collision();
 
-  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1] && !moving) {
-    origin__reset__promise(500);
+  if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1] && getKeysByValue(collision__circle, true).length == 1) {
+    origin__reset__promise(1000);
   }
 
-  buttons__collision();
+  
 
   
 };
+
+function update_pos_percent() {
+  position_percentage.x = round((drag__e.offsetLeft) / (outDim.right),2);
+  position_percentage.y = round((drag__e.offsetTop) /
+  (outDim.bottom), 2);
+}
 
 function other_buttons_opacity() {
   const position__map = {
@@ -364,30 +335,49 @@ function origin__reset__promise(x) {
   if (!p) {
     p = new Promise(function (resolve, reject) {
       setTimeout(() => {
-        if (getKeysByValue(collision__circle, true).length == 0 && !moving) {
-          drag__e.style.transition = "all 0.5s ease-in-out";
+        if (getKeysByValue(collision__circle, true).length == 0 && !moving && !isResizing) {
+          drag__e.style.transition = "all 0.4s ease-in-out";
           drag__e.style.left = origin[0] + "px";
           drag__e.style.top = origin[1] + "px";
-          resolve();
+          // console.log("origin");
+
+          drag__e.addEventListener("transitionend", function transitionEndCallback() {
+            drag__e.removeEventListener("transitionend", transitionEndCallback);
+            
+            update_pos_percent();
+            drag__e.style.transition = "none";
+            console.log(position_percentage, drag__e.offsetLeft, outDim.right);
+            resolve();
+
+          });
+          
         } else if (
           getKeysByValue(collision__circle, true).length == 1 &&
-          !moving
+          !moving && !isResizing
         ) {
           const temp = getKeysByValue(collision__circle, true);
           const circle_container = document.getElementById(temp);
           const rect = circle_container.getBoundingClientRect();
 
-          const centerX = rect.left + +rect.width / 2;
+          const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2 - nav__bar.offsetHeight;
-          drag__e.style.transition = "all 0.5s ease-in-out";
+          drag__e.style.transition = "all 0.4s ease-in-out";
           drag__e.style.left = centerX + "px";
           drag__e.style.top = centerY + "px";
-          resolve();
-        }
+          // console.log("collision");
+          drag__e.addEventListener("transitionend", function transitionEndCallback() {
+            drag__e.removeEventListener("transitionend", transitionEndCallback);
+            
+            update_pos_percent();
+            drag__e.style.transition = "none";
+            console.log(position_percentage, drag__e.offsetLeft, outDim.right);
+            resolve();
+
+          });
+        }   
         p = null;
       }, x);
     });
-
     return p;
   }
 }
@@ -399,3 +389,8 @@ function getDistance(x1, y1, x2, y2) {
 export const getKeysByValue = (object, value) => {
   return Object.keys(object).filter((key) => object[key] === value);
 };
+
+function round(number, precision){
+  let factor = 10 ** precision;
+  return Math.round(number * factor)/ factor;
+}
