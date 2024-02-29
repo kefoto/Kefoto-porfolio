@@ -12,7 +12,7 @@ import {
 import { updateBottomDateCircle } from "./src/bottomCircle.js";
 import { changeHoverletter } from "./src/letter.js";
 import { arrow_interaction, arrow_move } from "./src/arrow.js";
-import { mainloop, ball_up, canvas_resize } from "./src/ball.js";
+import { mainloop, ball_up, canvas_resize } from "./src/canvas.js";
 
 let resizeTimeout;
 export var isResizing = false;
@@ -39,13 +39,6 @@ function window_listener() {
         
         if (!isResizing){
             isResizing = true;
-        //     const position_percentage = {
-        //         x: (drag__e.offsetLeft) / (outDim.right),
-        //         y:
-        //           (drag__e.offsetTop) /
-        //           (outDim.bottom),
-        //       };
-
         //     console.log(position_percentage);
         }
       

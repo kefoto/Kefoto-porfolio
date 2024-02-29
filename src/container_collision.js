@@ -1,6 +1,6 @@
 import { deviceType, events } from "./device.js";
 import { isTouchDevice } from "./device.js";
-import { mainloop } from "./ball.js";
+import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
 
