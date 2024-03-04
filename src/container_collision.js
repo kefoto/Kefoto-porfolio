@@ -3,6 +3,7 @@ import { isTouchDevice } from "./device.js";
 import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
+import {check_n_update_style} from "./tool/cssChange.js";
 
 const spinning = document.querySelector(".spin");
 const arrowLink = document.getElementById("arrowLink");
@@ -62,6 +63,7 @@ var origin = [
   playground__container.offsetHeight / 2,
 ];
 
+// let styleChanges = {};
 export const container__collision = () => {
   drag__e.addEventListener(
     events[deviceType].down,
@@ -69,6 +71,8 @@ export const container__collision = () => {
       moving = true;
       offset = [drag__e.offsetLeft - e.clientX, drag__e.offsetTop - e.clientY];
       //making the spinning drag me disappear
+      // check_n_update_style(spinning, "opacity", "0");
+      // check_n_update_style(spinning, "visibility", "hidden");
       spinning.style.opacity = "0";
       spinning.style.visibility = "hidden";
     },
@@ -110,32 +114,43 @@ export const drag__e_move = (event) => {
         outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
     //   debugger;
     if (x_allowed) {
+      // styleChanges.left = mousePosition.x + offset[0] + "px";
       drag__e.style.left = mousePosition.x + offset[0] + "px";
     } else {
       if (mousePosition.x >= outDim.left + drag__e.offsetWidth / 2) {
+        // styleChanges.left = outDim.right - drag__e.offsetWidth / 2 + "px";
         drag__e.style.left = outDim.right - drag__e.offsetWidth / 2 + "px";
       }
       if (mousePosition.x <= outDim.right - drag__e.offsetWidth / 2) {
+        // styleChanges.left = outDim.left + drag__e.offsetWidth / 2 + "px";
         drag__e.style.left = outDim.left + drag__e.offsetWidth / 2 + "px";
       }
     }
     //   debugger;
     if (y_allowed) {
+      // styleChanges.top = mousePosition.y + offset[1] + "px";
       drag__e.style.top = mousePosition.y + offset[1] + "px";
     } else {
       if (
         mousePosition.y >=
         outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight
       ) {
+        // styleChanges.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
         drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
       }
       if (
         mousePosition.y <=
         outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
       ) {
+        // styleChanges.top = outDim.top + drag__e.offsetHeight / 2 + "px";
         drag__e.style.top = outDim.top + drag__e.offsetHeight / 2 + "px";
       }
     }
+
+    // requestAnimationFrame(() => {
+    //   Object.assign(drag__e.style, styleChanges);
+    //   styleChanges = {}; // Clear the style changes object
+    // });
     // debugger;
     // console.log(mousePosition);
     other_buttons_opacity();
@@ -210,11 +225,15 @@ function other_buttons_opacity() {
     otherButtons.forEach((b) => {
       const temp = position__map[b];
       if (temp == "left") {
+        //TODO: how about transition
+        // check_n_update_style(document.getElementById(b), temp, "-300px");
         document.getElementById(b).style[temp] = "-300px";
       } else if (temp == "right") {
+        // check_n_update_style(document.getElementById(b), temp, "-300px");
         document.getElementById(b).style[temp] = "-300px";
       }
 
+      // check_n_update_style(document.getElementById(b), temp, "0.2");
       document.getElementById(b).style.opacity = "0.2";
     });
 
@@ -224,11 +243,12 @@ function other_buttons_opacity() {
 
     otherButtons.forEach((b) => {
       const temp = position__map[b];
+      //  check_n_update_style(document.getElementById(b), temp, "0");
+      //  check_n_update_style(document.getElementById(b), "opacity", "1");
       document.getElementById(b).style[temp] = "0";
       document.getElementById(b).style.opacity = "1";
     });
 
-    // document.getElementById("Layer_2").style.opacity = "1";
   }
 }
 
@@ -251,19 +271,23 @@ function buttons__collision() {
         collision__circle[elementId] = false;
         return;
       }
-      console.log(elementId);
+      // console.log(elementId);
       //to change the disciptions
       // document.getElementById(classes[elementId]).style.transition =
       //   "opacity 0.3s ease-out";
       // document.getElementById(classes[elementId]).style.top = "50%";
 
+      // check_n_update_style(document.getElementById(classes[elementId]), "opacity", "1");
+      // check_n_update_style(document.getElementById(classes[elementId]), "visibility", "visible");
       document.getElementById(classes[elementId]).style.opacity = "1";
       document.getElementById(classes[elementId]).style.visibility = "visible";
 
+      // check_n_update_style(b, "backgroundColor", "#242424");
       b.style.backgroundColor = "#242424";
-      // b.style.transformOrigin = "50% 50%";
+  
       let temptranslate;
 
+      //TODO: CHANGE arrowLink
       if (b.id == "abt") {
         temptranslate = "translate(-50%, -50%)";
         arrowLink.href = "https://www.linkedin.com/in/kefoto/";
@@ -272,6 +296,10 @@ function buttons__collision() {
         arrowLink.href = "https://github.com/kefoto/";
 
         isRendering = true;
+
+        // check_n_update_style(canvas__ele, "visibility", "visible");
+        // check_n_update_style(physicCircleContainer__ele, "visibility", "visible");
+        // check_n_update_style(physicCircleContainer__ele, "opacity", "1");
         canvas__ele.style.visibility = "visible";
         physicCircleContainer__ele.style.visibility = "visible";
         physicCircleContainer__ele.style.opacity = "1";
@@ -285,27 +313,34 @@ function buttons__collision() {
         arrowLink.href = "https://example.com/collision4";
       }
 
+      // check_n_update_style(b, "transform", "scale(0.4) " + temptranslate);
       b.style.transform = "scale(0.4) " + temptranslate;
-
-      //TODO: CHANGE arrowLink
+      
+      
     } else {
-      console.log(elementId + "not colliding");
+      // console.log(elementId + "not colliding");
+      // check_n_update_style(b, "backgroundColor", "transparent");
+      // check_n_update_style(b, "transfor", "transparent");
+      // check_n_update_style(b, "backgroundColor", "transparent");
+      // check_n_update_style(b, "backgroundColor", "transparent");
+
       b.style.backgroundColor = "transparent";
-      b.style.transformOrigin = "initial";
+      // b.style.transformOrigin = "initial";
       b.style.width = button__menu__size + "px";
       b.style.height = button__menu__size + "px";
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
-      // document.getElementById(classes[elementId]).style.transition = "opacity 0.3s ease-out, top 60s ease";
-      // document.getElementById(classes[elementId]).style.transition =
-      //   "opacity 0.3s ease-out";
+
+
       document.getElementById(classes[elementId]).style.opacity = "0";
-      // document.getElementById(classes[elementId]).style.top = "-1000px";
       document.getElementById(classes[elementId]).style.visibility = "hidden";
 
       //make sure it only execute once
       if (b.id == "dta") {
         isRendering = false;
+        // check_n_update_style(canvas__ele, "visibility", "hidden");
+        // check_n_update_style(physicCircleContainer__ele, "visibility", "hidden");
+        // check_n_update_style(physicCircleContainer__ele, "opacity", "0");
         canvas__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.opacity = "0";
@@ -337,6 +372,9 @@ function origin__reset__promise(x) {
     p = new Promise(function (resolve, reject) {
       setTimeout(() => {
         if (getKeysByValue(collision__circle, true).length == 0 && !moving && !isResizing) {
+          // check_n_update_style(drag__e, "transition", "all 0.4s ease-in-out");
+          // check_n_update_style(drag__e, "left", origin[0] + "px");
+          // check_n_update_style(drag__e, "top", origin[1] + "px");
           drag__e.style.transition = "all 0.4s ease-in-out";
           drag__e.style.left = origin[0] + "px";
           drag__e.style.top = origin[1] + "px";
@@ -346,6 +384,7 @@ function origin__reset__promise(x) {
             drag__e.removeEventListener("transitionend", transitionEndCallback);
             
             update_pos_percent();
+            // check_n_update_style(drag__e, "transition", "none");
             drag__e.style.transition = "none";
             console.log(position_percentage, drag__e.offsetLeft, outDim.right);
             resolve();
@@ -362,6 +401,10 @@ function origin__reset__promise(x) {
 
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2 - nav__bar.offsetHeight;
+
+          // check_n_update_style(drag__e, "transition", "all 0.4s ease-in-out");
+          // check_n_update_style(drag__e, "left", centerX + "px");
+          // check_n_update_style(drag__e, "top", centerY + "px");
           drag__e.style.transition = "all 0.4s ease-in-out";
           drag__e.style.left = centerX + "px";
           drag__e.style.top = centerY + "px";
