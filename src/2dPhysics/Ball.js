@@ -152,6 +152,28 @@ export class Ball {
     }
   }
 
+  handleWallCollision_addVelo() {
+    if (this.pos.x < this.r) {
+      this.pos.x = this.r;
+    } else if (this.pos.x > canvas.width - this.r) {
+      this.pos.x = canvas.width - this.r;
+    }
+    if (this.pos.y < this.r) {
+      this.pos.y = this.r;
+    } else if (this.pos.y > canvas.height - this.r) {
+      this.pos.y = canvas.height - this.r;
+    }
+
+    if (this.pos.x <= this.r || this.pos.x >= canvas.width - this.r) {
+      this.velo.x *= -1; // Reverse velocity on collision with horizontal borders
+      this.velo.x += Math.random() * (10 - 5 + 1) + 5;
+    }
+    if (this.pos.y <= this.r || this.pos.y >= canvas.height - this.r) {
+      this.velo.y *= -1; // Reverse velocity on collision with vertical borders
+      this.velo.y += 10;
+    }
+  }
+
   handleBallCollision(otherBall) {
     const distance = this.pos.subtr(otherBall.pos).mag();
 

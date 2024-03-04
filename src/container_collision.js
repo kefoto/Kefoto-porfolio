@@ -147,10 +147,10 @@ export const drag__e_move = (event) => {
   }
 };
 //window resize event listener
-//TODO: fix this method
+
 export const container_resize = () => {
   //   debugger;
-  console.log(isResizing);
+  // console.log(isResizing);
   // console.log(position_percentage);
   outDim.left = playground__container.offsetLeft;
   outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
@@ -241,7 +241,7 @@ function buttons__collision() {
   //   debugger;
   button__menu.forEach((b) => {
     var elementId = b.id;
-    // console.log(elementId);
+    
     const button__menu_array = Array.from(button__menu);
     const otherButtons = button__menu_array.filter((item) => item !== b);
 
@@ -251,7 +251,7 @@ function buttons__collision() {
         collision__circle[elementId] = false;
         return;
       }
-
+      console.log(elementId);
       //to change the disciptions
       // document.getElementById(classes[elementId]).style.transition =
       //   "opacity 0.3s ease-out";
@@ -289,6 +289,7 @@ function buttons__collision() {
 
       //TODO: CHANGE arrowLink
     } else {
+      console.log(elementId + "not colliding");
       b.style.backgroundColor = "transparent";
       b.style.transformOrigin = "initial";
       b.style.width = button__menu__size + "px";

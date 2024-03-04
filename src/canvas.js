@@ -14,8 +14,6 @@ canvas.height = _c_height;
 const icons = document.querySelectorAll(".physicCircle");
 let mouseForce = 0.3;
 
-
-
 let startTime;
 let timeLapse = 0;
 
@@ -115,29 +113,23 @@ export const canvas_resize = () => {
   canvas.height = playground__container.offsetHeight;
 
   for (const ball of balls) {
-    ball.handleWallCollision();
-
-    for(const other of balls){
-      if(ball !== other){
-        ball.handleBallCollision(other);
-      }
-    }
-
-    ball.updateHtmlPosition();
+    // if collide with wall, a quick release of velocity
+      ball.handleWallCollision_addVelo();
   }
-  
+
+  requestAnimationFrame(mainloop);
 }
 
-function mirrorVector(originalVector, mirrorVector) {
-  // Calculate the angle between the two vectors
-  const angleBetween = cal_Angle_V(originalVector, mirrorVector);
-  // Double the angle to determine the mirroring angle
-  const mirroringAngle = 2 * angleBetween;
-  // Use the rotateVector function to mirror the vector
-  const mirroredVector = rotateVector(originalVector, mirroringAngle);
+// function mirrorVector(originalVector, mirrorVector) {
+//   // Calculate the angle between the two vectors
+//   const angleBetween = cal_Angle_V(originalVector, mirrorVector);
+//   // Double the angle to determine the mirroring angle
+//   const mirroringAngle = 2 * angleBetween;
+//   // Use the rotateVector function to mirror the vector
+//   const mirroredVector = rotateVector(originalVector, mirroringAngle);
 
-  return mirroredVector;
-}
+//   return mirroredVector;
+// }
 
 function isAnyBallMoving(){
   var result = false;
@@ -155,9 +147,8 @@ function isAnyBallDragging(){
   return result;
 }
 
-
 export const mainloop = (currentTime) => {
-  console.log(isRendering);
+  console.log("yeps");
   // Stop rendering if the flag is set to false
   if(!isRendering){
     return;

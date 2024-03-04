@@ -295,7 +295,7 @@ body {
   align-items: center;
   /* margin: 0 auto;
    */
-   /* visibility: initial; */
+   visibility: hidden;
    /* visibility: hidden !important; */
 }
 
@@ -316,20 +316,25 @@ body {
 #poster * {
   margin-bottom: 15px;
   user-select: none;
-  visibility: inherit !important;
+  visibility: inherit;
 }
 
 
 #foto p, #poster p{
   width: 34vw;
-
+  visibility: visible;
 }
 
 #data p {
   position: relative;
   top: -150px;
   width: 34vw;
+  visibility: visible;
   /* top:100px; */
+}
+
+#about p {
+  visibility: visible;
 }
 
 .description__pg a:hover {
@@ -400,6 +405,10 @@ body {
 
 }
 
+/* .hoverable-paragraph {
+  visibility: vui;
+} */
+
 .image-on-right {
   transform: translate(15vw, -3vh);
 }
@@ -420,6 +429,7 @@ body {
 .hoverable-letter {
   font-size: 1.1em;
   transition: all 0.3s ease;
+  /* visibility: visible; */
 }
 
 .circle {
@@ -550,6 +560,7 @@ body {
     width: 65% !important;
     height: auto !important;
     margin: 0 auto;
+    /* user-select: none; */
     z-index: 0;
   }
 
