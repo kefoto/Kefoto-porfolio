@@ -1,0 +1,53 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "Space Mono", sans-serif;
+}
+
+
+.button {
+    position:absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 2px solid black;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.5em;
+}
+
+a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.button p {
+    /* display: flex; */
+    position: absolute;
+    /* margin:auto; */
+    
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+
+    transition: all 0.3s ease-in-out;
+}
+
+
+.button:hover {
+    border-color: grey;
+    background-color: black;
+}
+
+.button:hover p{
+    color: white;
+}

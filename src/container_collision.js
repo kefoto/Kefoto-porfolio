@@ -279,7 +279,7 @@ function buttons__collision() {
         requestAnimationFrame(mainloop);
       } else if (b.id == "fto") {
         temptranslate = "translate(-50%, 50%)";
-        arrowLink.href = "https://example.com/collision3";
+        arrowLink.href = "foto-blog.html";
       } else {
         temptranslate = "translate(50%, 50%)";
         arrowLink.href = "https://example.com/collision4";
