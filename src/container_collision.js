@@ -63,7 +63,7 @@ var origin = [
   playground__container.offsetHeight / 2,
 ];
 
-// let styleChanges = {};
+let styleChanges = {};
 export const container__collision = () => {
   drag__e.addEventListener(
     events[deviceType].down,

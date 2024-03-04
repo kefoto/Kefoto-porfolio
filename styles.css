@@ -293,10 +293,6 @@ body {
   width: 60vw;
   margin: 0 auto;
   align-items: center;
-  /* margin: 0 auto;
-   */
-   visibility: hidden;
-   /* visibility: hidden !important; */
 }
 
 
@@ -310,63 +306,63 @@ body {
   /* overflow: hidden; */
   transform: translate(-50%, -50%);
 }
-#about *,
-#data *,
-#foto *,
-#poster * {
+#about > *,
+#data > *,
+#foto > *,
+#poster > * {
   margin-bottom: 15px;
   user-select: none;
-  visibility: inherit;
+  visibility: inherit !important;
 }
 
 
 #foto p, #poster p{
   width: 34vw;
-  visibility: visible;
+  /* visibility: visible; */
 }
 
 #data p {
   position: relative;
   top: -150px;
   width: 34vw;
-  visibility: visible;
+  /* visibility: visible; */
   /* top:100px; */
 }
 
-#about p {
-  visibility: visible;
-}
+/* #about p {
+  z-index: 99;
+} */
 
 .description__pg a:hover {
   color: navy !important;
+  /* visibility: visible; */
 }
 
 .description__pg a {
+  /* visibility: visible; */
   transition: color 0.3s ease;
+  /* z-index: 0; */
 }
 
 #about {
   opacity: 0;
-  /* transform: translate(-50%,-50%); */
   font-size: 1.2em;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
   top: 50%;
   left: 50%;
   position: relative;
-  visibility: inherit;
+  /* visibility: hidden; */
 }
 
 #data {
   text-align: center;
   opacity: 0;
   font-size: 1.2em;
-  /* padding: 10px; */
-  /* transform: translate(0, -50%); */
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
   top: 50%;
   left: 50%;
   position: relative;
-  visibility: inherit;
+  /* visibility: hidden; */
 }
 #foto {
   opacity: 0;
@@ -376,7 +372,7 @@ body {
   top: 50%;
   left: 50%;
   position: relative;
-  visibility: inherit;
+  visibility: visible;
 }
 #poster {
   opacity: 0;
@@ -387,7 +383,6 @@ body {
   top: 50%;
   left: 50%;
   position: relative;
-  visibility: inherit;
 }
 
 .text-on-right {
@@ -424,11 +419,12 @@ body {
   min-height: auto;
   min-width: auto;
   z-index: 0;
+  /* visibility: inherit; */
 }
 
 .hoverable-letter {
   font-size: 1.1em;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
   /* visibility: visible; */
 }
 
@@ -471,6 +467,7 @@ body {
   left: 50%;
   transform-origin: 0 150px;
   font-size: 1em;
+  z-index: 1;
 }
 
 
