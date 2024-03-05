@@ -1,8 +1,8 @@
 //reference: https://www.youtube.com/watch?v=GcPT4kd9JSo&ab_channel=danielstuts
-import { Ball, balls } from "./2dPhysics/Ball.js";
-import { Vector } from "./2dPhysics/Vector.js";
-import { isRendering } from "./container_collision.js";
-import { deviceType, events, isTouchDevice } from "./device.js";
+import {Ball, balls} from "./2dPhysics/Ball.js";
+import {Vector} from "./2dPhysics/Vector.js";
+import {isRendering} from "./container_collision.js";
+import {deviceType, events, isTouchDevice} from "./device.js";
 export const canvas = document.getElementById("physicsCanvas");
 export const ctx = canvas.getContext("2d");
 const playground__container = document.getElementById("container");
@@ -15,7 +15,6 @@ canvas.height = _c_height;
 const icons = document.querySelectorAll(".physicCircle");
 let mouseForce = 0.3;
 
-//for throttling
 let startTime;
 let timeLapse = 0;
 
@@ -27,18 +26,23 @@ let lastFrameTime = 0;
 
 // import {isRendering} from './app.js';
 
-//TODO: change this into touchctrl too
+
+
+
 function mousectrl() {
+
   // cancelAnimationFrame()
   canvas.addEventListener("mousedown", function (event) {
     // console.log("Mouse down event");
     const mouseX = event.clientX - canvas.getBoundingClientRect().left;
     const mouseY = event.clientY - canvas.getBoundingClientRect().top;
 
+    
     for (const ball of balls) {
       const distance = Math.sqrt(
         (mouseX - ball.pos.x) ** 2 + (mouseY - ball.pos.y) ** 2
       );
+      console.log(mouseX,mouseY);
       if (distance < ball.r) {
         ball.isDragging = true;
         ball.addPosition(ball.pos.x, ball.pos.y);
@@ -51,14 +55,16 @@ function mousectrl() {
         break;
       }
     }
+
   });
 
-  canvas.addEventListener("mousemove", function (event) {
-    if (isAnyBallDragging()) {
-      //TODO: if there exist a dragging element
+  canvas.addEventListener(
+    "mousemove",
+    function (event) {
+      // console.log()
       const mouseX = event.clientX - canvas.getBoundingClientRect().left;
       const mouseY = event.clientY - canvas.getBoundingClientRect().top;
-      console.log(mouseX, mouseY);
+
       const mousePos = new Vector(mouseX, mouseY);
 
       for (const ball of balls) {
@@ -69,7 +75,7 @@ function mousectrl() {
           const force = mousePos.subtr(ball.pos).unit().mult(mouseForce);
           ball.pos.x += force.x;
           ball.pos.y += force.y;
-
+          
           //check the boarders
           if (ball.pos.x < ball.r) {
             ball.pos.x = ball.r;
@@ -83,19 +89,18 @@ function mousectrl() {
           }
         }
       }
+      // if (balls.some((ball) => ball.isMoving || ball.isDragging)) {
+      //   timer = requestAnimationFrame(mainloop);
+      // }
     }
-    // console.log()
-
-    // if (balls.some((ball) => ball.isMoving || ball.isDragging)) {
-    //   timer = requestAnimationFrame(mainloop);
-    // }
-  });
-
+  );
+  
   canvas.addEventListener("mouseup", function (event) {
     // Release all dragged balls when the mouse is up
 
     ball_up();
   });
+
 }
 
 export const ball_up = () => {
@@ -103,7 +108,7 @@ export const ball_up = () => {
     ball.isDragging = false;
   }
   isRecording = false;
-};
+}
 
 //TODO: buggy
 export const canvas_resize = () => {
@@ -112,13 +117,24 @@ export const canvas_resize = () => {
 
   for (const ball of balls) {
     // if collide with wall, a quick release of velocity
-    ball.handleWallCollision_addVelo();
+      ball.handleWallCollision_addVelo();
   }
 
   requestAnimationFrame(mainloop);
-};
+}
 
-function isAnyBallMoving() {
+// function mirrorVector(originalVector, mirrorVector) {
+//   // Calculate the angle between the two vectors
+//   const angleBetween = cal_Angle_V(originalVector, mirrorVector);
+//   // Double the angle to determine the mirroring angle
+//   const mirroringAngle = 2 * angleBetween;
+//   // Use the rotateVector function to mirror the vector
+//   const mirroredVector = rotateVector(originalVector, mirroringAngle);
+
+//   return mirroredVector;
+// }
+
+function isAnyBallMoving(){
   var result = false;
   for (const ball of balls) {
     result = result || ball.isMoving;
@@ -126,7 +142,7 @@ function isAnyBallMoving() {
   return result;
 }
 
-function isAnyBallDragging() {
+function isAnyBallDragging(){
   var result = false;
   for (const ball of balls) {
     result = result || ball.isDragging;
@@ -137,11 +153,11 @@ function isAnyBallDragging() {
 export const mainloop = (currentTime) => {
   // console.log("yeps");
   // Stop rendering if the flag is set to false
-  if (!isRendering) {
+  if(!isRendering){
     return;
   }
   const elapsedTime = currentTime - lastFrameTime;
-
+  
   // console.log( canvas.width, canvas.height);
   // Check if enough time has passed to proceed to the next frame
   //throttling
@@ -164,22 +180,24 @@ export const mainloop = (currentTime) => {
       ball.updateHtmlPosition();
     }
 
-    if (!isAnyBallMoving() && !isAnyBallDragging()) {
+    if(!isAnyBallMoving() && !isAnyBallDragging()){
       return;
     }
+  
 
     // Update the last frame time
     lastFrameTime = currentTime;
     requestAnimationFrame(mainloop);
   }
-};
+}
 
 //TODO: still laggy, make requestion animation only there exist moving
 //TODO: resize
 
 // console.log(icons);
 
-//initiate the physical icons
+
+//initiate the physical icons 
 
 function getRandomPosition(icon) {
   const containerWidth = _c_width;
@@ -188,34 +206,33 @@ function getRandomPosition(icon) {
   const iconRadius = icon.offsetWidth / 2; // Replace with the radius of your circle
 
   // Calculate random left and top positions within the container
-  const randomLeft =
-    Math.random() * (containerWidth - 2 * iconRadius) + iconRadius;
-  const randomTop =
-    Math.random() * (containerHeight - 2 * iconRadius) + iconRadius;
+  const randomLeft = Math.random() * (containerWidth - 2 * iconRadius) + iconRadius;
+  const randomTop = Math.random() * (containerHeight - 2 * iconRadius) + iconRadius;
 
   return new Vector(randomLeft, randomTop);
 }
 
 function checkOverLap(icon, position) {
+
   for (const otherIcon of icons) {
     if (otherIcon !== icon) {
-      const otherRect_position = new Vector(
-        otherIcon.offsetLeft,
-        otherIcon.offsetTop
-      );
+      const otherRect_position = new Vector(otherIcon.offsetLeft, otherIcon.offsetTop);
       const distance = position.subtr(otherRect_position).mag();
-      if (distance <= icon.offsetWidth / 2 + otherIcon.offsetWidth / 2) {
+      if (
+        distance <= ( icon.offsetWidth / 2 + otherIcon.offsetWidth / 2 )
+      ) {
         // Overlap detected, adjust the position and check again
         position = checkOverLap(icon, getRandomPosition(icon));
       }
     }
   }
-
+  
   return position;
 }
 
 //initiate the icons
 icons.forEach((icon) => {
+
   const position = getRandomPosition(icon);
   const adjustedPosition = checkOverLap(icon, position);
 
@@ -228,8 +245,15 @@ icons.forEach((icon) => {
 
   const id = icon.id;
 
-  new Ball(left, top, width / 2, id);
+  new Ball(left, top, width/2, id);
   // console.log(`Icon ID: ${id}, Left: ${left}px, Top: ${top}px, Width: ${width}px`);
 });
 
+
+
+
+
 // requestAnimationFrame(mainloop);
+
+
+

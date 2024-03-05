@@ -6,8 +6,6 @@ import {
   container_resize,
   drag__e_move,
   drag__e_up,
-  outDim,
-  drag__e
 } from "./src/container_collision.js";
 import { updateBottomDateCircle } from "./src/bottomCircle.js";
 import { changeHoverletter } from "./src/letter.js";
@@ -18,7 +16,11 @@ let resizeTimeout;
 export var isResizing = false;
 
 //TODO: check this method if changes the deviceType in device.js
+//TODO: mobile performance issue
+//TODO: hovering thing UI need to change
+//TODO: main screen, items falling with circle touching the black circle that expands
 isTouchDevice();
+// console.log(deviceType);
 nav__expansion();
 updateBottomDateCircle();
 document_listener();
@@ -69,6 +71,7 @@ function document_listener() {
   document.addEventListener(
     events[deviceType].up,
     () => {
+
       drag__e_up();
       ball_up();
       //TODO: same applies to the physics balls
@@ -79,6 +82,10 @@ function document_listener() {
   document.addEventListener(
     events[deviceType].move,
     (e) => {
+      // if(isTouchDevice()){
+      //   e.preventDefault();
+      // }
+      // console.log("yep");
       drag__e_move(e);
       arrow_move(e);
     },

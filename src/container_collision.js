@@ -1,5 +1,4 @@
-import { deviceType, events } from "./device.js";
-import { isTouchDevice } from "./device.js";
+import { deviceType, events, isTouchDevice} from "./device.js";
 import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
@@ -63,13 +62,18 @@ var origin = [
   playground__container.offsetHeight / 2,
 ];
 
-let styleChanges = {};
+
 export const container__collision = () => {
   drag__e.addEventListener(
     events[deviceType].down,
     function (e) {
       moving = true;
-      offset = [drag__e.offsetLeft - e.clientX, drag__e.offsetTop - e.clientY];
+      if(!isTouchDevice()){
+        offset = [drag__e.offsetLeft - e.clientX, drag__e.offsetTop - e.clientY];
+      } else {
+        offset = [drag__e.offsetLeft - e.touches[0].clientX, drag__e.offsetTop - e.touches[0].clientY];
+      }
+      
       //making the spinning drag me disappear
       // check_n_update_style(spinning, "opacity", "0");
       // check_n_update_style(spinning, "visibility", "hidden");
@@ -102,6 +106,7 @@ export const drag__e_move = (event) => {
       x: !isTouchDevice() ? event.clientX : event.touches[0].clientX,
       y: !isTouchDevice() ? event.clientY : event.touches[0].clientY,
     };
+    
 
     //mouse allowed area but not the border collision
     var x_allowed =
@@ -113,6 +118,8 @@ export const drag__e_move = (event) => {
       mousePosition.y <=
         outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
     //   debugger;
+
+    console.log(mousePosition, offset);
     if (x_allowed) {
       // styleChanges.left = mousePosition.x + offset[0] + "px";
       drag__e.style.left = mousePosition.x + offset[0] + "px";
@@ -414,7 +421,7 @@ function origin__reset__promise(x) {
             
             update_pos_percent();
             drag__e.style.transition = "none";
-            console.log(position_percentage, drag__e.offsetLeft, outDim.right);
+            // console.log(position_percentage, drag__e.offsetLeft, outDim.right);
             resolve();
 
           });

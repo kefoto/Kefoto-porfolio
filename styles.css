@@ -539,8 +539,10 @@ body {
 }
 
 #arrow {
-  width: 30px; 
-  height: 30px; 
+  width: 5vw; 
+  height: 5vh; 
+  min-width: 30px;
+  min-height: 30px;
   transition: transform 0.2s ease-out;
   
   transform: translate(-50%,0%) scale(0.8); /* Optional: Smooth transition for the rotation */
