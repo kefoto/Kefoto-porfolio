@@ -119,7 +119,7 @@ export const drag__e_move = (event) => {
         outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2;
     //   debugger;
 
-    console.log(mousePosition, offset);
+    // console.log(mousePosition, offset);
     if (x_allowed) {
       // styleChanges.left = mousePosition.x + offset[0] + "px";
       drag__e.style.left = mousePosition.x + offset[0] + "px";

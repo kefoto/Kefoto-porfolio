@@ -10,7 +10,7 @@ import {
 import { updateBottomDateCircle } from "./src/bottomCircle.js";
 import { changeHoverletter } from "./src/letter.js";
 import { arrow_interaction, arrow_move } from "./src/arrow.js";
-import { mainloop, ball_up, canvas_resize } from "./src/canvas.js";
+import { mainloop, ball_up, ball_move, canvas_resize } from "./src/canvas.js";
 
 let resizeTimeout;
 export var isResizing = false;
@@ -87,6 +87,7 @@ function document_listener() {
       // }
       // console.log("yep");
       drag__e_move(e);
+      // ball_move(e);
       arrow_move(e);
     },
     true

@@ -417,7 +417,7 @@ body {
 
 .description__pg > div > img {
   width: 45%;
-  height: 45%;
+  height: auto;
   margin: 0 auto;
   min-height: auto;
   min-width: auto;
@@ -478,6 +478,8 @@ body {
   width: 80%;
   height: 80%;
   user-select: none;  
+  /* user-drag: none; Disable dragging for the img element */
+  -webkit-user-drag: none;
 }
 
 .physicCircle {
@@ -497,24 +499,25 @@ body {
 }
 
 #physicCircleContainer {
+  /* background-color: red; */
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 45%;
   position: absolute;
   left:0;
   top:0;
   opacity: 0;
+  z-index: 1;
   
   /* background-color: green; */
   /* overflow: hidden; */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-
+  transition: opacity 0.3s ease, visibility 0.3s eases;
   visibility: inherit;
 }
 
 #physicsCanvas {
-  z-index: 1;
+  z-index: 0;
   position: absolute;
   left:0;
   top:0;
@@ -559,7 +562,7 @@ body {
   .description__pg > div > img {
     /* width: 60%;
     height: 60%; */
-    width: 65% !important;
+    width: 78% !important;
     height: auto !important;
     margin: 0 auto;
     /* user-select: none; */
@@ -579,8 +582,8 @@ body {
 
   .button__menu {
     
-    max-width: calc(var(--parentHeight) / 3 - 15px);
-    max-height: calc(var(--parentHeight) / 3 - 15px);
+    max-width: calc(var(--parentHeight) / 4 - 15px);
+    max-height: calc(var(--parentHeight) / 4 - 15px);
 
     margin: 2vh 3vw !important;
   }
@@ -593,10 +596,34 @@ body {
 
 @media screen and (max-width: 480px) {
   .description__pg > div > img {
-    max-width: 60%;
-    max-height: 60%;
+    min-width: 100%;
+    max-height: auto;
     margin: 0 auto;
     z-index: 0;
   }
+
+  #foto p, #poster p, #data p {
+    font-size: 0.8em;
+    width: 45vw;
+    margin-bottom: 15px;
+    /* visibility: visible; */
+  }
+  
+  #about p {
+    font-size: 0.8em;
+    width: 80vw;
+  }
+  /* #data p {
+    position: relative;
+    margin-bottom: 15px;
+    top: -150px;
+    width: 50vw;
+    visibility: visible;
+    top:100px;
+  }
+  
+  #about p {
+    margin-bottom: 15px;
+  } */
 }
 

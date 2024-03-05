@@ -1,7 +1,6 @@
 import { Vector } from "./Vector.js";
 export var balls = [];
-import { pc_container } from "../canvas.js";
-
+import { canvas, ctx } from "../canvas.js";
 
 let friction = 0.04;
 const epsilon = 1e-4;
@@ -23,36 +22,36 @@ export class Ball {
     balls.push(this);
   }
 
-  // drawBall() {
-  //   ctx.beginPath();
-  //   ctx.arc(this.pos.x, this.pos.y, this.r, 0, 2 * Math.PI);
-  //   ctx.strokeStyle = "black";
-  //   ctx.stroke();
-  //   ctx.fillStyle = "blue";
-  //   ctx.fill();
-  //   ctx.closePath();
-  // }
+  drawBall() {
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, this.r, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.closePath();
+  }
 
-  // drawPoints() {
-  //   ctx.beginPath();
-  //   for (const _x_y of this._latest_points) {
-  //     ctx.arc(_x_y[0], _x_y[1], 10, 0, 2 * Math.PI);
-  //   }
-  //   ctx.strokeStyle = "orange";
-  //   ctx.stroke();
-  //   ctx.closePath();
-  // }
+  drawPoints() {
+    ctx.beginPath();
+    for (const _x_y of this._latest_points) {
+      ctx.arc(_x_y[0], _x_y[1], 10, 0, 2 * Math.PI);
+    }
+    ctx.strokeStyle = "orange";
+    ctx.stroke();
+    ctx.closePath();
+  }
 
-  // display() {
-  //   this.velo.drawVec(550, 400, 10, "green");
-  //   this.acce.unit().drawVec(550, 400, 50, "blue");
+  display() {
+    this.velo.drawVec(550, 400, 10, "green");
+    this.acce.unit().drawVec(550, 400, 50, "blue");
 
-  //   ctx.beginPath();
-  //   ctx.arc(550, 400, 50, 0, 2 * Math.PI);
-  //   ctx.strokeStyle = "black";
-  //   ctx.stroke();
-  //   ctx.closePath();
-  // }
+    ctx.beginPath();
+    ctx.arc(550, 400, 50, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+    ctx.closePath();
+  }
 
   addPosition(MouseX, MouseY) {
     if (this._latest_points.length > 7) {
@@ -134,20 +133,20 @@ export class Ball {
   handleWallCollision() {
     if (this.pos.x < this.r) {
       this.pos.x = this.r;
-    } else if (this.pos.x > pc_container.offsetWidth - this.r) {
-      this.pos.x = pc_container.offsetWidth - this.r;
+    } else if (this.pos.x > canvas.width - this.r) {
+      this.pos.x = canvas.width - this.r;
     }
     if (this.pos.y < this.r) {
       this.pos.y = this.r;
-    } else if (this.pos.y > pc_container.offsetHeight - this.r) {
-      this.pos.y = pc_container.offsetHeight - this.r;
+    } else if (this.pos.y > canvas.height - this.r) {
+      this.pos.y = canvas.height - this.r;
     }
 
-    if (this.pos.x <= this.r || this.pos.x >= pc_container.offsetWidth - this.r) {
+    if (this.pos.x <= this.r || this.pos.x >= canvas.width - this.r) {
       this.velo.x *= -1; // Reverse velocity on collision with horizontal borders
       this.velo.x *= 0.9;
     }
-    if (this.pos.y <= this.r || this.pos.y >= pc_container.offsetHeight - this.r) {
+    if (this.pos.y <= this.r || this.pos.y >= canvas.height - this.r) {
       this.velo.y *= -1; // Reverse velocity on collision with vertical borders
       this.velo.y *= 0.9;
     }
@@ -156,20 +155,20 @@ export class Ball {
   handleWallCollision_addVelo() {
     if (this.pos.x < this.r) {
       this.pos.x = this.r;
-    } else if (this.pos.x > pc_container.offsetWidth - this.r) {
-      this.pos.x = pc_container.offsetWidth - this.r;
+    } else if (this.pos.x > canvas.width - this.r) {
+      this.pos.x = canvas.width - this.r;
     }
     if (this.pos.y < this.r) {
       this.pos.y = this.r;
-    } else if (this.pos.y > pc_container.offsetHeight - this.r) {
-      this.pos.y = pc_container.offsetHeight - this.r;
+    } else if (this.pos.y > canvas.height - this.r) {
+      this.pos.y = canvas.height - this.r;
     }
 
-    if (this.pos.x <= this.r || this.pos.x >= pc_container.offsetWidth - this.r) {
+    if (this.pos.x <= this.r || this.pos.x >= canvas.width - this.r) {
       this.velo.x *= -1; // Reverse velocity on collision with horizontal borders
       this.velo.x += Math.random() * (10 - 5 + 1) + 5;
     }
-    if (this.pos.y <= this.r || this.pos.y >= pc_container.offsetHeight - this.r) {
+    if (this.pos.y <= this.r || this.pos.y >= canvas.height - this.r) {
       this.velo.y *= -1; // Reverse velocity on collision with vertical borders
       this.velo.y += 10;
     }
