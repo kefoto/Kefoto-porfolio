@@ -1,6 +1,6 @@
 import {getKeysByValue, collision__circle, classes} from './container_collision.js';
 
-
+//TODO: this lags when the website first loads
 const text = document.querySelector(".text");
 
 export const updateBottomDateCircle = () => {

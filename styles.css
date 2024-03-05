@@ -388,6 +388,14 @@ body {
   position: relative;
 }
 
+.h1 {
+  font-size: 0.8rem !important;
+}
+
+.h2 {
+  font-size: 0.7rem !important;
+}
+
 .text-on-right {
   position: absolute;
   top: 0 !important;
