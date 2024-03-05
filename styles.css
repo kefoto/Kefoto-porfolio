@@ -310,7 +310,7 @@ body {
 #data > *,
 #foto > *,
 #poster > * {
-  margin-bottom: 15px;
+  
   user-select: none;
   visibility: inherit !important;
 }
@@ -318,20 +318,22 @@ body {
 
 #foto p, #poster p{
   width: 34vw;
+  margin-bottom: 15px;
   /* visibility: visible; */
 }
 
 #data p {
   position: relative;
+  margin-bottom: 15px;
   top: -150px;
   width: 34vw;
   /* visibility: visible; */
   /* top:100px; */
 }
 
-/* #about p {
-  z-index: 99;
-} */
+#about p {
+  margin-bottom: 15px;
+}
 
 .description__pg a:hover {
   color: navy !important;
@@ -345,6 +347,7 @@ body {
 }
 
 #about {
+  /* margin-bottom: 15px; */
   opacity: 0;
   font-size: 1.2em;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
