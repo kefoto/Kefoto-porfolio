@@ -2,12 +2,10 @@ import { deviceType, events, isTouchDevice} from "./device.js";
 import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
-import {check_n_update_style} from "./tool/cssChange.js";
 
 const spinning = document.querySelector(".spin");
 const arrowLink = document.getElementById("arrowLink");
 
-const canvas__ele = document.getElementById("physicsCanvas");
 const physicCircleContainer__ele = document.getElementById(
   "physicCircleContainer"
 );
@@ -77,8 +75,13 @@ export const container__collision = () => {
       //making the spinning drag me disappear
       // check_n_update_style(spinning, "opacity", "0");
       // check_n_update_style(spinning, "visibility", "hidden");
+      
       spinning.style.opacity = "0";
       spinning.style.visibility = "hidden";
+      setTimeout(()=> {
+        spinning.style.animationPlayState = "paused";
+      },3000);
+      
     },
     true
   );
@@ -304,14 +307,11 @@ function buttons__collision() {
 
         isRendering = true;
 
-        // check_n_update_style(canvas__ele, "visibility", "visible");
-        // check_n_update_style(physicCircleContainer__ele, "visibility", "visible");
-        // check_n_update_style(physicCircleContainer__ele, "opacity", "1");
-        canvas__ele.style.visibility = "visible";
-        physicCircleContainer__ele.style.visibility = "visible";
         physicCircleContainer__ele.style.opacity = "1";
-
+        physicCircleContainer__ele.style.visibility = "visible";
+        
         requestAnimationFrame(mainloop);
+
       } else if (b.id == "fto") {
         temptranslate = "translate(-50%, 50%)";
         arrowLink.href = "foto-blog.html";
@@ -326,21 +326,17 @@ function buttons__collision() {
       
     } else {
       // console.log(elementId + "not colliding");
-      // check_n_update_style(b, "backgroundColor", "transparent");
-      // check_n_update_style(b, "transfor", "transparent");
-      // check_n_update_style(b, "backgroundColor", "transparent");
-      // check_n_update_style(b, "backgroundColor", "transparent");
 
       b.style.backgroundColor = "transparent";
-      // b.style.transformOrigin = "initial";
       b.style.width = button__menu__size + "px";
       b.style.height = button__menu__size + "px";
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
 
 
-      document.getElementById(classes[elementId]).style.opacity = "0";
+      
       document.getElementById(classes[elementId]).style.visibility = "hidden";
+      document.getElementById(classes[elementId]).style.opacity = "0";
 
       //make sure it only execute once
       if (b.id == "dta") {
@@ -348,7 +344,7 @@ function buttons__collision() {
         // check_n_update_style(canvas__ele, "visibility", "hidden");
         // check_n_update_style(physicCircleContainer__ele, "visibility", "hidden");
         // check_n_update_style(physicCircleContainer__ele, "opacity", "0");
-        canvas__ele.style.visibility = "hidden";
+        // canvas__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.opacity = "0";
       }

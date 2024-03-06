@@ -228,7 +228,7 @@ body {
   animation-duration: 20s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-
+  animation-play-state: running;
   transition: opacity 1s ease-in-out, visibility 1s ease;
 }
 
@@ -375,7 +375,7 @@ body {
   top: 50%;
   left: 50%;
   position: relative;
-  visibility: visible;
+  /* visibility: visible; */
 }
 #poster {
   opacity: 0;
@@ -427,8 +427,8 @@ body {
   width: 45%;
   height: auto;
   margin: 0 auto;
-  min-height: auto;
-  min-width: auto;
+  /* min-height: auto;
+  min-width: auto; */
   z-index: 0;
   /* visibility: inherit; */
 }
@@ -486,6 +486,7 @@ body {
   width: 80%;
   height: 80%;
   user-select: none;  
+  /* visibility: vis; */
   /* user-drag: none; Disable dragging for the img element */
   -webkit-user-drag: none;
 }
@@ -502,8 +503,12 @@ body {
   align-items: center;
   justify-content: center;
   user-select: none;
-  visibility: inherit;
   transform: translate(-50%, -50%);
+  /* transition: opacity 0.3s ease, visibility 0.5s ease; */
+}
+
+#physicCircleContainer > * {
+  visibility: inherit;
 }
 
 #physicCircleContainer {
@@ -516,22 +521,13 @@ body {
   left:0;
   top:0;
   opacity: 0;
-  z-index: 1;
-  
+  /* z-index: ; */
   /* background-color: green; */
   /* overflow: hidden; */
-  transition: opacity 0.3s ease, visibility 0.3s eases;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   visibility: inherit;
 }
 
-#physicsCanvas {
-  z-index: 0;
-  position: absolute;
-  left:0;
-  top:0;
-  opacity: 0;
-  visibility: inherit;
-}
 
 #enter {
   position: fixed;
@@ -570,7 +566,7 @@ body {
   .description__pg > div > img {
     /* width: 60%;
     height: 60%; */
-    width: 78% !important;
+    width: 60% !important;
     height: auto !important;
     margin: 0 auto;
     /* user-select: none; */
@@ -590,8 +586,8 @@ body {
 
   .button__menu {
     
-    max-width: calc(var(--parentHeight) / 4 - 15px);
-    max-height: calc(var(--parentHeight) / 4 - 15px);
+    max-width: calc(var(--parentHeight) / 3 - 15px);
+    max-height: calc(var(--parentHeight) / 3 - 15px);
 
     margin: 2vh 3vw !important;
   }
@@ -604,8 +600,8 @@ body {
 
 @media screen and (max-width: 480px) {
   .description__pg > div > img {
-    min-width: 100%;
-    max-height: auto;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
     z-index: 0;
   }
@@ -620,6 +616,21 @@ body {
   #about p {
     font-size: 0.8em;
     width: 80vw;
+  }
+
+
+  .physicCircle {
+    width: 60px;
+    height: 60px;
+    
+  }
+
+  .button__menu {
+    
+    max-width: calc(var(--parentHeight) / 4 - 15px);
+    max-height: calc(var(--parentHeight) / 4 - 15px);
+
+    margin: 2vh 3vw !important;
   }
   /* #data p {
     position: relative;

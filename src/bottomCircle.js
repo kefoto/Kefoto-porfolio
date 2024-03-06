@@ -6,14 +6,12 @@ const text = document.querySelector(".text");
 export const updateBottomDateCircle = () => {
     if (getKeysByValue(collision__circle, true).length == 0) {
       var temp = new Date();
+      const dateString =`TODAY'S DATE: ${
+        temp.getMonth() + 1
+      }/${temp.getDate()}/${temp.getFullYear()} `;
+
       presentDateCircle(
-        `TODAY'S DATE: ${
-          temp.getMonth() + 1
-        }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
-          temp.getMonth() + 1
-        }/${temp.getDate()}/${temp.getFullYear()} TODAY'S DATE: ${
-          temp.getMonth() + 1
-        }/${temp.getDate()}/${temp.getFullYear()} `
+       repeatedString(dateString, 3)
       );
     } else {
       

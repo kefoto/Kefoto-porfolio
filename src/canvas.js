@@ -1,10 +1,9 @@
 //reference: https://www.youtube.com/watch?v=GcPT4kd9JSo&ab_channel=danielstuts
-import { Ball, balls } from "./2dPhysics/Ball.js";
-import { Vector } from "./2dPhysics/Vector.js";
+import { Ball, balls, Vector} from "./2dPhysics/Ball.js";
 import { isRendering } from "./container_collision.js";
 import { deviceType, events, isTouchDevice } from "./device.js";
-export const canvas = document.getElementById("physicsCanvas");
-export const ctx = canvas.getContext("2d");
+// export const canvas = document.getElementById("physicsCanvas");
+// export const ctx = canvas.getContext("2d");
 // const playground__container = document.getElementById("container");
 
 // const _c_width = playground__container.offsetWidth * 0.45;
@@ -23,15 +22,15 @@ let timeLapse = 0;
 let isRecording = false;
 
 //TODO: don't know why frame rate 60 does not work
-const targetFrameRate = 90; // Set your target frame rate
+const targetFrameRate = 75; // Set your target frame rate
 const frameInterval = 1000 / targetFrameRate; // Calculate the interval between frames
 let lastFrameTime = 0;
 
 // import {isRendering} from './app.js';
 console.log(pc_container.getBoundingClientRect().left,pc_container.getBoundingClientRect().top);
-console.log(canvas.getBoundingClientRect().left,canvas.getBoundingClientRect().top);
+// console.log(canvas.getBoundingClientRect().left,canvas.getBoundingClientRect().top);
 console.log(pc_container.offsetWidth,pc_container.offsetHeight);
-console.log(canvas.width,canvas.height);
+// console.log(canvas.width,canvas.height);
 
 
 //TODO: change this into touchctrl too
@@ -98,7 +97,7 @@ export const ball_move = (event) => {
     const mouseX = !isTouchDevice() ? event.clientX - pc_container.getBoundingClientRect().left : event.touches[0].clientX - pc_container.getBoundingClientRect().left;
     const mouseY = !isTouchDevice() ? event.clientY - pc_container.getBoundingClientRect().top : event.touches[0].clientY - pc_container.getBoundingClientRect().top;
     // const mouseY = event.clientY - pc_container.getBoundingClientRect().top;
-    console.log(mouseX, mouseY);
+    // console.log(mouseX, mouseY);
     const mousePos = new Vector(mouseX, mouseY);
 
     for (const ball of balls) {
@@ -135,7 +134,7 @@ export const ball_up = () => {
   isRecording = false;
 };
 
-//TODO: buggy
+//TODO: not buggy, but when resize, check and update size
 export const canvas_resize = () => {
   for (const ball of balls) {
     // if collide with wall, a quick release of velocity

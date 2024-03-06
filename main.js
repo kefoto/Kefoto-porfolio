@@ -7,7 +7,7 @@ import {
   drag__e_move,
   drag__e_up,
 } from "./src/container_collision.js";
-import { updateBottomDateCircle } from "./src/bottomCircle.js";
+import { updateBottomDateCircle, presentDateCircle, repeatedString} from "./src/bottomCircle.js";
 import { changeHoverletter } from "./src/letter.js";
 import { arrow_interaction, arrow_move } from "./src/arrow.js";
 import { mainloop, ball_up, ball_move, canvas_resize } from "./src/canvas.js";
@@ -22,7 +22,14 @@ export var isResizing = false;
 isTouchDevice();
 // console.log(deviceType);
 nav__expansion();
-updateBottomDateCircle();
+var temp = new Date();
+const dateString =`TODAY'S DATE: ${
+  temp.getMonth() + 1
+}/${temp.getDate()}/${temp.getFullYear()} `;
+
+presentDateCircle(
+ repeatedString(dateString,3)
+);
 document_listener();
 window_listener();
 
