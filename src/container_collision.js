@@ -333,8 +333,6 @@ function buttons__collision() {
       b.style.transform = "scale(1.0) translate(0%, 0%)";
 
 
-
-      
       document.getElementById(classes[elementId]).style.visibility = "hidden";
       document.getElementById(classes[elementId]).style.opacity = "0";
 
