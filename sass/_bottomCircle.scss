@@ -2,11 +2,12 @@ $parentHeight: 25vw;
 
 .circle {
     position: absolute;
-    // background-color: red;
+    background-color: #fff;
+    border-radius: 50%;
     aspect-ratio: 1/1;
     height: $parentHeight;
     width: $parentHeight;
-    max-width: 20;
+    max-width: 300px;
     left: 50%;
     top: 107%;
     transform: translate(-50%, -50%);
@@ -17,8 +18,8 @@ $parentHeight: 25vw;
     height: 100%;
     width: 100%;
     animation: anim 90s linear infinite;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
+    -webkit-user-select: none; 
+    -ms-user-select: none;
     user-select: none;
   }
   
@@ -31,10 +32,12 @@ $parentHeight: 25vw;
     }
   }
   
+  //TODO: how to show when this is big
+
   .text span {
     position: absolute;
     left: 50%;
-    transform-origin: 0 calc($parentHeight/2);
+    transform-origin: 0 min(calc($parentHeight/2), 300px);
     font-size: 1em;
     z-index: 2;
   }

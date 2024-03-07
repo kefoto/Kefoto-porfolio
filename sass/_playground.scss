@@ -111,18 +111,21 @@
 }
 
 .description__pg {
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  height: 100vh;
   // opacity: 1;
   // display: flex;
+  // background-color: red;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
   // flex-wrap: wrap;
   // grid-template-rows: repeat(2, 1fr); // Example grid with 2 rows
   // grid-template-columns: repeat(2, 1fr); // Example grid with 2 columns
   // gap: 10px;
   // background-color: red;
   position: relative;
-  /* margin: 0 auto; */
-  // align-items: center;
+  margin:auto;
   
   
 
@@ -130,17 +133,31 @@
   #about, #data, #foto, #poster {
     width: 60%;
     // display: subgrid;
-    position: absolute;
-    // top: 0;
-    // left: 0;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-25%, -50%);
+    display: flex;
+    flex-direction: column;
+    margin:auto;
+    height: 80vh;
     @extend .description-section;
-    // justify-content: center;ß
+    justify-content: center;
+    align-items: center;
     
+    // background-color: red;
     // grid-template-columns: repeat(2, 1fr);
 
     p {
-      width: 45vw;
+      width: 37vw;
       margin-bottom: 15px;
+    }
+
+    img {
+      width: 45%;
+      height: auto;
+      margin: 0 auto;
+      z-index: 0;
     }
   }
 
@@ -163,7 +180,7 @@
 #data > *,
 #foto > *,
 #poster > * {
-  // grid-column: span 1;
+  // position: absolute;
   user-select: none;
   visibility: inherit;
 }
@@ -176,35 +193,36 @@
   font-size: 0.7rem !important;
 }
 
-// .text-on-right {
-//   // position: absolute;
-//   // top: 0 !important;
-//   // left: 60%;
-//   text-align: left;
-// }
+.text-on-right {
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+  text-align: left;
+}
 
-// .text-on-left {
-//   // position: absolute;
-//   // top: 0 !important;
-//   // right: 60%; 
-//   text-align: right;
+.text-on-left {
+  position: absolute;
+  top: 50%;
+  // left:0;
+  
+  transform: translate(-50%, -50%);
+  text-align: right;
+  margin-right: 10px;
+}
 
-// }
 
+.image-on-right {
+  position: absolute;
+  top: 50%;
+  right:0;
+  transform: translate(0, -55%);
+}
 
-// .image-on-right {
-//   transform: translate(15vw, -3vh);
-// }
-
-// .image-on-left {
-//   transform: translate(-15vw, -3vh);
-// }
-
-.description__pg > div > img {
-  width: 45%;
-  height: auto;
-  margin: 0 auto;
-  z-index: 0;
+.image-on-left {
+  position: absolute;
+  top: 50%;
+  left:0;
+  transform: translate(0, -55%);
 }
 
 .hoverable-letter {
@@ -213,7 +231,7 @@
 
 .physicCircle img {
   width: 80%;
-  height: 80%;
+  height: auto;
   margin: auto;
   user-select: none;  
   -webkit-user-drag: none;
