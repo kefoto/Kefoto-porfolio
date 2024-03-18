@@ -18,6 +18,8 @@ $link-transition: all 0.2s none;
   // overflow-x: hidden;
 
   svg {
+    // background-color: #242424 !important;
+    // color: black;
     transition: all 0.3s ease-in-out;
   }
 }
@@ -35,18 +37,26 @@ $link-transition: all 0.2s none;
   width: 50px;
   height: 100%;
   aspect-ratio: 1/1;
-  padding: 0;
+  padding-top: 10px;
   // background-color: red;
   max-width: 200px;
   min-width: 50px;
   margin: auto 0;
-
+  // color: black;
   justify-content: center;
   transition: all 0.3s ease-out;
 
   &:hover {
     transform: rotate(90deg);
   }
+
+  svg path, svg rect{
+    // filter: invert(100%);
+    // margin: auto;
+    // background-color: #242424;
+    fill: #242424;
+  }
+
   @include mq(720px) {
     // visibility: hidden;
   }

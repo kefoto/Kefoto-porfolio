@@ -28,62 +28,58 @@
   <body>
     <nav class="navbar">
       <div class="navbar__container">
-        <a href="index.html" id="navbar__logo"
-          >
-          <img src="image/yepp ke logo.svg"/>
-          <!-- TODO: animate logo using gsap -->
-          <!-- <svg
-            id="Layer_2"
-            data-name="Layer 2"
-            xmlns="https://www.w3.org/2000/svg"
-            viewBox="0 0 427.63 100.96"
+        <a href="index.html" id="navbar__logo">
+          <!-- <img src="image/logo separate for animation.svg" /> -->
+          <svg
+          id="logo_1" data-name="logo_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 300.05 299.97"
           >
             <defs>
               <style>
                 .cls-1 {
-                  fill: #242424;
-                  stroke-width: 1px;
+                  stroke-width: 0px;
                 }
               </style>
             </defs>
-            <g id="Layer_2-2" data-name="Layer 2">
+            <rect
+              id="mide"
+              class="cls-1"
+              x="145.72"
+              y="24.89"
+              width="9"
+              height="137.93"
+              rx="4.5"
+              ry="4.5"
+            />
+            <path
+              id="tip"
+              class="cls-1"
+              d="m194.59,244.82c-5,5-13.24,4.86-18.33-.04-6.81-6.56-16.06-10.59-26.26-10.59s-19.48,4.04-26.29,10.61c-4.75,4.58-12.07,4.91-17.09.86l29.13,29.13c7.97,7.97,21.1,8.09,29.07.12l29.76-30.09Z"
+            />
+            <g id="extra">
               <path
                 class="cls-1"
-                d="m66.88,27.55c-9.86-.06-14.1,6.31-20.31,13.97l-1.23,1.7,5.26-19.69C53.31,11.46,44.13,0,31.76,0h-12.74C11.43,0,5.28,6.15,5.28,13.73c0,5.94,3.78,10.99,9.06,12.9,1.07.56,2.56.83,4.67.83,1.84,0,4.71.07,4.67.08-4.93,1.89-7.64,7.09-8.4,10.26L0,98.96h34.15l6.6-29.18,5.82,29.18h34.54l-6.17-21.91c-2.73-10.55-7.11-16.72-19.83-20.01,8.13-.03,19.5-2.28,24.81-8.45,1.27-1.48,2.59-3.52,3.44-4.62,0,0,0,0,0,0l10.55-16.42h-27.03Z"
+                d="m168.51,283.29c-4.92,4.92-11.59,7.68-18.55,7.68h20.98c-3.34-.71-5.03-5.09-2.43-7.68"
               />
               <path
                 class="cls-1"
-                d="m123.99,32.41c4.42,0,3.26,12.55,1.93,21.24-.67,4.34,2.55,8.11,6.91,8.11h26.08s3.75-8.94,1.46-15.62c-5.29-15.46-28.43-20.68-46.59-13.94-4.59,1.7-23.75,8.81-29.38,27.88-.41,1.38-4.88,17.38,3.92,29.21,12.94,17.38,45.68,13.82,62.62-.66,3.12-2.67,5.75-5.84,7.86-8.88,2.28-3.27-.66-7.37-4.44-6.27-5.55,1.62-12.79,2.17-20.66-1.23-17.3-7.48-14.07-39.83-9.71-39.83Z"
-              />
-              <path
-                class="cls-1"
-                d="m189.53,54.89c0-5.57,1.39-10.37,3.82-14.61,1.43-2.49-.32-5.68-3.06-5.68h0c-9.62,0-16.47,7.53-18.68,17.47l-11.05,46.88h34.15s1.78-9.87,2.6-13.11c1.65-6.58-2.08-9.19-5.95-20.15-1.19-3.37-1.84-7.01-1.84-10.82Z"
-              />
-              <circle class="cls-1" cx="222.11" cy="55.43" r="16.86" />
-            </g>
-            <g id="Layer_3" data-name="Layer 3">
-              <path
-                class="cls-1"
-                d="m244.56,6.52c-.71-.29-1.44-.49-2.16-.62h0S205.99.14,205.99.14c-3.21-.59-6.5,1.14-7.77,4.28-1.45,3.6.29,7.69,3.89,9.14l34.37,13c5.53,2.23,11.82-.45,14.05-5.98,2.23-5.53-.45-11.82-5.98-14.05Z"
-              />
-              <path
-                class="cls-1"
-                d="m427.56,62.31c-1.26-19.44-12.62-33.98-37.65-33.98-22.18,0-31.64,15.85-32.09,35.37-.51,21.97,17.67,35.24,36.65,35.19,18.98-.05,34.35-17.15,33.09-36.59Zm-25.6,4.53c-3.01,2.78-7.7,2.6-10.49-.42l-10.42-11.29c-2.78-3.01-2.6-7.7.42-10.49,3.01-2.78,7.7-2.59,10.49.42l10.42,11.29c2.78,3.01,2.6,7.7-.42,10.49Z"
-              />
-              <path
-                class="cls-1"
-                d="m291.78,29.31c-2.58-.02-10.12.43-15.72,1.83-11.5,2.87-20.1,1.8-20.1,1.8-4.95-.51-6.17,2.92-3.83,7.14.07.13.15.27.22.41.2.37.39.74.57,1.12,2.6,5.39,3.27,11.51,2.27,17.42l-.55,3.22c-.35,2.06-.52,4.15-.4,6.24.96,17,15.24,30.31,33.61,30.47,19.78.17,36.82-14.98,38.05-33.84,1.23-18.86-14.36-35.64-34.14-35.81Zm6.95,37.54c-3.01,2.78-7.7,2.6-10.49-.42l-10.42-11.29c-2.78-3.01-2.6-7.7.42-10.49,3.01-2.78,7.7-2.59,10.49.42l10.42,11.29c2.78,3.01,2.6,7.7-.42,10.49Z"
+                d="m132.11,283.94c1.93,2.61.44,6.37-2.67,7.03h20.53c-6.64,0-13.02-2.52-17.86-7.03Z"
               />
             </g>
-            <g id="Layer_4" data-name="Layer 4">
-              <path
-                class="cls-1"
-                d="m330.17,93.22l5.96-73c.25-3,2.75-5.32,5.77-5.32h6.85l-.83,10.15c-.19,2.34,1.66,4.35,4.01,4.35h6.38l-.99,12.18h-10.74l-4.68,57.32h-6.48c-3.07,0-5.49-2.62-5.24-5.68Z"
-              />
-            </g></svg
-        > -->
-      
-      </a>
+            <path
+              id="v"
+              class="cls-1"
+              d="m168.51,283.29l122.54-122.54c2.89-2.88,5.13-6.27,6.66-9.97,1.53-3.69,2.34-7.68,2.34-11.76V4.59c0-1.86-1.08-3.55-2.69-4.29-.49-.19-1.02-.3-1.58-.3-2.49,0-4.5,2.01-4.5,4.5v130.91c0,8.15-3.24,15.96-9,21.73l-117.65,117.65c-7.97,7.97-20.9,7.97-28.87,0l-29.13-29.13c-.36-.29-.71-.6-1.04-.93L17.94,157.08c-5.76-5.76-9-13.57-9-21.72V4.64c0-1.86-1.08-3.54-2.68-4.28-.5-.19-1.03-.3-1.59-.3C2.18.06.16,2.07.16,4.56v134.64H.16c0,8.15,3.24,15.97,9,21.73l122.48,122.48c.17.17.32.35.46.54,4.84,4.51,11.22,7.03,17.86,7.03s13.63-2.76,18.55-7.68Z"
+            />
+            <path
+              id="i"
+              class="cls-1"
+              d="m299.97,295.47h0c0,2.49-2.01,4.5-4.5,4.5H4.5c-2.49,0-4.5-2.01-4.5-4.5h0c0-2.49,2.01-4.5,4.5-4.5h290.97c2.49,0,4.5,2.01,4.5,4.5Z"
+            />
+          </svg>
+          <!-- TODO: animate logo using gsap -->
+        </a>
 
         <ul class="navbar__menu">
           <li class="navbar__btn">
@@ -150,9 +146,7 @@
           <!-- information description -->
           <div class="description__pg">
             <div id="about">
-              <p
-                class="hoverable-paragraph"
-              >
+              <p class="hoverable-paragraph">
                 Kefoto, Ke's photos, is a vision on combining fun graphics,
                 analytics, and interaction.
               </p>
@@ -176,32 +170,32 @@
               </div>
             </div>
             <div id="foto">
-              <img class="image-on-right" src="image/000012630027 Edited.JPG" style="aspect-ratio: 2/3;" />
+              <img
+                class="image-on-right"
+                src="image/000012630027 Edited.JPG"
+                style="aspect-ratio: 2/3"
+              />
               <div class="text-on-left">
                 <h3>Latest</h3>
-                <p class="hoverable-paragraph">
-                  chameleon
-                </p>
+                <p class="hoverable-paragraph">chameleon</p>
 
                 <p class="hoverable-paragraph">
                   Shot on Canon F1 with Kodak Gold 200
                 </p>
-                <p
-                  class="hoverable-paragraph h1"
-                >
+                <p class="hoverable-paragraph h1">
                   The essence of mechanical cameras is how imperfection and
                   practice reflects the appreciation of story.
                 </p>
 
-                <p
-                  class="hoverable-paragraph h2"
-                >
-                  2023/11/17
-                </p>
+                <p class="hoverable-paragraph h2">2023/11/17</p>
               </div>
             </div>
             <div id="poster">
-              <img class="image-on-left" src="image/eoc.jpg" style="aspect-ratio: 4/5"/>
+              <img
+                class="image-on-left"
+                src="image/eoc.jpg"
+                style="aspect-ratio: 4/5"
+              />
               <div class="text-on-right">
                 <h3>Latest</h3>
                 <a
@@ -211,15 +205,11 @@
                 >
                   <p class="hoverable-paragraph">Eastman On Campus</p>
                 </a>
-                <p
-                  class="hoverable-paragraph h1"
-                >
+                <p class="hoverable-paragraph h1">
                   I love visuals capturing subtle textures and imaginative
                   snapshots of my space around me.
                 </p>
-                <p
-                  class="hoverable-paragraph h2"
-                >
+                <p class="hoverable-paragraph h2">
                   Photoshop, Illustrator & Blender
                 </p>
               </div>
@@ -253,22 +243,52 @@
             <!-- TODO: change the structure -->
             <div id="physicCircleContainer">
               <div id="python" class="physicCircle in">
-                <img id="python" class="in" src="image/icons/python.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="python"
+                  class="in"
+                  src="image/icons/python.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <div id="java" class="physicCircle in">
-                <img id="java" class="in" src="image/icons/java.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="java"
+                  class="in"
+                  src="image/icons/java.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <div id="js" class="physicCircle in">
-                <img id="js" class="in" src="image/icons/js.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="js"
+                  class="in"
+                  src="image/icons/js.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <div id="stata" class="physicCircle in">
-                <img id="stata" class="in" src="image/icons/stata.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="stata"
+                  class="in"
+                  src="image/icons/stata.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <div id="html" class="physicCircle in">
-                <img id="html" class="in" src="image/icons/html.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="html"
+                  class="in"
+                  src="image/icons/html.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <div id="css" class="physicCircle in">
-                <img id="css" class="in" src="image/icons/css.png" style="aspect-ratio: 1/1;"/>
+                <img
+                  id="css"
+                  class="in"
+                  src="image/icons/css.png"
+                  style="aspect-ratio: 1/1"
+                />
               </div>
               <!-- <div id="tableau">
                 <img src="image/icons/css.png" />
@@ -298,11 +318,9 @@
           </div>
           <div id="enter">
             <a id="arrowLink" href="" target="_blank"
-              ><img id="arrow" src="image/arrow.svg" style="aspect-ratio: 1/1;"
+              ><img id="arrow" src="image/arrow.svg" style="aspect-ratio: 1/1"
             /></a>
           </div>
-
-          
         </div>
 
         <!-- <div id="line"></div> -->

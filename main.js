@@ -11,6 +11,7 @@ import { updateBottomDateCircle, presentDateCircle, repeatedString} from "./src/
 import { changeHoverletter } from "./src/letter.js";
 import { arrow_interaction, arrow_move } from "./src/arrow.js";
 import { mainloop, ball_up, ball_move, canvas_resize } from "./src/canvas.js";
+import { logo_animation } from "./src/logo_animation.js";
 
 let resizeTimeout;
 export var isResizing = false;
@@ -39,6 +40,7 @@ requestAnimationFrame(mainloop);
 
 arrow_interaction();
 changeHoverletter();
+logo_animation();
 
 // ensure only one listener exist
 function window_listener() {
