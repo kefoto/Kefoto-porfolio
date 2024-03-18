@@ -49,12 +49,20 @@ $link-transition: all 0.2s none;
   &:hover {
     transform: rotate(90deg);
   }
-
   svg path, svg rect{
     // filter: invert(100%);
     // margin: auto;
     // background-color: #242424;
     fill: #242424;
+
+    
+  }
+  #extra {
+    opacity: 0;
+  }
+
+  #i {
+    opacity: 0;
   }
 
   @include mq(720px) {
