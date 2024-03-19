@@ -3,7 +3,7 @@ import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
 
-const spinning = document.querySelector(".spin");
+// const spinning = document.querySelector(".spin");
 const arrowLink = document.getElementById("arrowLink");
 
 const physicCircleContainer__ele = document.getElementById(
@@ -11,7 +11,7 @@ const physicCircleContainer__ele = document.getElementById(
 );
 
 export const drag__e = document.getElementById("drag__e");
-const nav__bar = document.querySelector(".navbar");
+export const nav__bar = document.querySelector(".navbar");
 export const button__menu = document.querySelectorAll(".button__menu");
 
 var offset = [0, 0];
@@ -55,6 +55,13 @@ export var collision__circle = {
   ptr: false,
 };
 
+export const translate_const = {
+  abt: {x: "-25%", y:"-25%"},
+  dta: {x:"25%", y:"-25%"},
+  fto: {x:"-25%", y:"25%"},
+  ptr: {x:"25%", y:"25%"}
+}
+
 var origin = [
   playground__container.offsetWidth / 2,
   playground__container.offsetHeight / 2,
@@ -72,15 +79,11 @@ export const container__collision = () => {
         offset = [drag__e.offsetLeft - e.touches[0].clientX, drag__e.offsetTop - e.touches[0].clientY];
       }
       
-      //making the spinning drag me disappear
-      // check_n_update_style(spinning, "opacity", "0");
-      // check_n_update_style(spinning, "visibility", "hidden");
-      
-      spinning.style.opacity = "0";
-      spinning.style.visibility = "hidden";
-      setTimeout(()=> {
-        spinning.style.animationPlayState = "paused";
-      },3000);
+      // spinning.style.opacity = "0";
+      // spinning.style.visibility = "hidden";
+      // setTimeout(()=> {
+      //   spinning.style.animationPlayState = "paused";
+      // },3000);
       
     },
     true
@@ -164,8 +167,9 @@ export const drag__e_move = (event) => {
     // debugger;
     // console.log(mousePosition);
     other_buttons_opacity();
-    updateBottomDateCircle();
+    
     buttons__collision();
+    
 
     update_pos_percent();
     // console.log(position_percentage);
@@ -203,7 +207,7 @@ export const container_resize = () => {
   //it's impossible to go off bound with no transitions
 
   other_buttons_opacity();
-  updateBottomDateCircle();
+  // updateBottomDateCircle();
   buttons__collision();
 
   if (drag__e.offsetLeft != origin[0] && drag__e.offsetTop != origin[1] && getKeysByValue(collision__circle, true).length == 1) {
@@ -234,17 +238,18 @@ function other_buttons_opacity() {
 
     otherButtons.forEach((b) => {
       const temp = position__map[b];
-      if (temp == "left") {
-        //TODO: how about transition
-        // check_n_update_style(document.getElementById(b), temp, "-300px");
-        document.getElementById(b).style[temp] = "-300px";
-      } else if (temp == "right") {
-        // check_n_update_style(document.getElementById(b), temp, "-300px");
-        document.getElementById(b).style[temp] = "-300px";
-      }
+      // if (temp == "left") {
+      //   // check_n_update_style(document.getElementById(b), temp, "-300px");
+      //   document.getElementById(b).style[temp] = "-300px";
+      // } else if (temp == "right") {
+      //   // check_n_update_style(document.getElementById(b), temp, "-300px");
+      //   document.getElementById(b).style[temp] = "-300px";
+      // }
+
+      gsap.to(`#${b}`, { [temp]: "-300px", duration: 0.5, opacity: 0.2, ease: "power1.out"});
 
       // check_n_update_style(document.getElementById(b), temp, "0.2");
-      document.getElementById(b).style.opacity = "0.2";
+      // document.getElementById(b).style.opacity = "0.2";
     });
 
     // console.log(otherButtons);
@@ -255,8 +260,8 @@ function other_buttons_opacity() {
       const temp = position__map[b];
       //  check_n_update_style(document.getElementById(b), temp, "0");
       //  check_n_update_style(document.getElementById(b), "opacity", "1");
-      document.getElementById(b).style[temp] = "0";
-      document.getElementById(b).style.opacity = "1";
+      gsap.to(`#${b}`, { [temp]: "0", duration: 0.5, opacity: 1, ease: "power1.out"});
+      // document.getElementById(b).style.opacity = "1";
     });
 
   }
@@ -289,20 +294,18 @@ function buttons__collision() {
 
       // check_n_update_style(document.getElementById(classes[elementId]), "opacity", "1");
       // check_n_update_style(document.getElementById(classes[elementId]), "visibility", "visible");
-      document.getElementById(classes[elementId]).style.opacity = "1";
-      document.getElementById(classes[elementId]).style.visibility = "visible";
-
-      // check_n_update_style(b, "backgroundColor", "#242424");
+      gsap.to(`#${classes[elementId]}`, { opacity: 1, visibility: "visible", duration: 0.5 }, 0);
       b.style.backgroundColor = "#242424";
   
-      let temptranslate;
+
+      let href;
 
       //TODO: CHANGE arrowLink
       if (b.id == "abt") {
-        temptranslate = "translate(-50%, -50%)";
+
         arrowLink.href = "https://www.linkedin.com/in/kefoto/";
       } else if (b.id == "dta") {
-        temptranslate = "translate(50%, -50%)";
+
         arrowLink.href = "https://github.com/kefoto/";
 
         isRendering = true;
@@ -313,15 +316,28 @@ function buttons__collision() {
         requestAnimationFrame(mainloop);
 
       } else if (b.id == "fto") {
-        temptranslate = "translate(-50%, 50%)";
+   
         arrowLink.href = "foto-blog.html";
       } else {
-        temptranslate = "translate(50%, 50%)";
         arrowLink.href = "https://example.com/collision4";
       }
-
+      console.log(b.id);
       // check_n_update_style(b, "transform", "scale(0.4) " + temptranslate);
-      b.style.transform = "scale(0.4) " + temptranslate;
+      gsap.to("#" + b.id, {
+        scale: 0.4,
+        duration: 0.5,
+        x: translate_const[b.id].x,
+        y: translate_const[b.id].y,
+        ease: "power1.out",
+        // onComplete: function() {
+        //   // Code to execute after the transformation is complete
+          
+        // }
+      }).then(() =>{
+        updateBottomDateCircle();
+      });
+
+
       
       
     } else {
@@ -330,8 +346,19 @@ function buttons__collision() {
       b.style.backgroundColor = "transparent";
       b.style.width = button__menu__size + "px";
       b.style.height = button__menu__size + "px";
-      b.style.transform = "scale(1.0) translate(0%, 0%)";
-
+      gsap.to("#" + b.id, {
+        scale: 1,
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        ease: "power1.out",
+        // onComplete: function() {
+        //   // Code to execute after the transformation is complete
+        //   updateBottomDateCircle();
+        // }
+      }).then(() =>{
+        updateBottomDateCircle();
+      });
 
       document.getElementById(classes[elementId]).style.visibility = "hidden";
       document.getElementById(classes[elementId]).style.opacity = "0";

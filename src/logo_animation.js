@@ -3,7 +3,7 @@ var tl = gsap.timeline({ defaults: { ease: 'power4.in', duration: 0.5} });
 
 tl.to("#tip", { y: 20, opacity: 0, scaleY: 0.1, transformOrigin: "50% bottom", duration: 0.2})
   .fromTo("#extra", { opacity: 0 }, { opacity: 1 }, 0) // Start the animation at the same time as the previous one
-  .fromTo("#i", { opacity: 0, scaleX: 0, transformOrigin: "50% 50%"}, { opacity: 1, scaleX: 1, transformOrigin: "50% 50%"}, 0); // Start the animation at the same time as the previous one
+  .fromTo("#i", { opacity: 0, scaleX: 0, transformOrigin: "50% 50%"}, { opacity: 1, scaleX: 1, transformOrigin: "50% 50%" }, 0); // Start the animation at the same time as the previous one
 
 export const logo_animation = () => {
 tl.pause();
@@ -15,3 +15,9 @@ tl.pause();
     tl.reverse(); // Reverse the timeline on mouse leave
   });
 };
+
+
+
+
+// GSAP animation for flipping the letters upside down
+// gsap.set(".text span", { rotationX: 180 });

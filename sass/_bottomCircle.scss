@@ -1,43 +1,65 @@
-$parentHeight: 25vw;
+$parentHeight: 300px;
 
 .circle {
-    position: absolute;
-    background-color: #fff;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    height: $parentHeight;
-    width: $parentHeight;
-    // max-width: 300px;
-    left: 50%;
-    top: 107%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;
-  }
-  
-  .text {
-    height: 100%;
-    width: 100%;
-    animation: anim 90s linear infinite;
-    -webkit-user-select: none; 
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  @keyframes anim {
-    0%{
-      transform: rotate(0deg);
-    }
-    100%{
-      transform: rotate(360deg);
-    }
-  }
-  
-  //TODO: how to show when this is big
+  position: absolute;
+  // background-color: white;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  height: $parentHeight;
+  width: $parentHeight;
+  // background-color: red;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
 
-  .text span {
+
+
+  @include mq(720px) {
+    height: 200px;
+    width: 200px;
+  }
+
+
+  .yep{
+    width: 100%;
+    height: 100%;
     position: absolute;
     left: 50%;
-    transform-origin: 0 min(calc($parentHeight/2), 300px);
-    font-size: 1em;
-    z-index: 2;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
+}
+
+.text {
+  height: 100%;
+  width: 100%;
+  // animation: anim 90s linear infinite;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// @keyframes anim {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+//TODO: how to show when this is big
+
+.text span {
+  position: absolute;
+  left: 50%;
+  transform-origin: 0 calc($parentHeight/2);
+  font-size: 1.1em;
+  z-index: 2;
+
+  @include mq(720px) {
+    font-size: 0.9em;
+    transform-origin: 0 100px;
+  }
+}
