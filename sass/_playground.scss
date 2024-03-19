@@ -68,7 +68,6 @@
   transition: opacity 0.3s ease;
 }
 
-
 .button__menu {
   width: calc(var(--parentHeight) / 2 - 20px); /* Adjust the size as needed */
   height: calc(var(--parentHeight) / 2 - 20px);
@@ -101,7 +100,7 @@
 #abt {
   top: 0;
   left: 0;
-  opacity: 1; 
+  opacity: 1;
 }
 
 #dta {
@@ -137,32 +136,25 @@
   // gap: 10px;
   // background-color: red;
   position: relative;
-  margin:auto;
-  
-  
+  margin: auto;
 
-
-  #about, #data, #foto, #poster {
-    width: 60%;
-    // display: subgrid;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-25%, -50%);
-    display: flex;
-    flex-direction: column;
-    margin:auto;
-    height: 80vh;
-    @extend .description-section;
-    justify-content: center;
-    align-items: center;
+  #data,
+  #foto,
+  #poster {
     
+
+    @extend .description-section;
+
     // background-color: red;
-    // grid-template-columns: repeat(2, 1fr);
 
     p {
       width: 37vw;
       margin-bottom: 15px;
+
+      @include mq(720px) {
+        width: 50vw;
+        margin-bottom: 12px;
+      }
     }
 
     img {
@@ -182,10 +174,36 @@
   }
 }
 
+#about {
+  @extend .description-section;
+  p {
+    width: 70vw;
+    margin-bottom: 15px;
+
+    @include mq(720px) {
+      margin-bottom: 12px;
+    }
+  }
+
+  img {
+    width: 45%;
+    height: auto;
+    margin: 0 auto;
+    z-index: 0;
+  }
+}
+
 .description-section {
+  width: 60%;
   opacity: 0;
   font-size: 1.2em;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 #about > *,
@@ -216,24 +234,23 @@
   position: absolute;
   top: 50%;
   // left:0;
-  
+
   transform: translate(-50%, -50%);
   text-align: right;
   margin-right: 10px;
 }
 
-
 .image-on-right {
   position: absolute;
   top: 50%;
-  right:0;
+  right: 0;
   transform: translate(0, -55%);
 }
 
 .image-on-left {
   position: absolute;
   top: 50%;
-  left:0;
+  left: 0;
   transform: translate(0, -55%);
 }
 
@@ -246,12 +263,11 @@
   width: 80%;
   height: auto;
   margin: auto;
-  user-select: none;  
+  user-select: none;
   -webkit-user-drag: none;
 }
 
 .physicCircle {
-  
   background-color: white;
   border-radius: 50%;
   border: 1.5px solid black;
@@ -283,8 +299,8 @@
   height: 100%;
   width: 45%;
   position: absolute;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   opacity: 0;
   /* z-index: ; */
   /* background-color: green; */
@@ -292,7 +308,6 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
   visibility: inherit;
 }
-
 
 #enter {
   position: fixed;
@@ -311,20 +326,18 @@
 }
 
 #arrow {
-  width: 5vw; 
-  height: 5vh; 
+  width: 5vw;
+  height: 5vh;
   min-width: 30px;
   min-height: 30px;
   transition: transform 0.2s ease-out;
-  
-  transform: translate(-50%,0%) scale(0.8); /* Optional: Smooth transition for the rotation */
+
+  transform: translate(-50%, 0%) scale(0.8); /* Optional: Smooth transition for the rotation */
 }
 
 #arrow.active {
   transform: translate(-50%, 0%) scale(1) rotate(0deg) !important;
 }
-
-
 
 /* @media screen and (max-width: 1080px) {
   .description__pg > div > img {
@@ -391,4 +404,3 @@
     margin: 2vh 3vw !important;
   }
 } */
-
