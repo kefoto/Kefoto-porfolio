@@ -16,9 +16,8 @@ import { logo_animation } from "./src/logo_animation.js";
 let resizeTimeout;
 export var isResizing = false;
 
-//TODO: check this method if changes the deviceType in device.js
+
 //TODO: mobile performance issue
-//TODO: hovering thing UI need to change
 //TODO: main screen, items falling with circle touching the black circle that expands
 isTouchDevice();
 // console.log(deviceType);
@@ -40,7 +39,11 @@ requestAnimationFrame(mainloop);
 
 arrow_interaction();
 changeHoverletter();
-logo_animation();
+if(deviceType =="mouse"){
+  console.log("yep");
+  logo_animation();
+}
+
 
 // ensure only one listener exist
 function window_listener() {

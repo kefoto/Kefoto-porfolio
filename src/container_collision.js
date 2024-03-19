@@ -2,6 +2,7 @@ import { deviceType, events, isTouchDevice} from "./device.js";
 import { mainloop } from "./canvas.js";
 import { updateBottomDateCircle } from "./bottomCircle.js";
 import {isResizing} from "../main.js";
+import { photo_expansion_add,photo_expansion_remove } from "./scroll.js";
 
 // const spinning = document.querySelector(".spin");
 const arrowLink = document.getElementById("arrowLink");
@@ -280,6 +281,7 @@ function buttons__collision() {
     const button__menu_array = Array.from(button__menu);
     const otherButtons = button__menu_array.filter((item) => item !== b);
 
+    //if something is colliding
     if (isCircleCollide(drag__e, b)) {
       collision__circle[elementId] = true;
       if (getKeysByValue(collision__circle, true).length >= 2) {
@@ -304,20 +306,23 @@ function buttons__collision() {
       if (b.id == "abt") {
 
         arrowLink.href = "https://www.linkedin.com/in/kefoto/";
+
+
       } else if (b.id == "dta") {
 
         arrowLink.href = "https://github.com/kefoto/";
 
         isRendering = true;
-
         physicCircleContainer__ele.style.opacity = "1";
         physicCircleContainer__ele.style.visibility = "visible";
-        
         requestAnimationFrame(mainloop);
 
       } else if (b.id == "fto") {
-   
+        
         arrowLink.href = "foto-blog.html";
+
+        photo_expansion_add();
+        
       } else {
         arrowLink.href = "https://example.com/collision4";
       }
@@ -339,7 +344,7 @@ function buttons__collision() {
 
 
       
-      
+    //if nothign collide
     } else {
       // console.log(elementId + "not colliding");
 
@@ -374,7 +379,13 @@ function buttons__collision() {
         physicCircleContainer__ele.style.opacity = "0";
       }
 
+      if(b.id == "fto"){
+        photo_expansion_remove();
+      }
+
       collision__circle[elementId] = false;
+
+      
     }
   });
 }

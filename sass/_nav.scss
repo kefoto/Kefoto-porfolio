@@ -52,8 +52,15 @@ $link-transition: all 0.2s none;
   justify-content: center;
   transition: all 0.3s ease-out;
 
+  @include mq(520px) {
+    transform: rotate(90deg);
+  }
+
   &:hover {
     transform: rotate(90deg);
+
+    @include mq(520px) {
+    }
   }
   svg path, svg rect{
     // filter: invert(100%);
@@ -65,10 +72,26 @@ $link-transition: all 0.2s none;
   }
   #extra {
     opacity: 0;
+
+    @include mq(520px) {
+      opacity: 1;
+    }
+  }
+
+  #tip {
+    opacity: 1;
+
+    @include mq(520px) {
+      opacity: 0;
+    }
   }
 
   #i {
     opacity: 0;
+
+    @include mq(520px) {
+      opacity: 1;
+    }
   }
 
   @include mq(720px) {

@@ -5,6 +5,7 @@ import {
 } from "./container_collision.js";
 
 //TODO: this lags when the website first loads
+// TODO: animation issue/position issue when the drag move from one circle to another, probability dely issue
 
 const text = document.querySelector(".text");
 const circle_spin = document.getElementById("welcome");
@@ -40,7 +41,7 @@ export const updateBottomDateCircle = () => {
     if (!isDragOutside) {
       isDragOutside = true;
       gsap.killTweensOf(circle_spin);
-      gsap.to(circle_spin, { opacity: 0, duration: 0.3 }).then(() => {
+      gsap.to(circle_spin, { opacity: 0, duration: 0.5 }).then(() => {
         gsap
           .to(circle_spin, {
             left: "50%",
@@ -65,7 +66,7 @@ export const updateBottomDateCircle = () => {
       prevCollidedContainer = currentCollidedContainer;
       gsap.killTweensOf(circle_spin);
       gsap
-        .to(circle_spin, { opacity: 0, duration: 0.1, ease: "power1.out" })
+        .to(circle_spin, { opacity: 0, duration: 0.5, ease: "power1.out" })
         .then(() => {
           const rect = drag_receive.getBoundingClientRect();
 
