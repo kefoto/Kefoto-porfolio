@@ -6,6 +6,7 @@ $link-transition: all 0.2s none;
 // Navbar styling
 .navbar {
   background: #fff;
+  // background-color: red;
   border-bottom: 1px solid $bkg__black;
   height: 10vh;
   min-height: 60px;
@@ -15,7 +16,7 @@ $link-transition: all 0.2s none;
   position: sticky;
   top: 0;
   z-index: 999;
-  // overflow-x: hidden;
+  overflow: hidden;
 
   svg {
     // background-color: #242424 !important;
@@ -31,6 +32,10 @@ $link-transition: all 0.2s none;
   // max-width: 1400px;
   margin: 0 auto;
   padding: 0 30px;
+
+  @include mq(720px) {
+    padding: 0 15px;
+  }
 }
 
 #navbar__logo {
@@ -38,10 +43,11 @@ $link-transition: all 0.2s none;
   height: 100%;
   aspect-ratio: 1/1;
   padding-top: 10px;
-  // background-color: red;
+  // padding-right: 10px;
+  
   max-width: 200px;
   min-width: 50px;
-  margin: auto 0;
+  // margin: auto 0;
   // color: black;
   justify-content: center;
   transition: all 0.3s ease-out;
@@ -89,18 +95,13 @@ $link-transition: all 0.2s none;
   }
 
   @include mq(720px) {
-    left:-1000px;
-    width: 50%;
-    // display: grid;
-    // grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    // grid-gap: 10px;
     // justify-content: center;
-    // padding: 0 -20px;
-    margin: 85px 0px auto 0px;
-    position: absolute;
+    // padding: 0 20px;
+    margin: auto;
+    // position: absolute;
 
     &.active {
-      left: 0;
+      // left: 0;
       opacity: 1;
       z-index: 99;
     }
@@ -110,7 +111,7 @@ $link-transition: all 0.2s none;
     padding: 0 0.7rem;
     
     @include mq(720px) {
-      padding: 0 0.4rem;
+      padding: 0 0.8rem;
     }
   }
 }
@@ -151,10 +152,18 @@ $link-transition: all 0.2s none;
 
 .brand__link {
   width: 45px;
-  /* max-height: 100px; */
   height: 45px;
   padding: 10px;
   border-radius: 50%;
+
+  @include mq(720px) {
+    width: 52px;
+    height: 52px;
+    
+    * {
+      transform: scale(1.2);
+    }
+  }
 }
 
 .navbar__toggle {
@@ -164,7 +173,7 @@ $link-transition: all 0.2s none;
   padding: 10px;
   width: 50px;
   height: 50px;
-  margin: auto -10px auto 0;
+  margin: auto -5px auto 0;
   transition: all 0.3s ease-in-out;
   background-color: $bkg__black;
 
@@ -174,5 +183,11 @@ $link-transition: all 0.2s none;
 
   &.is-active svg {
     transform: rotate(135deg);
+  }
+
+  @include mq(720px) {
+    margin: auto 0 auto 0;
+    width: 55px;
+    height: 55px;
   }
 }

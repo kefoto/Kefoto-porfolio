@@ -13,6 +13,7 @@ import { deviceType, events, isTouchDevice } from "./device.js";
 
 export const pc_container = document.getElementById("physicCircleContainer");
 const icons = document.querySelectorAll(".physicCircle");
+
 let mouseForce = 0.6;
 
 //for throttling
@@ -138,6 +139,9 @@ export const ball_up = () => {
 export const canvas_resize = () => {
   for (const ball of balls) {
     // if collide with wall, a quick release of velocity
+    if(ball.r != icons[0].offsetWidth/2){
+      ball.r = icons[0].offsetWidth/2;
+    }
     ball.handleWallCollision_addVelo();
   }
 
@@ -198,7 +202,6 @@ export const mainloop = (currentTime) => {
 };
 
 //TODO: still laggy, make requestion animation only there exist moving
-//TODO: resize
 
 // console.log(icons);
 

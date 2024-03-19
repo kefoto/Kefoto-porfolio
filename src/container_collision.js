@@ -39,7 +39,7 @@ var position_percentage = { x: (drag__e.offsetLeft) / (outDim.right),
 
 var p = null;
 
-let button__menu__size = playground__container.clientHeight / 2 - 15;
+let button__menu__size = button__menu.clientHeight;
 
 export const classes = {
   abt: "about",

@@ -84,6 +84,16 @@
   margin: 1vh 1vw;
   user-select: none;
   transition: opacity 0.4s ease, background-color 0.3s ease-in-out, all 0.35s ease;
+
+  @include mq(1080px) {
+    width: calc(var(--parentHeight) / 3 - 20px); /* Adjust the size as needed */
+    height: calc(var(--parentHeight) / 3 - 20px);
+  }
+
+  @include mq(520px) {
+    width: calc(var(--parentHeight) / 4 - 20px); /* Adjust the size as needed */
+    height: calc(var(--parentHeight) / 4 - 20px);
+  }
 }
 
 #abt {
@@ -252,6 +262,11 @@
   user-select: none;
   transform: translate(-50%, -50%);
   z-index: 2;
+
+  @include mq(520px) {
+    width: 60px;
+    height: 60px;
+  }
   /* transition: opacity 0.3s ease, visibility 0.5s ease; */
 }
 
