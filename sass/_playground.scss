@@ -1,10 +1,10 @@
 #container {
   position: relative;
-  // display: flex;
+  display: flex;
   --parentHeight: 90vh;
   height: var(--parentHeight);
   width: 100%;
-  background-color: #fff;
+  // background-color: red;
   // top: 0%;
   overflow: hidden;
 
@@ -31,37 +31,8 @@
       opacity: 1;
     }
   }
-  // .spin {
-  //   position: absolute;
-  //   // font-size: 2.4em;
-  //   // width: 4em;
-  //   // height: 4em;
-  //   width: 25%;
-  //   height: 25%;
-  //   opacity: 0;
-  //   top: 50%;
-  //   left: 50%;
-  //   visibility: inherit;
-  //   transform-origin: top left;
-  //   z-index: 1;
-  //   user-select: none;
-  //   -webkit-user-drag: none;
-  //   animation-name: rotation__a;
-  //   animation-duration: 20s;
-  //   animation-iteration-count: infinite;
-  //   animation-timing-function: linear;
-  //   animation-play-state: running;
-  //   transition: opacity 1s ease-in-out, visibility 1s ease;
-  // }
 }
-// @keyframes rotation__a {
-//   from {
-//     transform: rotate(0deg) translate(-50%, -50%);
-//   }
-//   to {
-//     transform: rotate(360deg) translate(-50%, -50%);
-//   }
-// }
+
 
 #Layer_1 {
   opacity: 0;
@@ -82,6 +53,9 @@
   position: absolute;
   margin: 1vh 1vw;
   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
   transition: opacity 0.4s ease, background-color 0.3s ease-in-out;
 
   @include mq(1080px) {
@@ -192,7 +166,7 @@
     z-index: 0;
   }
 }
-
+// TODO: visibility issue
 .description-section {
   width: 60%;
   opacity: 0;
@@ -204,6 +178,8 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 #about > *,
@@ -211,7 +187,8 @@
 #foto > *,
 #poster > * {
   // position: absolute;
-  user-select: none;
+  // -webkit-user-drag: none;
+  // user-select: none;
   visibility: inherit;
 }
 
@@ -263,7 +240,7 @@
   width: 80%;
   height: auto;
   margin: auto;
-  user-select: none;
+  // user-select: none;
   -webkit-user-drag: none;
 }
 

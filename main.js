@@ -20,6 +20,13 @@ export var isResizing = false;
 //TODO: mobile performance issue
 //TODO: main screen, items falling with circle touching the black circle that expands
 isTouchDevice();
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  gsap.registerPlugin(ScrollTrigger);
+  // gsap code here!
+ });
+
+
 // console.log(deviceType);
 nav__expansion();
 var temp = new Date();

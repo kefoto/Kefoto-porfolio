@@ -12,7 +12,8 @@ $parentHeight: 300px;
   top: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
-
+  // user-select: none;
+  -webkit-user-drag: none;
 
 
   @include mq(720px) {
@@ -35,9 +36,7 @@ $parentHeight: 300px;
   height: 100%;
   width: 100%;
   // animation: anim 90s linear infinite;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  
 }
 
 // @keyframes anim {
@@ -56,10 +55,13 @@ $parentHeight: 300px;
   left: 50%;
   transform-origin: 0 calc($parentHeight/2);
   font-size: 1.1em;
-  z-index: 2;
+  z-index: 1;
+
+  -webkit-user-drag: none;
 
   @include mq(720px) {
     font-size: 0.9em;
     transform-origin: 0 100px;
   }
+
 }

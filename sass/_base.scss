@@ -18,13 +18,22 @@ body {
     border: 0;
     font-family: "Space Mono", sans-serif;
     // overflow: hidden;
+    overflow-y: scroll;
 }
 
-// #testing{
-//     visibility: hidden;
-// }
+section {
+    overflow-x: hidden;
+    
+}
+#testing{
+    font-size: 3em; 
+    display: flex; 
+    position:relative; 
+    left: 0
+}
 #introduction {
     width: 100%;
     height: 100%;
+    // position: sticky;
     // overflow:
 }
