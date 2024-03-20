@@ -1,3 +1,12 @@
+
+
+#space {
+  height: 10vh;
+  position: relative;
+  display: flex;
+  width: 100%;
+  // background-color: red;
+}
 #container {
   position: relative;
   display: flex;
@@ -7,6 +16,8 @@
   // background-color: red;
   // top: 0%;
   overflow: hidden;
+  bottom: 0;
+  left: 0;
 
   #drag__e {
     position: absolute;

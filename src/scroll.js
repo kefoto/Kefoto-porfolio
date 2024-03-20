@@ -1,6 +1,8 @@
 // different sections for 2 page
 let photoScrolled = false;
 
+let tl;
+let tl2;
 //TODO: scroll bar  size change
 //TODO: the playground is not sticky
 export const photo_expansion_add = () => {
@@ -14,31 +16,39 @@ export const photo_expansion_add = () => {
 
     // Find the container element
     var bodyElement = document.body;
-
+    
     // Insert the section element after the existing section
     bodyElement.appendChild(section);
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#testing",
-        start: "20px 60%",
-        end: "+=500",
-        scrub: 1.2,
-        markers: true,
-        // pin:"#playground",
-      },
-    });
 
-    gsap.to("#playground", {
+    console.log(tl);
+    tl = gsap.timeline({
+      
       scrollTrigger: {
-        trigger: "#playground",
+        trigger: ".pinned",
         start: "top top",
         end: "+=2000",
         pin: true,
-        pinSpacing: false
-      }
+        pinSpacing: false,
+        markers: true
+      },
+      
+
     });
 
-    tl.to("#testing", { x: 800});
+    tl2 = gsap.timeline({
+      scrollTrigger: {
+      trigger: "#testing",
+      start: "20px 60%",
+      end: "+=500",
+      scrub: 1.2,
+      markers: true,
+      // pin:"#playground",
+    },});
+    tl2.to("#testing", { x: 800});
+    
+
+    console.log(tl);
+    
     photoScrolled = true; // Set the flag to true after executing photo_scroll
   }
 };
@@ -53,6 +63,17 @@ export const photo_expansion_remove = () => {
      // Update the ScrollTrigger configuration to remove pinning from #playground
     //  gsap.set("#playground", { clearProps: "all" }); // Clear all props
     photoScrolled = false; // Reset the flag to false since the section is removed
+
+    if (tl) {
+      tl.kill();
+    }
+    if (tl2) {
+      tl2.kill();
+    }
+
+
+
+    tl = tl2 = null;
   }
 };
 
