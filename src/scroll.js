@@ -12,7 +12,7 @@ export const photo_expansion_add = () => {
 
     // Optionally, add content to the section
     section.id = "photo_expansion";
-    section.innerHTML = '<p id="testing">yep</p>';
+    section.innerHTML = '<p id="testing">Scroll Animations, WIP</p>';
 
     // Find the container element
     var bodyElement = document.body;

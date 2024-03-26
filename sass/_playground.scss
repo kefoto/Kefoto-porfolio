@@ -1,4 +1,6 @@
 
+///TODO: Content still not hidden when the page started
+//TODO: styling problem, can not select and drag the drag_e when scrolled, blocked by something that is unselectable
 
 #space {
   height: 10vh;
@@ -34,7 +36,7 @@
     left: 50%;
     border-radius: 50%;
     padding: 15px;
-    z-index: 3;
+    z-index: 50;
     cursor: move;
     transition: none;
 
@@ -191,6 +193,7 @@
   align-items: center;
   -webkit-user-drag: none;
   user-select: none;
+  // user-
 }
 
 #about > *,
