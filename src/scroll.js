@@ -3,7 +3,9 @@ let photoScrolled = false;
 
 let tl;
 let tl2;
-//TODO: scroll bar  size change
+// TODO: scroll bar size change
+//TODO: resize issue, after the condition is off and the animation is disabled
+//TODO: the background sometimes block the interaction, block on pc.
 //TODO: the playground is not sticky
 export const photo_expansion_add = () => {
   if (!photoScrolled) {
@@ -29,7 +31,8 @@ export const photo_expansion_add = () => {
         end: "+=2000",
         pin: true,
         pinSpacing: false,
-        markers: true
+        markers: true,
+        invalidateOnRefresh: true
       },
       
 

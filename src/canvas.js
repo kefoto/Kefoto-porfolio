@@ -28,9 +28,9 @@ const frameInterval = 1000 / targetFrameRate; // Calculate the interval between 
 let lastFrameTime = 0;
 
 // import {isRendering} from './app.js';
-console.log(pc_container.getBoundingClientRect().left,pc_container.getBoundingClientRect().top);
+// console.log(pc_container.getBoundingClientRect().left,pc_container.getBoundingClientRect().top);
 // console.log(canvas.getBoundingClientRect().left,canvas.getBoundingClientRect().top);
-console.log(pc_container.offsetWidth,pc_container.offsetHeight);
+// console.log(pc_container.offsetWidth,pc_container.offsetHeight);
 // console.log(canvas.width,canvas.height);
 
 

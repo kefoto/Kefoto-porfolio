@@ -15,6 +15,7 @@ export const drag__e = document.getElementById("drag__e");
 export const nav__bar = document.querySelector(".navbar");
 export const button__menu = document.querySelectorAll(".button__menu");
 
+
 var offset = [0, 0];
 var mousePosition;
 
@@ -79,12 +80,6 @@ export const container__collision = () => {
       } else {
         offset = [drag__e.offsetLeft - e.touches[0].clientX, drag__e.offsetTop - e.touches[0].clientY];
       }
-      
-      // spinning.style.opacity = "0";
-      // spinning.style.visibility = "hidden";
-      // setTimeout(()=> {
-      //   spinning.style.animationPlayState = "paused";
-      // },3000);
       
     },
     true
@@ -182,6 +177,7 @@ export const container_resize = () => {
   //   debugger;
   // console.log(isResizing);
   // console.log(position_percentage);
+  //TODO: playground__container dimension froze 
   outDim.left = playground__container.offsetLeft;
   outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
   outDim.right =
@@ -190,6 +186,8 @@ export const container_resize = () => {
     playground__container.offsetTop +
     playground__container.offsetHeight -
     nav__bar.offsetHeight;
+
+  console.log(outDim.right, outDim.bottom);
   origin = [
     playground__container.offsetWidth / 2,
     playground__container.offsetHeight / 2,
@@ -321,7 +319,7 @@ function buttons__collision() {
         
         arrowLink.href = "foto-blog.html";
 
-        photo_expansion_add();
+        // photo_expansion_add();
         
       } else {
         arrowLink.href = "https://example.com/collision4";
@@ -380,7 +378,7 @@ function buttons__collision() {
       }
 
       if(b.id == "fto"){
-        photo_expansion_remove();
+        // photo_expansion_remove();
       }
 
       collision__circle[elementId] = false;

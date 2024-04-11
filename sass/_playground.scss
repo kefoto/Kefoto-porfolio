@@ -193,7 +193,7 @@
   align-items: center;
   -webkit-user-drag: none;
   user-select: none;
-  // user-
+  visibility: inherit;
 }
 
 #about > *,
@@ -205,6 +205,8 @@
   // user-select: none;
   visibility: inherit;
 }
+
+
 
 .h1 {
   font-size: 0.8rem !important;
@@ -245,7 +247,6 @@
   transform: translate(0, -55%);
 }
 
-// TODO: the container circle change when the cursor circle changes need to change
 .hoverable-letter {
   font-size: 1.1em;
 }
