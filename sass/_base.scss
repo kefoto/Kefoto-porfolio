@@ -17,14 +17,22 @@
 body {
     border: 0;
     font-family: "Space Mono", sans-serif;
-    // overflow: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
+    // overflow-y: scroll;
 }
 
 section {
     overflow-x: hidden;
     
 }
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
 #testing{
     font-size: 3em; 
     display: flex; 
