@@ -15,7 +15,6 @@ export const drag__e = document.getElementById("drag__e");
 export const nav__bar = document.querySelector(".navbar");
 export const button__menu = document.querySelectorAll(".button__menu");
 
-
 var offset = [0, 0];
 var mousePosition;
 
@@ -163,16 +162,12 @@ export const drag__e_move = (event) => {
     // debugger;
     // console.log(mousePosition);
     other_buttons_opacity();
-    
     buttons__collision();
-    
-
     update_pos_percent();
     // console.log(position_percentage);
   }
 };
 //window resize event listener
-
 export const container_resize = () => {
   //   debugger;
   // console.log(isResizing);
