@@ -18,15 +18,20 @@ let resizeTimeout;
 export var isResizing = false;
 
 
-//TODO: mobile performance issue
+//TODO: mobile performance issue, thottling 
 //TODO: main screen, items falling with circle touching the black circle that expands
+//TODO: a loading screen
+//TODO: drag me on the main page
+//TODO: arrow. set not hover based on mobile
+//TODO: set up email list
+//TODO: from left and right to up and down
 isTouchDevice();
 
 
 //loading
 document.addEventListener("DOMContentLoaded", (event) => {
 
-  //TODO: a loading screen
+  
   gsap.registerPlugin(ScrollTrigger);
 
   //making all the content invisible.
