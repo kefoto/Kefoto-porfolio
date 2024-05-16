@@ -59,7 +59,7 @@ container__collision();
 
 requestAnimationFrame(mainloop);
 
-arrow_interaction();
+// arrow_interaction();
 changeHoverletter();
 if(deviceType =="mouse"){
   // console.log("yep");
@@ -114,8 +114,7 @@ function document_listener() {
       // }
       // console.log("yep");
       drag__e_move(e);
-      // ball_move(e);
-      arrow_move(e);
+      // arrow_move(e);
     },
     true
   );

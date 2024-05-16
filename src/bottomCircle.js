@@ -45,7 +45,7 @@ export const updateBottomDateCircle = () => {
         gsap
           .to(circle_spin, {
             left: "50%",
-            top: "107%",
+            top: "50%",
             x: 0,
             y: 0,
             duration: 0.3,
