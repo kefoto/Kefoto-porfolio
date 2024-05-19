@@ -140,7 +140,7 @@
     
 
     .bk_size {
-      width: 100%;
+      width: 102%;
       height: auto;
       margin: 0 auto;
       z-index: -1;
@@ -172,7 +172,7 @@
 .description-section {
   width: 100%;
   opacity: 0;
-  font-size: 1.1em;
+  font-size: 1.05em;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
   display: flex;
   flex-direction: column;
@@ -268,7 +268,7 @@
   left: 50%;
   opacity: 0.7;
   transform: translate(-50%, 0);
-
+  filter: blur(3px);
   mask-image: linear-gradient(rgba(0, 0, 0, 1) 10vh, rgba(0, 0, 0, 0) 33vh);
 }
 
@@ -276,9 +276,9 @@
   position: absolute;
   top: 0;
   left: 50%;
-  
+  opacity: 0.7;
   transform: translate(-50%, 0);
-
+  filter: blur(3px);
   mask-image: linear-gradient(rgba(0, 0, 0, 1) 10vh, rgba(0, 0, 0, 0) 33vh);
 
   
@@ -286,7 +286,7 @@
 }
 
 .hoverable-letter {
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 .physicCircle img {
