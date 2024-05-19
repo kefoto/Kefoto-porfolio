@@ -3,11 +3,16 @@ $bkg__black: #242424;
 $button-transition: all 0.3s ease-in-out;
 $link-transition: all 0.2s none;
 
+
+
+// TODO: make navbar blurry
+
 // Navbar styling
 .navbar {
   background: #fff;
   // background-color: red;
-  border-bottom: 1px solid $bkg__black;
+  // border-bottom: 1px solid $bkg__black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 10vh;
   // min-height: 60px;
   width: 100%;
@@ -50,6 +55,7 @@ $link-transition: all 0.2s none;
   // margin: auto 0;
   // color: black;
   justify-content: center;
+  margin: auto 0;
   transition: all 0.3s ease-out;
 
   @include mq(520px) {
