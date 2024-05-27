@@ -173,6 +173,7 @@ export const container_resize = () => {
   // console.log(isResizing);
   // console.log(position_percentage);
   //TODO: playground__container dimension froze 
+
   outDim.left = playground__container.offsetLeft;
   outDim.top = playground__container.offsetTop - nav__bar.offsetHeight;
   outDim.right =
@@ -274,6 +275,9 @@ function buttons__collision() {
     const button__menu_array = Array.from(button__menu);
     const otherButtons = button__menu_array.filter((item) => item !== b);
 
+    // if(isCircleCollide(drag__e, b)){
+    //   collision__circle[elementId] = true;
+    // }
     //if something is colliding
     if (isCircleCollide(drag__e, b)) {
       collision__circle[elementId] = true;
@@ -289,17 +293,18 @@ function buttons__collision() {
 
       // check_n_update_style(document.getElementById(classes[elementId]), "opacity", "1");
       // check_n_update_style(document.getElementById(classes[elementId]), "visibility", "visible");
-      gsap.to(`#${classes[elementId]}`, { opacity: 1, visibility: "visible", duration: 0.5 }, 0);
+      gsap.set(`#${classes[elementId]}`, { visibility: "visible", opacity: 0 });
+      gsap.to(`#${classes[elementId]}`, { opacity: 1, visibility: "visible", duration: 0.5 }, 0.5);
       b.style.backgroundColor = "#242424";
   
 
       let href;
-
+      //Changing style
       //TODO: CHANGE arrowLink
       if (b.id == "abt") {
 
         arrowLink.href = "https://www.linkedin.com/in/kefoto/";
-
+       
 
       } else if (b.id == "dta") {
 
@@ -311,12 +316,15 @@ function buttons__collision() {
         requestAnimationFrame(mainloop);
 
       } else if (b.id == "fto") {
-        
+        gsap.set('#foto-float', {clipPath: 'circle(0%)', opacity: 0});
+        gsap.to('#foto-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7,ease: "power3.out", overwrite:'true'});
         arrowLink.href = "foto-blog.html";
-
+      
         // photo_expansion_add();
         
       } else {
+        gsap.set('#ptr-float', {clipPath: 'circle(0%)', opacity: 0});
+        gsap.to('#ptr-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7, ease: "power3.out", overwrite:'true'});
         arrowLink.href = "https://example.com/collision4";
       }
       console.log(b.id);
@@ -358,8 +366,7 @@ function buttons__collision() {
         updateBottomDateCircle();
       });
 
-      document.getElementById(classes[elementId]).style.visibility = "hidden";
-      document.getElementById(classes[elementId]).style.opacity = "0";
+  
 
       //make sure it only execute once
       if (b.id == "dta") {
@@ -370,12 +377,19 @@ function buttons__collision() {
         // canvas__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.visibility = "hidden";
         physicCircleContainer__ele.style.opacity = "0";
-      }
-
-      if(b.id == "fto"){
+      } else if(b.id == "fto"){
+        //TODO: when this condition happens, the animation glitches
+        gsap.set('#foto-float', {clipPath: 'circle(100%)', opacity: 1});
+        gsap.to('#foto-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
         // photo_expansion_remove();
+      } else if(b.id == "ptr") {
+        gsap.set('#ptr-float', {clipPath: 'circle(100%)', opacity: 1});
+        gsap.to('#ptr-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
       }
 
+      gsap.to(`#${classes[elementId]}`, { opacity: 0, visibility: "hidden", duration: 0.5}, 0.5);
+      // document.getElementById(classes[elementId]).style.visibility = "hidden";
+      // document.getElementById(classes[elementId]).style.opacity = "0";
       collision__circle[elementId] = false;
 
       
