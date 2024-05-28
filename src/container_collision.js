@@ -318,15 +318,15 @@ function buttons__collision() {
           requestAnimationFrame(mainloop);
 
         } else if (b.id == "fto") {
-          gsap.set('#foto-float', {clipPath: 'circle(0%)', opacity: 0});
-          gsap.to('#foto-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7,ease: "power3.out", overwrite:'true'});
+          gsap.set('#foto-float', {clipPath: 'circle(0%)'});
+          gsap.to('#foto-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.4,ease: "power3.in", overwrite:'true'});
           arrowLink.href = "foto-blog.html";
         
           // photo_expansion_add();
           
         } else {
-          gsap.set('#ptr-float', {clipPath: 'circle(0%)', opacity: 0});
-          gsap.to('#ptr-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7, ease: "power3.out", overwrite:'true'});
+          gsap.set('#ptr-float', {clipPath: 'circle(0%)'});
+          gsap.to('#ptr-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.4, ease: "power3.in", overwrite:'true'});
           arrowLink.href = "https://example.com/collision4";
         }
         gsap.to("#" + b.id, {
@@ -349,10 +349,6 @@ function buttons__collision() {
           x: 0,
           y: 0,
           ease: "power1.out",
-        // onComplete: function() {
-        //   // Code to execute after the transformation is complete
-        //   updateBottomDateCircle();
-        // }
         }).then(updateBottomDateCircle);
 
       //make sure it only execute once
@@ -366,17 +362,15 @@ function buttons__collision() {
           physicCircleContainer__ele.style.opacity = "0";
         } else if(b.id == "fto"){
           //TODO: when this condition happens, the animation glitches
-          gsap.set('#foto-float', {clipPath: 'circle(100%)', opacity: 1});
-          gsap.to('#foto-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
+          gsap.set('#foto-float', {clipPath: 'circle(100%)'});
+          gsap.to('#foto-float', {clipPath: 'circle(0%)', duration: 0.3, ease: "power1.out"});
         // photo_expansion_remove();
         } else if(b.id == "ptr") {
-          gsap.set('#ptr-float', {clipPath: 'circle(100%)', opacity: 1});
-          gsap.to('#ptr-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
+          gsap.set('#ptr-float', {clipPath: 'circle(100%)'});
+          gsap.to('#ptr-float', {clipPath: 'circle(0%)', duration: 0.3, ease: "power1.out"});
         }
 
-        gsap.to(`#${classes[elementId]}`, { opacity: 0, visibility: "hidden", duration: 0.3, ease: "power3.out", delay: 0.3});
-      // document.getElementById(classes[elementId]).style.visibility = "hidden";
-      // document.getElementById(classes[elementId]).style.opacity = "0";
+        gsap.to(`#${classes[elementId]}`, { opacity: 0, duration: 0.3, ease: "power3.out", delay: 0.3});
         collision__circle[elementId] = false;
       }
       previousCollisionState[elementId] = currentlyColliding;

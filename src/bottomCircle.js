@@ -54,7 +54,7 @@ export const updateBottomDateCircle = () => {
             },
           })
           .then(() => {
-            gsap.to(circle_spin, { opacity: 1, duration: 0.2 });
+            gsap.to(circle_spin, { opacity: 1, duration: 0.2, delay: 2.5});
           });
       });
     }
@@ -66,7 +66,7 @@ export const updateBottomDateCircle = () => {
       prevCollidedContainer = currentCollidedContainer;
       gsap.killTweensOf(circle_spin);
       gsap
-        .to(circle_spin, { opacity: 0, duration: 0.5, ease: "power1.out" })
+        .to(circle_spin, { opacity: 0, duration: 0.2, ease: "power1.out" })
         .then(() => {
           const rect = drag_receive.getBoundingClientRect();
 
@@ -92,7 +92,7 @@ export const updateBottomDateCircle = () => {
               },
             })
             .then(() => {
-              gsap.to(circle_spin, { opacity: 1, duration: 0.2 });
+              gsap.to(circle_spin, { opacity: 1, duration: 0.2, ease: "power1.out"});
             });
         });
     }

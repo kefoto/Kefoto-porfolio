@@ -132,7 +132,7 @@
   #foto,
   #poster {
     
-
+    font-size: 1.05em;
     @extend .description-section;
 
     // background-color: red;
@@ -159,13 +159,13 @@
 
 #about {
   @extend .description-section;
+  font-size: 0.9em;
   
 }
 // TODO: visibility issue
 .description-section {
   width: 100%;
   opacity: 0;
-  font-size: 1.05em;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
   display: flex;
   flex-direction: column;
@@ -191,7 +191,7 @@
 
 
 .h1 {
-  font-size: 0.9rem !important;
+  font-size: 0.8rem !important;
 }
 
 .header {
@@ -234,8 +234,8 @@
 
 .text-box {
   position: absolute;
-  width: 65%;
-  max-width: 600px;
+  width: 72%;
+  max-width: 700px;
   top: calc(50% - 5vh);
   transform: translate(0, -50%);
   text-align: left;
@@ -244,17 +244,27 @@
   z-index: 1;
   // border: 1.5px solid black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow */
+
+
+  @include mq(720px) {
+    width: 80%;
+    padding: 20px;
+  }
+
+
 }
 
 .image-pop-up {
-  position: absolute;
-  top: 0;
+  // background-color: red;
+  // position: absolute;
+  margin-top: 20px;
+  bottom: 0;
   left: 0;
-  width: 60%;
-  height: 60%;
+  width: 50%;
+  height: 50%;
   aspect-ratio: 1/1;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 250px;
+  max-height: 250px;
   // border-radius: 50%;
   display: flex;
   
@@ -263,8 +273,8 @@
 
 .image-pop-up .pop-up {
   position: relative;
-  width: 50%; /* Ensure the image has a defined width */
-  height: 50%;
+  width: 100%; /* Ensure the image has a defined width */
+  height: 100%;
   border-radius: 50%; /* Makes the image circular */
   
   // transition: clip-path 0.3s ease; 
@@ -273,6 +283,11 @@
   clip-path: circle(0%);
   justify-content: center;
   align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   
   transition: all 0.3s ease;
