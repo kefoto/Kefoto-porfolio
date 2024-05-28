@@ -56,6 +56,13 @@ export var collision__circle = {
   ptr: false,
 };
 
+var previousCollisionState = {
+  abt: false,
+  dta: false,
+  fto: false,
+  ptr: false,
+}
+
 export const translate_const = {
   abt: {x: "-25%", y:"-25%"},
   dta: {x:"25%", y:"-25%"},
@@ -183,7 +190,7 @@ export const container_resize = () => {
     playground__container.offsetHeight -
     nav__bar.offsetHeight;
 
-  console.log(outDim.right, outDim.bottom);
+  // console.log(outDim.right, outDim.bottom);
   origin = [
     playground__container.offsetWidth / 2,
     playground__container.offsetHeight / 2,
@@ -272,128 +279,109 @@ function buttons__collision() {
   button__menu.forEach((b) => {
     var elementId = b.id;
     
-    const button__menu_array = Array.from(button__menu);
-    const otherButtons = button__menu_array.filter((item) => item !== b);
 
-    // if(isCircleCollide(drag__e, b)){
-    //   collision__circle[elementId] = true;
-    // }
-    //if something is colliding
-    if (isCircleCollide(drag__e, b)) {
-      collision__circle[elementId] = true;
-      if (getKeysByValue(collision__circle, true).length >= 2) {
-        collision__circle[elementId] = false;
-        return;
-      }
-      // console.log(elementId);
-      //to change the disciptions
-      // document.getElementById(classes[elementId]).style.transition =
-      //   "opacity 0.3s ease-out";
-      // document.getElementById(classes[elementId]).style.top = "50%";
+    const currentlyColliding = isCircleCollide(drag__e, b);
+    const previouslyColliding = previousCollisionState[elementId];
 
-      // check_n_update_style(document.getElementById(classes[elementId]), "opacity", "1");
-      // check_n_update_style(document.getElementById(classes[elementId]), "visibility", "visible");
-      gsap.set(`#${classes[elementId]}`, { visibility: "visible", opacity: 0 });
-      gsap.to(`#${classes[elementId]}`, { opacity: 1, visibility: "visible", duration: 0.5 }, 0.5);
-      b.style.backgroundColor = "#242424";
-  
+    // const button__menu_array = Array.from(button__menu);
+    // const otherButtons = button__menu_array.filter((item) => item !== b);
 
-      let href;
+    if (currentlyColliding !== previouslyColliding) {
+      collision__circle[elementId] = currentlyColliding;
+
+      if (currentlyColliding) {
+        
+        if (getKeysByValue(collision__circle, true).length >= 2) {
+          collision__circle[elementId] = false;
+          return;
+        }
+
+        gsap.set(`#${classes[elementId]}`, { visibility: "visible", opacity: 0 });
+        gsap.to(`#${classes[elementId]}`, { opacity: 1, visibility: "visible", duration: 0.5, delay: 0.3});
+        b.style.backgroundColor = "#242424";
+
+        let href;
       //Changing style
       //TODO: CHANGE arrowLink
-      if (b.id == "abt") {
+        if (b.id == "abt") {
 
-        arrowLink.href = "https://www.linkedin.com/in/kefoto/";
+          arrowLink.href = "https://www.linkedin.com/in/kefoto/";
        
 
-      } else if (b.id == "dta") {
+        } else if (b.id == "dta") {
 
-        arrowLink.href = "https://github.com/kefoto/";
+          arrowLink.href = "https://github.com/kefoto/";
 
-        isRendering = true;
-        physicCircleContainer__ele.style.opacity = "1";
-        physicCircleContainer__ele.style.visibility = "visible";
-        requestAnimationFrame(mainloop);
+          isRendering = true;
+          physicCircleContainer__ele.style.opacity = "1";
+          physicCircleContainer__ele.style.visibility = "visible";
+          requestAnimationFrame(mainloop);
 
-      } else if (b.id == "fto") {
-        gsap.set('#foto-float', {clipPath: 'circle(0%)', opacity: 0});
-        gsap.to('#foto-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7,ease: "power3.out", overwrite:'true'});
-        arrowLink.href = "foto-blog.html";
-      
-        // photo_expansion_add();
+        } else if (b.id == "fto") {
+          gsap.set('#foto-float', {clipPath: 'circle(0%)', opacity: 0});
+          gsap.to('#foto-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7,ease: "power3.out", overwrite:'true'});
+          arrowLink.href = "foto-blog.html";
         
-      } else {
-        gsap.set('#ptr-float', {clipPath: 'circle(0%)', opacity: 0});
-        gsap.to('#ptr-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7, ease: "power3.out", overwrite:'true'});
-        arrowLink.href = "https://example.com/collision4";
-      }
-      console.log(b.id);
-      // check_n_update_style(b, "transform", "scale(0.4) " + temptranslate);
-      gsap.to("#" + b.id, {
-        scale: 0.4,
-        duration: 0.5,
-        x: translate_const[b.id].x,
-        y: translate_const[b.id].y,
-        ease: "power1.out",
-        // onComplete: function() {
-        //   // Code to execute after the transformation is complete
+          // photo_expansion_add();
           
-        // }
-      }).then(() =>{
-        updateBottomDateCircle();
-      });
-
-
+        } else {
+          gsap.set('#ptr-float', {clipPath: 'circle(0%)', opacity: 0});
+          gsap.to('#ptr-float', {clipPath: 'circle(100%)', opacity: 1, duration: 0.6, delay: 0.7, ease: "power3.out", overwrite:'true'});
+          arrowLink.href = "https://example.com/collision4";
+        }
+        gsap.to("#" + b.id, {
+          scale: 0.4,
+          duration: 0.5,
+          x: translate_const[b.id].x,
+          y: translate_const[b.id].y,
+          ease: "power1.out",
+        }).then(updateBottomDateCircle);
       
-    //if nothign collide
-    } else {
-      // console.log(elementId + "not colliding");
+      } else {
 
-      b.style.backgroundColor = "transparent";
-      b.style.width = button__menu__size + "px";
-      b.style.height = button__menu__size + "px";
-      gsap.to("#" + b.id, {
-        scale: 1,
-        duration: 0.5,
-        x: 0,
-        y: 0,
-        ease: "power1.out",
+        // console.log(b.id);
+        b.style.backgroundColor = "transparent";
+        b.style.width = button__menu__size + "px";
+        b.style.height = button__menu__size + "px";
+        gsap.to("#" + b.id, {
+          scale: 1,
+          duration: 0.5,
+          x: 0,
+          y: 0,
+          ease: "power1.out",
         // onComplete: function() {
         //   // Code to execute after the transformation is complete
         //   updateBottomDateCircle();
         // }
-      }).then(() =>{
-        updateBottomDateCircle();
-      });
-
-  
+        }).then(updateBottomDateCircle);
 
       //make sure it only execute once
-      if (b.id == "dta") {
-        isRendering = false;
+        if (b.id == "dta") {
+          isRendering = false;
         // check_n_update_style(canvas__ele, "visibility", "hidden");
         // check_n_update_style(physicCircleContainer__ele, "visibility", "hidden");
         // check_n_update_style(physicCircleContainer__ele, "opacity", "0");
         // canvas__ele.style.visibility = "hidden";
-        physicCircleContainer__ele.style.visibility = "hidden";
-        physicCircleContainer__ele.style.opacity = "0";
-      } else if(b.id == "fto"){
-        //TODO: when this condition happens, the animation glitches
-        gsap.set('#foto-float', {clipPath: 'circle(100%)', opacity: 1});
-        gsap.to('#foto-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
+          physicCircleContainer__ele.style.visibility = "hidden";
+          physicCircleContainer__ele.style.opacity = "0";
+        } else if(b.id == "fto"){
+          //TODO: when this condition happens, the animation glitches
+          gsap.set('#foto-float', {clipPath: 'circle(100%)', opacity: 1});
+          gsap.to('#foto-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
         // photo_expansion_remove();
-      } else if(b.id == "ptr") {
-        gsap.set('#ptr-float', {clipPath: 'circle(100%)', opacity: 1});
-        gsap.to('#ptr-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
-      }
+        } else if(b.id == "ptr") {
+          gsap.set('#ptr-float', {clipPath: 'circle(100%)', opacity: 1});
+          gsap.to('#ptr-float', {clipPath: 'circle(0%)', opacity: 0, duration: 0.2, ease: "power1.out"});
+        }
 
-      gsap.to(`#${classes[elementId]}`, { opacity: 0, visibility: "hidden", duration: 0.5}, 0.5);
+        gsap.to(`#${classes[elementId]}`, { opacity: 0, visibility: "hidden", duration: 0.3, ease: "power3.out", delay: 0.3});
       // document.getElementById(classes[elementId]).style.visibility = "hidden";
       // document.getElementById(classes[elementId]).style.opacity = "0";
-      collision__circle[elementId] = false;
-
-      
+        collision__circle[elementId] = false;
+      }
+      previousCollisionState[elementId] = currentlyColliding;
     }
+    
   });
 }
 

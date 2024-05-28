@@ -76,7 +76,7 @@ export const updateBottomDateCircle = () => {
             drag_receive.offsetTop + drag_receive.offsetHeight / 2;
 
 
-          console.log(centerX,centerY,rect.left + rect.width / 2, rect.left + rect.width / 2);
+          // console.log(centerX,centerY,rect.left + rect.width / 2, rect.left + rect.width / 2);
           const stringtemp = classes[temp] + " ";
           // Change position and set opacity to 1
           gsap
