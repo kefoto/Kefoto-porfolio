@@ -300,6 +300,12 @@
   // display: flex;
   
   z-index: 3;
+
+  @include mq(720px) {
+    
+    width: 35%;
+    height: 35%;
+  }
 }
 
 .link-pop-up {
@@ -318,6 +324,11 @@
   
   z-index: 3;
 
+  @include mq(720px) {
+    
+    width: 35%;
+    height: 35%;
+  }
   
   
 }
