@@ -18,8 +18,8 @@ let resizeTimeout;
 export var isResizing = false;
 
 
-//TODO: mobile performance issue, thottling 
-//TODO: main screen, items falling with circle touching the black circle that expands
+//TODO: mobile performance issue, thottling, data page
+//TODO: Animation: doubles
 //TODO: a loading screen
 //TODO: drag me on the main page
 //TODO: arrow. set not hover based on mobile

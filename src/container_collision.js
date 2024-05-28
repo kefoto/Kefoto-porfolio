@@ -319,14 +319,14 @@ function buttons__collision() {
 
         } else if (b.id == "fto") {
           gsap.set('#foto-float', {clipPath: 'circle(0%)'});
-          gsap.to('#foto-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.4,ease: "power3.in", overwrite:'true'});
+          gsap.to('#foto-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.2,ease: "power3.in", overwrite:'true'});
           arrowLink.href = "foto-blog.html";
         
           // photo_expansion_add();
           
         } else {
           gsap.set('#ptr-float', {clipPath: 'circle(0%)'});
-          gsap.to('#ptr-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.4, ease: "power3.in", overwrite:'true'});
+          gsap.to('#ptr-float', {clipPath: 'circle(100%)', duration: 0.2, delay: 0.2, ease: "power3.in", overwrite:'true'});
           arrowLink.href = "https://example.com/collision4";
         }
         gsap.to("#" + b.id, {
@@ -371,6 +371,7 @@ function buttons__collision() {
         }
 
         gsap.to(`#${classes[elementId]}`, { opacity: 0, duration: 0.3, ease: "power3.out", delay: 0.3});
+        gsap.to(`#${classes[elementId]}`, { visibility: "hidden", delay: 0.5});
         collision__circle[elementId] = false;
       }
       previousCollisionState[elementId] = currentlyColliding;
