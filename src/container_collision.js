@@ -141,23 +141,19 @@ export const drag__e_move = (event) => {
         drag__e.style.left = outDim.left + drag__e.offsetWidth / 2 + "px";
       }
     }
-    //   debugger;
     if (y_allowed) {
-      // styleChanges.top = mousePosition.y + offset[1] + "px";
       drag__e.style.top = mousePosition.y + offset[1] + "px";
     } else {
       if (
         mousePosition.y >=
         outDim.top + nav__bar.offsetHeight / 2 + drag__e.offsetHeight
       ) {
-        // styleChanges.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
         drag__e.style.top = outDim.bottom - drag__e.offsetHeight / 2 + "px";
       }
       if (
         mousePosition.y <=
         outDim.bottom + nav__bar.offsetHeight - drag__e.offsetHeight / 2
       ) {
-        // styleChanges.top = outDim.top + drag__e.offsetHeight / 2 + "px";
         drag__e.style.top = outDim.top + drag__e.offsetHeight / 2 + "px";
       }
     }
